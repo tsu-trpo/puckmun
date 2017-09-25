@@ -1,2 +1,2 @@
 # puckmun
-Waka Waka Waka Waka Waka Waka Waka Waka Waka Waka Waka
+The game you all know and love. Soon it will be here!

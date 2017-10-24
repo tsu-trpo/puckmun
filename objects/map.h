@@ -5,8 +5,8 @@
 typedef int block_t;
 
 const block_t Wall = 'X';
-const block_t Point = '.';
-const block_t BigPoint = '*';
+const block_t Point = '*';
+const block_t BigPoint = '#';
     
 
 using namespace std;

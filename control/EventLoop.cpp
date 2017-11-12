@@ -20,3 +20,12 @@ EventLoop& EventLoop :: start_game()
 		}
 	}
 }
+
+
+EventLoop& EventLoop :: run() //updates everything
+{
+	this->before_game()
+		 .start_game()
+		 .after_game();
+	return *this;
+}

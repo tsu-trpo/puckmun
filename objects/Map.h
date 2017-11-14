@@ -7,13 +7,11 @@
 using namespace std;
 
 class Map
-	{
-		int m_height;
-		int m_width;
-		vector<vector<Block>> m_map;
+{
+	int m_height;
+	int m_width;
+	vector<vector<Block>> m_map;
 		
-	public:
-		Map(int,int);
-		Map(const Map&);
-		
-	} ;
+public:
+	Map(int,int);
+};

@@ -17,5 +17,5 @@ class Command
 public:
 	void update(const shared_ptr<AnimateObject>&) const;
 
-	Command(BaseCommand*);
+	Command(unique_ptr<BaseCommand>);
 };

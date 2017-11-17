@@ -1,7 +1,7 @@
 #include "inputs/Command.h"
 
-Command::Command(BaseCommand* command)
-	: m_command(command)
+Command::Command(unique_ptr<BaseCommand> command)
+	: m_command(std::move(command))
 {
 }
 

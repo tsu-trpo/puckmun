@@ -1,6 +1,6 @@
 #include "control/EventLoop.h"
 
-EventLoop :: EventLoop(GameField field, InputList inputs)
+EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
 	: m_field (field)
 	, m_inputs(inputs)
 {}

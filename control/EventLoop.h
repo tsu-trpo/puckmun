@@ -26,7 +26,7 @@ class EventLoop
 		bool m_keep_playing;
 
 
-		EventLoop(GameField, InputList);
+		EventLoop(const GameField&, const InputList&);
 
 
 		bool move_objects(); //updates m_field and m_keep_playing

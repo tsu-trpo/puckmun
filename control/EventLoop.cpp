@@ -25,10 +25,9 @@ EventLoop& EventLoop :: start_game()
 {
 	while(m_keep_playing)
 	{
-		this->move_objects();
-
 		this->redraw_screen();
 
+		// replan all objects' actions
 		for (auto& t : m_inputs)
 		{
 			auto& input_ptr  = t.first;
@@ -38,6 +37,8 @@ EventLoop& EventLoop :: start_game()
 
 			this->plan_object(command, object_ptr);
 		}
+
+		this->move_objects();
 	}
 }
 

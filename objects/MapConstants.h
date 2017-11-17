@@ -1,7 +1,6 @@
 #pragma once
 
-// needed to have size_t type
-#include <cstdio>
+#include <cstddef>
 
 // В этом файле описаны важные константы и типы, относящиеся к положению
 // вещей на карте

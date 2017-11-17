@@ -10,13 +10,18 @@ EventLoop& EventLoop :: start_game()
 {
 	while(m_keep_playing)
 	{
-		this->update_objects();
+		this->move_objects();
 
 		this->redraw_screen();
 
-		for (auto& input_ptr : m_inputs)
+		for (auto& t : m_inputs)
 		{
-			input_ptr->update(m_field);
+			auto& input_ptr  = t.first;
+			auto& object_ptr = t.second;
+
+			auto command = input_ptr->plan(m_field, object_ptr);
+
+			this->plan_object(command, object_ptr);
 		}
 	}
 }

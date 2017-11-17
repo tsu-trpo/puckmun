@@ -1,13 +1,20 @@
+#pragma once
+
 #include <vector>
 #include <memory>
+#include <map>
 
+#include "objects/AnimateObject.h"
 #include "objects/GameField.h"
 #include "inputs/Input.h"
+#include "inputs/Command.h"
 
 using std::vector;
 using std::shared_ptr;
+using std::pair;
 
-using InputList = vector< shared_ptr<Input> >;
+using InputObject = pair< shared_ptr<Input>, shared_ptr<AnimateObject> >;
+using InputList   = vector<InputObject>;
 
 
 class EventLoop
@@ -22,7 +29,8 @@ class EventLoop
 		EventLoop(GameField, InputList);
 
 
-		bool update_objects(); //updates m_field and m_keep_playing
+		bool move_objects(); //updates m_field and m_keep_playing
+		void plan_object(Command, shared_ptr<AnimateObject>); //updates m_field && m_inputs by updating second argument
 		void redraw_screen() const;
 
 		EventLoop& before_game(); //dunno what it updates

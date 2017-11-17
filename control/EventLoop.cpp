@@ -35,11 +35,13 @@ EventLoop& EventLoop :: start_game()
 
 EventLoop& EventLoop :: before_game()
 {
+	return *this;
 }
 
 
 EventLoop& EventLoop :: after_game()
 {
+	return *this;
 }
 
 

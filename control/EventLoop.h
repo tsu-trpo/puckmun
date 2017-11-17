@@ -30,7 +30,7 @@ class EventLoop
 
 
 		bool move_objects(); //updates m_field and m_keep_playing
-		void plan_object(Command, shared_ptr<AnimateObject>); //updates m_field && m_inputs by updating second argument
+		void plan_object(const Command&, const shared_ptr<AnimateObject>&); //updates m_field && m_inputs by updating second argument
 		void redraw_screen() const;
 
 		EventLoop& before_game(); //dunno what it updates

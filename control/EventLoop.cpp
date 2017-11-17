@@ -6,6 +6,12 @@ EventLoop :: EventLoop(GameField field, InputList inputs)
 {}
 
 
+void EventLoop :: plan_object(const Command& command, const shared_ptr<AnimateObject>& object)
+{
+	command.update(object);
+}
+
+
 EventLoop& EventLoop :: start_game()
 {
 	while(m_keep_playing)

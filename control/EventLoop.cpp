@@ -33,6 +33,8 @@ EventLoop& EventLoop :: start_game()
 
 		this->move_objects();
 	}
+
+	return *this;
 }
 
 

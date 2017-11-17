@@ -1,5 +1,6 @@
 #pragma once
 
+// needed to have size_t type
 #include <cstdio>
 
 // В этом файле описаны важные константы и типы, относящиеся к положению

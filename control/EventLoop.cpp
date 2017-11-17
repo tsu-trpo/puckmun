@@ -6,13 +6,6 @@ EventLoop :: EventLoop(GameField field, InputList inputs)
 {}
 
 
-// moves objects on the field as they say with tick()
-bool move_objects()
-{
-	
-}
-
-
 // updates object by the command send by input/AI
 void EventLoop :: plan_object(const Command& command, const shared_ptr<AnimateObject>& object)
 {

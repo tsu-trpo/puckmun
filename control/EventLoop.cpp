@@ -33,6 +33,16 @@ EventLoop& EventLoop :: start_game()
 }
 
 
+EventLoop& EventLoop :: before_game()
+{
+}
+
+
+EventLoop& EventLoop :: after_game()
+{
+}
+
+
 EventLoop& EventLoop :: run() //updates everything
 {
 	this->before_game()

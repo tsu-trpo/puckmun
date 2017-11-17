@@ -56,7 +56,7 @@ EventLoop& EventLoop :: after_game()
 EventLoop& EventLoop :: run() //updates everything
 {
 	this->before_game()
-		 .start_game()
-		 .after_game();
+	     .start_game()
+	     .after_game();
 	return *this;
 }

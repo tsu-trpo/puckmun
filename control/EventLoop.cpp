@@ -6,12 +6,21 @@ EventLoop :: EventLoop(GameField field, InputList inputs)
 {}
 
 
+// moves objects on the field as they say with tick()
+bool move_objects()
+{
+	
+}
+
+
+// updates object by the command send by input/AI
 void EventLoop :: plan_object(const Command& command, const shared_ptr<AnimateObject>& object)
 {
 	command.update(object);
 }
 
 
+// start and run the game - the main event loop
 EventLoop& EventLoop :: start_game()
 {
 	while(m_keep_playing)
@@ -33,18 +42,21 @@ EventLoop& EventLoop :: start_game()
 }
 
 
+// take actions before running the event loop
 EventLoop& EventLoop :: before_game()
 {
 	return *this;
 }
 
 
+// take actions after the event loop peacefully terminates
 EventLoop& EventLoop :: after_game()
 {
 	return *this;
 }
 
 
+// public functions to set up all actions of event loop
 EventLoop& EventLoop :: run() //updates everything
 {
 	this->before_game()

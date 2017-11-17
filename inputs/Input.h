@@ -10,6 +10,6 @@ using std::shared_ptr;
 
 class Input
 {
-	public:
-		virtual Command plan(GameField, shared_ptr<AnimateObject>) = 0;
+public:
+	virtual Command plan(GameField, shared_ptr<AnimateObject>) = 0;
 };

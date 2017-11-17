@@ -19,25 +19,25 @@ using InputList   = vector<InputObject>;
 
 class EventLoop
 {
-	private:
-		GameField m_field;
-		InputList m_inputs;
+private:
+	GameField m_field;
+	InputList m_inputs;
 
-		bool m_keep_playing;
-
-
-		EventLoop(const GameField&, const InputList&);
+	bool m_keep_playing;
 
 
-		bool move_objects(); //updates m_field and m_keep_playing
-		void plan_object(const Command&, const shared_ptr<AnimateObject>&); //updates m_field && m_inputs by updating second argument
-		void redraw_screen() const;
-
-		EventLoop& before_game(); //dunno what it updates
-		EventLoop& start_game();  //updates everything
-		EventLoop& after_game();  //dunno either
+	EventLoop(const GameField&, const InputList&);
 
 
-	public:
-		EventLoop& run(); //updates everything
+	bool move_objects(); //updates m_field and m_keep_playing
+	void plan_object(const Command&, const shared_ptr<AnimateObject>&); //updates m_field && m_inputs by updating second argument
+	void redraw_screen() const;
+
+	EventLoop& before_game(); //dunno what it updates
+	EventLoop& start_game();  //updates everything
+	EventLoop& after_game();  //dunno either
+
+
+public:
+	EventLoop& run(); //updates everything
 };

@@ -7,7 +7,7 @@ EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
 
 
 // updates object by the command send by input/AI
-void EventLoop :: plan_object(const Command& command, const shared_ptr<AnimateObject>& object)
+void EventLoop :: update_object_plan(const Command& command, const shared_ptr<AnimateObject>& object)
 {
 	command.update(object);
 }
@@ -28,7 +28,7 @@ EventLoop& EventLoop :: start_game()
 
 			auto command = input_ptr->plan(m_field, object_ptr);
 
-			this->plan_object(command, object_ptr);
+			this->update_object_plan(command, object_ptr);
 		}
 
 		this->move_objects();

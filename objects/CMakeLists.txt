@@ -6,3 +6,8 @@ project(objects)
 add_library(Map STATIC
 	Map.cpp
 )
+
+# Библиотека с AnimateObject
+add_library(AnimateObject STATIC
+	AnimateObject.cpp
+)

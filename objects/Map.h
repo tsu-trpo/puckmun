@@ -8,10 +8,10 @@ using namespace std;
 
 class Map
 {
-	int m_height;
-	int m_width;
+	Coordinate m_height;
+	Coordinate m_width;
 	vector<vector<Block>> m_map;
 		
 public:
-	Map(int,int);
+	Map(Coordinate,Coordinate);
 };

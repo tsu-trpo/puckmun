@@ -1,5 +1,5 @@
 enum struct Block
 {
-	Wall, Point, BigPoint
+	Wall, Point, BigPoint, Space
 };
 

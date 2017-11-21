@@ -1,6 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 #include "objects/Map.h"
 
 Map::Map(int H,int W)

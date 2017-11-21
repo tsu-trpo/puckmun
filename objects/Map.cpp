@@ -1,6 +1,6 @@
 #include "objects/Map.h"
 
-Map::Map(int H,int W)
+Map::Map(Coordinate H,Coordinate W)
 {
 	m_height = H;
 	m_width = W;

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "objects/Block.h"
+#include "objects/MapConstants.h"
 
 using namespace std;
 

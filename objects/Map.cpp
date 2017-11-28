@@ -8,4 +8,3 @@ Map::Map(Coordinate Height,Coordinate Width)
 	for(int i = 0; i < W; i++)
 		m_map[i].resize(H);
 }
-

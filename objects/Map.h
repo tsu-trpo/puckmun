@@ -15,4 +15,5 @@ class Map
 		
 public:
 	Map(Coordinate,Coordinate);
+	void Change_Block(Coordinate,Coordinate, Block);
 };

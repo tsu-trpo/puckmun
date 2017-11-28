@@ -1,10 +1,10 @@
 #include "objects/Map.h"
 
-Map::Map(Coordinate Height,Coordinate Width)
+Map::Map(Coordinate height,Coordinate width)
 {
-	m_height = Height;
-	m_width = Width;
-	m_map.resize(W);
-	for(int i = 0; i < W; i++)
-		m_map[i].resize(H);
+	m_height = height;
+	m_width = width;
+	m_map.resize(width);
+	for(int i = 0; i < width; i++)
+		m_map[i].resize(height);
 }

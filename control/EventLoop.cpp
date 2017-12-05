@@ -7,9 +7,9 @@ EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
 
 
 // updates object by the command send by input/AI
-void EventLoop :: update_object_plan(const Command& command, const shared_ptr<AnimateObject>& object)
+void EventLoop :: update_object_plan(const Command& command, const shared_ptr<GameObject>& object)
 {
-	command.update(object);
+	command.update( std::static_pointer_cast<AnimateObject>(object) );
 }
 
 

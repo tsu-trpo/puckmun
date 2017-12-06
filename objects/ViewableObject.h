@@ -11,7 +11,7 @@ class ViewableObject
 public:
 	virtual char get_form() = 0;
 
-	//fuck fuck fuck old-c-style types
+	//short - тип в ncurses для передачи цветов. Ужас
 	virtual short get_bg_color()   = 0;
 	virtual short get_body_color() = 0;
 

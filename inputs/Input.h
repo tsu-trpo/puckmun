@@ -11,5 +11,5 @@ using std::shared_ptr;
 class Input
 {
 public:
-	virtual Command plan(const GameField&, const shared_ptr<AnimateObject>&) = 0;
+	virtual Command plan(const GameField&, const shared_ptr<const AnimateObject>&) = 0;
 };

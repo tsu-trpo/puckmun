@@ -29,7 +29,7 @@ short ncurses_color(Color color)
 			return COLOR_WHITE;
 			break;
 		default:
-			// ehhh what to do what to do
+			throw std::logic_error("In file Color.cpp on line 33:\n    unexpected color value in case section\n");
 			// well it should never come here
 			return ERR;
 	}

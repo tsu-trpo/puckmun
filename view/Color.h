@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <ncurses.h>
 
 // defines strict colors and a function to convert them to ncurses colors

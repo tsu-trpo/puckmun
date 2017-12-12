@@ -15,5 +15,5 @@ class Map
 		
 public:
 	Map(Coordinate,Coordinate);
-	Map change_block(Coordinate,Coordinate, Block);
+	Map & change_block(Coordinate,Coordinate, Block);
 };

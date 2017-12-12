@@ -11,6 +11,6 @@ Map::Map(Coordinate height,Coordinate width)
 Map Map::change_block(Coordinate height,Coordinate width, Block block)
 {
 	if(height >= 0 && height < m_height && width >= 0 && width < m_width)
-		m_map[width][height] = block;
+		m_map.at(width).at(height) = block;
 	return *this;
 }

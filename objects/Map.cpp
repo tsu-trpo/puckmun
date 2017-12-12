@@ -8,7 +8,9 @@ Map::Map(Coordinate height,Coordinate width)
 	for(int i = 0; i < width; i++)
 		m_map[i].resize(height);
 }
-void Map::Change_Block(Coordinate height,Coordinate width, Block block)
+Map Map::change_block(Coordinate height,Coordinate width, Block block)
 {
-	m_map[width][height] = block;
+	if(height >= 0 && height < m_height && width >= 0 && width < m_width)
+		m_map[width][height] = block;
+	return *this;
 }

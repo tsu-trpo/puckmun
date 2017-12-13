@@ -14,4 +14,6 @@ class Map
 public:
 	Map(Coordinate,Coordinate);
 	Map & change_block(Coordinate,Coordinate, Block);
+	Coordinate get_height();
+	Coordinate get_width();
 };

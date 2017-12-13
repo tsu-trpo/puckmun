@@ -2,8 +2,8 @@
 
 TheMan::TheMan()
 {
-	m_current = NULL;
-	m_next = NULL;
+	m_current = Down;
+	m_next = Down;
 }
 MoveDirection TheMan::tick()
 {

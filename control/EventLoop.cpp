@@ -1,5 +1,7 @@
 #include "control/EventLoop.h"
 
+#include "error.h"
+
 EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
 	: m_field (field)
 	, m_inputs(inputs)
@@ -9,6 +11,8 @@ EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
 // updates object by the command send by input/AI
 void EventLoop :: update_object_plan(const Command& command, const shared_ptr<GameObject>& object)
 {
+	if (!object)
+		throw std::invalid_argument( ERR_HEADER "passed null pointer as object" );
 	command.update( std::static_pointer_cast<AnimateObject>(object) );
 }
 

@@ -5,7 +5,7 @@ Map::Map(Coordinate height,Coordinate width)
 
 	m_map.resize(width);
 	for( auto &line : m_map)
-		line->resize(height);
+		line.resize(height);
 }
 Map & Map::change_block(Coordinate height,Coordinate width, Block block)
 {

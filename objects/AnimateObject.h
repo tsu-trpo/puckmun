@@ -18,12 +18,12 @@ protected:
 public:
 	virtual MoveDirection tick(void) = 0;
 	
-	Coordinate get_x(void);
-	Coordinate get_y(void);
+	Coordinate get_x(void) const;
+	Coordinate get_y(void) const;
 	Coordinate set_x(Coordinate);
 	Coordinate set_y(Coordinate);
 
-	PeriodT    get_period(void);
+	PeriodT    get_period(void) const;
 	PeriodT    set_period(PeriodT);
 };
 

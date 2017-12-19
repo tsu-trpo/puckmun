@@ -2,7 +2,6 @@
 
 Map::Map(Coordinate height,Coordinate width)
 {
-
 	m_map.resize(width);
 	for( auto &line : m_map)
 		line.resize(height);
@@ -21,7 +20,6 @@ Coordinate Map::get_width()
 
 Coordinate Map::get_height()
 {
-	
 	if (get_width() == 0) 
     		return 0;
 	return m_map[0].size();

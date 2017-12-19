@@ -8,8 +8,7 @@ Map::Map(Coordinate height,Coordinate width)
 }
 Map & Map::change_block(Coordinate height,Coordinate width, Block block)
 {
-	if(height < get_width() && width < get_height())
-		m_map.at(width).at(height) = block;
+	m_map.at(width).at(height) = block;
 	return *this;
 }
 

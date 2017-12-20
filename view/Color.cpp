@@ -32,7 +32,5 @@ short ncurses_color(Color color)
 			break;
 		default:
 			throw std::logic_error(ERR_HEADER "unexpected color value in case section\n");
-			// well it should never come here
-			return ERR;
 	}
 }

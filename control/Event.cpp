@@ -65,3 +65,28 @@ Event event_nothing()
 	return Event(Event::Type::Nothing, ObjectPtr(nullptr),
 	             StandartX, StandartY, StandartDirection, StandartBlock);
 }
+
+Event::Type   Event::get_type()                  const
+{
+	return m_type;
+}
+ObjectPtr     Event::get_object_argument()       const
+{
+	return m_object_argument;
+}
+Coordinate    Event::get_coordinate_argument_x() const
+{
+	return m_coordinate_argument_x;
+}
+Coordinate    Event::get_coordinate_argument_y() const
+{
+	return m_coordinate_argument_y;
+}
+Block         Event::get_block_argument()        const
+{
+	return m_block_argument;
+}
+MoveDirection Event::get_direction_argument()    const
+{
+	return m_direction_argument;
+}

@@ -40,6 +40,13 @@ public:
 	Event(const Type&, const ObjectPtr&, const Coordinate&,
 	      const Coordinate&, const MoveDirection&, const Block&);
 
+	Type          get_type() const;
+	ObjectPtr     get_object_argument() const;
+	Coordinate    get_coordinate_argument_x() const;
+	Coordinate    get_coordinate_argument_y() const;
+	MoveDirection get_direction_argument() const;
+	Block         get_block_argument() const;
+
 private:
 	Type          m_type;
 	ObjectPtr     m_object_argument;

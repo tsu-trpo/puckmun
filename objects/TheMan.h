@@ -11,7 +11,7 @@ class TheMan: public AnimateObject
 private:
 	TheMan();
 	MoveDirection tick();
-	void ChangeCurrent();
-	void ChangeNext(MoveDirection);
+	void Change_Current();
+	void Change_Next(MoveDirection);
 };
 	

@@ -10,12 +10,12 @@ MoveDirection TheMan::tick()
 	return m_current;
 }
 
-void TheMan::ChangeCurrent()
+void TheMan::Change_Current()
 {
 	m_current = m_next;
 }
 
-void TheMan::ChangeNext(MoveDirection next)
+void TheMan::Change_Next(MoveDirection next)
 {
 	m_next = next;
 }

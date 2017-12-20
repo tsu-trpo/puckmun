@@ -5,3 +5,7 @@ project(control)
 add_library(EventLoop STATIC
 	EventLoop.cpp
 )
+
+add_library(Event STATIC
+	Event.cpp
+)

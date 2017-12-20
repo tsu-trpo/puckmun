@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "objects/AnimateObject.h"
+#include "control/MoveDirection.h"
 
 class TheMan: public AnimateObject
 {	
@@ -10,6 +11,7 @@ class TheMan: public AnimateObject
 private:
 	TheMan();
 	MoveDirection tick();
-
+	void ChangeCurrent();
+	void ChangeNext(MoveDirection);
 };
 	

@@ -14,7 +14,7 @@ EventLoop& EventLoop :: start_game()
 		this->replan_all_objects();
 
 		// move and redraw each object based on tick
-		for (auto& object_ptr : m_field.get_objects())
+		for (auto& object_ptr : m_field.objects)
 		{
 			// every periodth time of object do
 			if ( m_current_tick % object_ptr->get_period() != 0 )
@@ -74,10 +74,60 @@ EventLoop& EventLoop :: replan_all_objects()
 }
 
 
+EventLoop& EventLoop :: move_and_redraw(const vector<Event>& events)
+{
+	for (auto& event : events)
+	{
+		//drawing stuff
+		this->redraw_screen(event);
+		//physics stuff
+		this->execute_event(event);
+	}
+	return *this;
+}
+
+
 PeriodT EventLoop :: increment_tick()
 {
 	// maximum is 120, which is divisible by 1, 2, 3, 4, 5, 6, 8, 10, 12
 	return m_current_tick = (m_current_tick + 1) % 120;
 }
 
+EventLoop& EventLoop :: execute_event(const Event& event)
+{
+	if (event.get_type() == Event::Type::Nothing)
+	{
+		return *this;
+	}
+	if (event.get_type() == Event::Type::EatPoint)
+	{
+		auto x = event.get_coordinate_argument_x();
+		auto y = event.get_coordinate_argument_y();
+
+		m_field.map.change_block(x, y, Block::Space);
+
+		//TODO: score stuff
+
+		return *this;
+	}
+	if (event.get_type() == Event::Type::DestroyWall)
+	{
+		auto x = event.get_coordinate_argument_x();
+		auto y = event.get_coordinate_argument_y();
+
+		m_field.map.change_block(x, y, Block::Space);
+
+		return *this;
+	}
+	if (event.get_type() == Event::Type::AddWall)
+	{
+		auto x     = event.get_coordinate_argument_x();
+		auto y     = event.get_coordinate_argument_y();
+		auto block = event.get_block_argument();
+
+		m_field.map.change_block(x, y, block);
+
+		return *this;
+	}
+}
 // vim: tw=78

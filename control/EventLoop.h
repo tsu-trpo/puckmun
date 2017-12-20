@@ -32,13 +32,14 @@ private:
 	EventLoop(const GameField&, const InputList&);
 
 
-	void redraw_screen()            const;
+	void redraw_screen(const Event&) const;
 	vector<Event> move_object(const MoveDirection&,
 	                          const shared_ptr<AnimateObject>&) const;
 
 	PeriodT increment_tick(); //updates m_current_tick
 
 	// very unconst methods:
+	EventLoop& execute_event(const Event&);
 	EventLoop& replan_all_objects();
 	EventLoop& move_and_redraw(const vector<Event>&);
 	EventLoop& before_game();

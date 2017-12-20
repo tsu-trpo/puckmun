@@ -5,6 +5,7 @@
 #include <map>
 
 #include "objects/AnimateObject.h"
+#include "objects/GameObject.h"
 #include "objects/GameField.h"
 #include "inputs/Input.h"
 #include "inputs/Command.h"
@@ -13,7 +14,7 @@ using std::vector;
 using std::shared_ptr;
 using std::pair;
 
-using InputObject = pair< shared_ptr<Input>, shared_ptr<AnimateObject> >;
+using InputObject = pair< shared_ptr<Input>, shared_ptr<GameObject> >;
 using InputList   = vector<InputObject>;
 
 
@@ -30,7 +31,7 @@ private:
 
 
 	bool move_objects(); //updates m_field and m_keep_playing
-	void update_object_plan(const Command&, const shared_ptr<AnimateObject>&); //updates m_field && m_inputs by updating second argument
+	void update_object_plan(const Command&, const shared_ptr<GameObject>&); //updates m_field && m_inputs by updating second argument
 	void redraw_screen() const;
 
 	EventLoop& before_game(); //dunno what it updates

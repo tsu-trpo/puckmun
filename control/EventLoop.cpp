@@ -15,7 +15,7 @@ EventLoop& EventLoop :: start_game()
 	{
 		this->replan_all_objects();
 
-		// move and redraw each object based on tick
+		// tick all objects and act upon it
 		for (auto& object_ptr : m_field.objects)
 		{
 			// every periodth time of object do
@@ -95,13 +95,38 @@ PeriodT EventLoop :: increment_tick()
 	return m_current_tick = (m_current_tick + 1) % 120;
 }
 
+void move_one_object(const shared_ptr<AnimateObject>& obj, MoveDirection dir)
+{
+	// doesn't check for boundaries because it doesn't have enought
+	// information for right limit anyway, and it should be called only in
+	// correct cases by design
+
+	switch (dir)
+	{
+		case MoveDirection::Up:
+			obj->set_y( obj->get_y() - 1 );
+			return;
+		case MoveDirection::Down:
+			obj->set_y( obj->get_y() + 1 );
+			return;
+		case MoveDirection::Left:
+			obj->set_x( obj->get_x() - 1 );
+			return;
+		case MoveDirection::Right:
+			obj->set_x( obj->get_x() + 1 );
+			return;
+	}
+}
+
 EventLoop& EventLoop :: execute_event(const Event& event)
 {
-	if (event.get_type() == Event::Type::Nothing)
+	switch (event.get_type())
+	{
+	case Event::Type::Nothing:
 	{
 		return *this;
 	}
-	if (event.get_type() == Event::Type::EatPoint)
+	case Event::Type::EatPoint:
 	{
 		auto x = event.get_coordinate_argument_x();
 		auto y = event.get_coordinate_argument_y();
@@ -112,7 +137,7 @@ EventLoop& EventLoop :: execute_event(const Event& event)
 
 		return *this;
 	}
-	if (event.get_type() == Event::Type::DestroyWall)
+	case Event::Type::DestroyWall:
 	{
 		auto x = event.get_coordinate_argument_x();
 		auto y = event.get_coordinate_argument_y();
@@ -121,7 +146,7 @@ EventLoop& EventLoop :: execute_event(const Event& event)
 
 		return *this;
 	}
-	if (event.get_type() == Event::Type::AddWall)
+	case Event::Type::AddWall:
 	{
 		auto x     = event.get_coordinate_argument_x();
 		auto y     = event.get_coordinate_argument_y();
@@ -130,6 +155,17 @@ EventLoop& EventLoop :: execute_event(const Event& event)
 		m_field.map.change_block(x, y, block);
 
 		return *this;
+	}
+	case Event::Type::Move:
+	{
+		auto dir    = event.get_direction_argument();
+		auto object = event.get_object_argument();
+
+		move_one_object(object, dir);
+
+		return *this;
+	}
+	// TODO: other cases
 	}
 }
 // vim: tw=78

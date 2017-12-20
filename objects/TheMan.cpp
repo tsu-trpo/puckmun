@@ -3,19 +3,19 @@
 TheMan::TheMan()
 {
 	m_current = MoveDirection::Down;
-	m_next = MoveDirection::Down;
+	m_future = MoveDirection::Down;
 }
 MoveDirection TheMan::tick()
 {
 	return m_current;
 }
 
-void TheMan::Change_Current()
+void TheMan::set_current()
 {
-	m_current = m_next;
+	m_current = m_future;
 }
 
-void TheMan::Change_Next(MoveDirection next)
+void TheMan::set_future(MoveDirection next)
 {
-	m_next = next;
+	m_future = next;
 }

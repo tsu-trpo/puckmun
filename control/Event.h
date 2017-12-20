@@ -39,6 +39,8 @@ public:
 
 	Event(const Type&, const ObjectPtr&, const Coordinate&,
 	      const Coordinate&, const MoveDirection&, const Block&);
+	Event(const Event&) = delete;
+	Event(Event&&) = default;
 
 	Type          get_type() const;
 	ObjectPtr     get_object_argument() const;

@@ -9,6 +9,7 @@
 #include "inputs/Input.h"
 #include "inputs/Command.h"
 #include "control/MoveDirection.h"
+#include "control/Event.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -31,18 +32,22 @@ private:
 	EventLoop(const GameField&, const InputList&);
 
 
-	bool animate_objects(); //updates m_field and m_keep_playing
-	PeriodT increment_tick(); //updates m_current_tick
-	//two next update m_field && m_inputs by updating their second argument
-	void update_object_plan(const Command&, const shared_ptr<AnimateObject>&);
-	bool move_object(const MoveDirection&, const shared_ptr<AnimateObject>&);
-	void redraw_screen() const;
+	void redraw_screen()            const;
+	vector<Event> move_object(const MoveDirection&,
+	                          const shared_ptr<AnimateObject>&) const;
 
-	EventLoop& before_game(); //dunno what it updates
-	EventLoop& start_game();  //updates everything
-	EventLoop& after_game();  //dunno either
+	PeriodT increment_tick(); //updates m_current_tick
+
+	// very unconst methods:
+	EventLoop& replan_all_objects();
+	EventLoop& move_and_redraw(const vector<Event>&);
+	EventLoop& before_game();
+	EventLoop& start_game();
+	EventLoop& after_game();
 
 
 public:
 	EventLoop& run(); //updates everything
 };
+
+// vim: tw=78

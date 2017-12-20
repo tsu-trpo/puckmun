@@ -28,13 +28,13 @@ public:
 		Nothing
 	};
 	// creators of specific events
-	friend Event event_move(MoveDirection, ObjectPtr);
-	friend Event event_kill(ObjectPtr);
-	friend Event event_promote(ObjectPtr);
-	friend Event event_demote(ObjectPtr);
-	friend Event event_eat_point(Coordinate, Coordinate);
-	friend Event event_destroy_wall(Coordinate, Coordinate);
-	friend Event event_add_wall(Coordinate, Coordinate, Block);
+	friend Event event_move(const MoveDirection&, const ObjectPtr&);
+	friend Event event_kill(const ObjectPtr&);
+	friend Event event_promote(const ObjectPtr&);
+	friend Event event_demote(const ObjectPtr&);
+	friend Event event_eat_point(const Coordinate&, const Coordinate&);
+	friend Event event_destroy_wall(const Coordinate&, const Coordinate&);
+	friend Event event_add_wall(const Coordinate&, const Coordinate&, const Block&);
 	friend Event event_nothing();
 
 	Event(const Type&, const ObjectPtr&, const Coordinate&,

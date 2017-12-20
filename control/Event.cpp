@@ -16,43 +16,43 @@ Event::Event(const Event::Type&   type,
 {}
 
 
-Event event_move(MoveDirection dir, ObjectPtr obj)
+Event event_move(const MoveDirection& dir, const ObjectPtr& obj)
 {
 	return Event(Event::Type::Move, obj, // non-standart
 	             StandartX, StandartY,   // standart
 	             dir,                    // non-standart
 	             StandartBlock);         // standart
 }
-Event event_kill(ObjectPtr obj)
+Event event_kill(const ObjectPtr& obj)
 {
 	return Event(Event::Type::Kill, obj, // only non-standart
 	             StandartX, StandartY, StandartDirection, StandartBlock);
 }
-Event event_promote(ObjectPtr obj)
+Event event_promote(const ObjectPtr& obj)
 {
 	return Event(Event::Type::Promote, obj, // only non-standart
 	             StandartX, StandartY, StandartDirection, StandartBlock);
 }
-Event event_demote(ObjectPtr obj)
+Event event_demote(const ObjectPtr& obj)
 {
 	return Event(Event::Type::Demote, obj, // only non-standart
 	             StandartX, StandartY, StandartDirection, StandartBlock);
 }
-Event event_eat_point(Coordinate x, Coordinate y)
+Event event_eat_point(const Coordinate& x, const Coordinate& y)
 {
 	return Event(Event::Type::EatPoint,             // non-standart
 	             ObjectPtr(nullptr),                // standarty
 	             x, y,                              // non-standart
 	             StandartDirection, StandartBlock); // standart
 }
-Event event_destroy_wall(Coordinate x, Coordinate y)
+Event event_destroy_wall(const Coordinate& x, const Coordinate& y)
 {
 	return Event(Event::Type::DestroyWall,          // non-standart
 	             ObjectPtr(nullptr),                // standarty
 	             x, y,                              // non-standart
 	             StandartDirection, StandartBlock); // standart
 }
-Event event_add_wall(Coordinate x, Coordinate y, Block block)
+Event event_add_wall(const Coordinate& x, const Coordinate& y, const Block& block)
 {
 	return Event(Event::Type::AddWall, // non-standart
 	             ObjectPtr(nullptr),   // standarty
@@ -90,3 +90,5 @@ MoveDirection Event::get_direction_argument()    const
 {
 	return m_direction_argument;
 }
+
+// vim: tw=78

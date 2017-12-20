@@ -5,6 +5,7 @@
 #include <map>
 
 #include "objects/AnimateObject.h"
+#include "objects/GameObject.h"
 #include "objects/GameField.h"
 #include "inputs/Input.h"
 #include "inputs/Command.h"
@@ -15,7 +16,7 @@ using std::vector;
 using std::shared_ptr;
 using std::pair;
 
-using InputObject = pair< shared_ptr<Input>, shared_ptr<AnimateObject> >;
+using InputObject = pair< shared_ptr<Input>, shared_ptr<GameObject> >;
 using InputList   = vector<InputObject>;
 
 

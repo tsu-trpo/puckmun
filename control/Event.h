@@ -6,12 +6,12 @@
 #include <memory>
 #include <vector>
 
-#include "objects/AnimateObject.h"
+#include "objects/GameObject.h"
 #include "objects/MapConstants.h"
 #include "objects/Block.h"
 #include "control/MoveDirection.h"
 
-using ObjectPtr = std::shared_ptr<AnimateObject>;
+using ObjectPtr = std::shared_ptr<GameObject>;
 
 class Event
 {

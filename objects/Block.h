@@ -1,3 +1,5 @@
+#pragma once
+
 enum struct Block
 {
 	Wall, 
@@ -5,4 +7,3 @@ enum struct Block
 	BigPoint,
 	Space
 };
-

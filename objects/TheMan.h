@@ -13,5 +13,7 @@ private:
 	MoveDirection tick();
 	void set_current();
 	void set_future(MoveDirection);
+	MoveDirection get_current() const;
+	MoveDirection get_future() const;
 };
 	

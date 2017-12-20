@@ -19,3 +19,14 @@ void TheMan::set_future(MoveDirection next)
 {
 	m_future = next;
 }
+
+MoveDirection TheMan::get_current() const
+{
+	return m_current;
+}
+
+MoveDirection TheMan::get_future() const
+{
+        return m_current;
+}
+

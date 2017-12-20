@@ -4,13 +4,12 @@
 #include <memory>
 
 #include "AnimateObject.h"
+#include "objects/Map.h"
 
 using std::shared_ptr;
 
-class GameField
+struct GameField
 {
-	std::vector< shared_ptr<AnimateObject> > m_objects;
-
-public:
-	const std::vector< shared_ptr<AnimateObject> >& get_objects();
+	std::vector< shared_ptr<AnimateObject> > objects;
+	Map map;
 };

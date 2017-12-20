@@ -3,13 +3,13 @@
 #include <vector>
 #include <memory>
 
-#include "AnimateObject.h"
+#include "GameObject.h"
 #include "objects/Map.h"
 
 using std::shared_ptr;
 
 struct GameField
 {
-	std::vector< shared_ptr<AnimateObject> > objects;
+	std::vector< shared_ptr<GameObject> > objects;
 	Map map;
 };

@@ -7,4 +7,7 @@
 
 class GameObject : public AnimateObject, public ViewableObject
 {
+public:
+	virtual GameObject& promote();
+	virtual GameObject& demote();
 };

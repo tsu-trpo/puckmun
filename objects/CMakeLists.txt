@@ -11,3 +11,9 @@ add_library(Map STATIC
 add_library(AnimateObject STATIC
 	AnimateObject.cpp
 )
+
+# Библиотека с TheMan
+add_library(TheMan STATIC
+TheMan.cpp
+
+)

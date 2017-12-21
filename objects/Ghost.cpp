@@ -8,3 +8,7 @@ MoveDirection Ghost::tick()
 {
 	return m_current;
 }
+void Ghost::Change_Current(MoveDirection next)
+{
+		m_current = next;
+}

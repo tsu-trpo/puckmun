@@ -11,6 +11,7 @@
 #include "inputs/Command.h"
 #include "control/MoveDirection.h"
 #include "control/Event.h"
+#include "view/Render.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -25,6 +26,7 @@ class EventLoop
 private:
 	GameField m_field;
 	InputList m_inputs;
+	Render    m_render;
 
 	bool m_keep_playing;
 	PeriodT m_current_tick;
@@ -40,7 +42,6 @@ private:
 	PeriodT increment_tick(); //updates m_current_tick
 
 	// very unconst methods:
-	EventLoop& execute_event(const Event&);
 	EventLoop& replan_all_objects();
 	EventLoop& move_and_redraw(const vector<Event>&);
 	EventLoop& before_game();

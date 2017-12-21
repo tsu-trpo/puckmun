@@ -81,9 +81,9 @@ EventLoop& EventLoop :: move_and_redraw(const vector<Event>& events)
 	for (auto& event : events)
 	{
 		//drawing stuff
-		this->redraw_screen(event);
+		event.execute_graphics(m_field, m_render);
 		//physics stuff
-		this->execute_event(event);
+		event.execute_physics(m_field);
 	}
 	return *this;
 }
@@ -118,70 +118,4 @@ void move_one_object(const shared_ptr<AnimateObject>& obj, MoveDirection dir)
 	}
 }
 
-EventLoop& EventLoop :: execute_event(const Event& event)
-{
-	switch (event.get_type())
-	{
-		case Event::Type::Nothing:
-		{
-			return *this;
-		}
-		case Event::Type::EatPoint:
-		{
-			auto x = event.get_coordinate_argument_x();
-			auto y = event.get_coordinate_argument_y();
-
-			m_field.map.change_block(x, y, Block::Space);
-
-			//TODO: score stuff
-
-			return *this;
-		}
-		case Event::Type::DestroyWall:
-		{
-			auto x = event.get_coordinate_argument_x();
-			auto y = event.get_coordinate_argument_y();
-
-			m_field.map.change_block(x, y, Block::Space);
-
-			return *this;
-		}
-		case Event::Type::AddWall:
-		{
-			auto x     = event.get_coordinate_argument_x();
-			auto y     = event.get_coordinate_argument_y();
-			auto block = event.get_block_argument();
-
-			m_field.map.change_block(x, y, block);
-
-			return *this;
-		}
-		case Event::Type::Move:
-		{
-			auto dir    = event.get_direction_argument();
-			auto object = event.get_object_argument();
-
-			move_one_object(object, dir);
-
-			return *this;
-		}
-		case Event::Type::Promote:
-		{
-			auto object = event.get_object_argument();
-
-			object->promote();
-
-			return *this;
-		}
-		case Event::Type::Demote:
-		{
-			auto object = event.get_object_argument();
-
-			object->demote();
-
-			return *this;
-		}
-		// TODO: other cases
-	}
-}
 // vim: tw=78

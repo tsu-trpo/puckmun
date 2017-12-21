@@ -9,5 +9,5 @@ class Ghost: public AnimateObject
 private:
 	Ghost();
 	MoveDirection tick();
-	Ghost change_current(MoveDirection);
+	Ghost & change_current(MoveDirection);
 };

@@ -4,7 +4,7 @@ Ghost::Ghost()
 {
 	m_current = MoveDirection::Down;
 }
-MoveDirection Ghost::tick()
+MoveDirection Ghost::tick() const
 {
 	return m_current;
 }

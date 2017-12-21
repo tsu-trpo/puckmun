@@ -6,14 +6,10 @@
 #include <memory>
 
 #include "objects/GameField.h"
-#include "objects/AnimateObject.h"
-#include "objects/ViewableObject.h"
 #include "view/Render.h"
 #include "control/events/BaseEvent.h"
 
-
 using std::unique_ptr;
-using std::shared_ptr;
 
 class Event
 {

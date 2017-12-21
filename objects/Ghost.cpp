@@ -11,4 +11,5 @@ MoveDirection Ghost::tick()
 Ghost Ghost::change_current(MoveDirection next)
 {
 	m_current = next;
+	return *this;
 }

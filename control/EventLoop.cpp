@@ -101,27 +101,4 @@ PeriodT EventLoop :: increment_tick()
 	return m_current_tick = (m_current_tick + 1) % 120;
 }
 
-void move_one_object(const shared_ptr<AnimateObject>& obj, MoveDirection dir)
-{
-	// doesn't check for boundaries because it doesn't have enought
-	// information for right limit anyway, and it should be called only in
-	// correct cases by design
-
-	switch (dir)
-	{
-		case MoveDirection::Up:
-			obj->set_y( obj->get_y() - 1 );
-			return;
-		case MoveDirection::Down:
-			obj->set_y( obj->get_y() + 1 );
-			return;
-		case MoveDirection::Left:
-			obj->set_x( obj->get_x() - 1 );
-			return;
-		case MoveDirection::Right:
-			obj->set_x( obj->get_x() + 1 );
-			return;
-	}
-}
-
 // vim: tw=78

@@ -2,7 +2,7 @@
 
 Ghost::Ghost()
 {
-	m_current = Down;
+	m_current = MoveDirection::Down;
 }
 MoveDirection Ghost::tick()
 {

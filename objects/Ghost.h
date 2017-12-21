@@ -6,8 +6,8 @@
 class Ghost: public AnimateObject
 {	
 	MoveDirection m_current;
-private:
+public:
 	Ghost();
-	MoveDirection tick();
+	MoveDirection tick() const;
 	Ghost & set_current(MoveDirection);
 };

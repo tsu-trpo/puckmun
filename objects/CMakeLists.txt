@@ -6,6 +6,14 @@ project(objects)
 add_library(Map STATIC
 	Map.cpp
 )
+# Библиотека с TheMan
+add_library(TheMan STATIC
+	TheMan.cpp
+)
+# Библиотека с Ghost
+add_library(Ghost STATIC
+	Ghost.cpp
+)
 
 # Библиотека с AnimateObject
 add_library(AnimateObject STATIC

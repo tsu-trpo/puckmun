@@ -1,12 +1,12 @@
 #include "objects/Map.h"
 
-Map::Map(Coordinate height,Coordinate width)
+Map::Map(Coordinate height, Coordinate width)
 {
 	m_map.resize(width);
-	for( auto &line : m_map)
+	for(auto &line : m_map)
 		line.resize(height);
 }
-Map & Map::change_block(Coordinate height,Coordinate width, Block block)
+Map & Map::change_block(Coordinate height, Coordinate width, Block block)
 {
 	m_map.at(width).at(height) = block;
 	return *this;

@@ -80,10 +80,16 @@ EventLoop& EventLoop :: move_and_redraw(const vector<Event>& events)
 {
 	for (auto& event : events)
 	{
-		//drawing stuff
-		event.execute_graphics(m_field, m_render);
-		//physics stuff
-		event.execute_physics(m_field);
+		if (event.graphics_first())
+		{
+			event.execute_graphics(m_field, m_render);
+			event.execute_physics(m_field);
+		}
+		else
+		{
+			event.execute_physics(m_field);
+			event.execute_graphics(m_field, m_render);
+		}
 	}
 	return *this;
 }

@@ -11,8 +11,9 @@ EventLoop :: EventLoop(
 	, m_inputs(inputs)
 	, m_render(render)
 	, m_keep_playing (true)
-	, m_current_tick(0)
-	, m_current_time(0)
+	, m_current_tick (0)
+	, m_current_time (0)
+	, m_scheduled_events ()
 {}
 
 

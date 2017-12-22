@@ -32,6 +32,7 @@ private:
 	PeriodT m_current_tick;
 	TimeT m_current_time;
 
+	list<Event> m_scheduled_events;
 
 
 	EventLoop(const GameField&, const InputList&, const Render&);

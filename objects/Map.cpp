@@ -12,16 +12,19 @@ Map & Map::change_block(Coordinate height, Coordinate width, Block block)
 	return *this;
 }
 
-Coordinate Map::get_width()
+Coordinate Map::get_width() const
 {	
 	return m_map.size();
 }
 
-Coordinate Map::get_height()
+Coordinate Map::get_height() const
 {
 	if (get_width() == 0) 
     		return 0;
 	return m_map[0].size();
 }
 
-
+Block Map::at(Coordinate x, Coordinate y) const
+{
+	return m_map.at(x).at(y);
+}

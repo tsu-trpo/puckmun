@@ -7,6 +7,11 @@ add_library(Map STATIC
 	Map.cpp
 )
 
+# Библиотека с загрузчиком
+add_library(MapLoader STATIC
+	MapLoader.cpp
+)
+
 # Библиотека с AnimateObject
 add_library(AnimateObject STATIC
 	AnimateObject.cpp

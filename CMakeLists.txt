@@ -17,3 +17,8 @@ include_directories(${puckmun_SOURCE_DIR})
 add_subdirectory(control)
 add_subdirectory(objects)
 add_subdirectory(view)
+add_subdirectory(errors)
+
+add_executable(main main.cpp)
+
+target_link_libraries(main Map MapLoader BasicMapLoader-errors Map)

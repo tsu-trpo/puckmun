@@ -136,8 +136,8 @@ EventLoop& EventLoop :: execute_one_event(const Event& event)
 PeriodT EventLoop :: increment_tick()
 {
 	m_current_time += 1;
-	// maximum is 120, which is divisible by 1, 2, 3, 4, 5, 6, 8, 10, 12
-	return m_current_tick = (m_current_tick + 1) % 120;
+	m_current_tick = (m_current_tick + 1) % MaxPeriod;
+	return m_current_tick;
 }
 
 // vim: tw=78

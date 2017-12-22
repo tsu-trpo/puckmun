@@ -9,10 +9,13 @@
 // Тип, хранящий частоту реакции объектов
 typedef unsigned char PeriodT;
 
+// Максимальное значение периода
+const PeriodT MaxPeriod = 120; // делится на 1, 2, 3, 4, 5, 6, 8, 10, 12
+
 // Тип, хранящий время
 typedef size_t TimeT;
 
 // Значение стандартного направления
-MoveDirection StandartDirection = MoveDirection::Down;
+const MoveDirection StandartDirection = MoveDirection::Down;
 
 // vim: tw=78

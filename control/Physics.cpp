@@ -55,7 +55,7 @@ namespace Physics
 	}
 
 	//dummy function for now
-	PhysicsEvents interact_objects(ObjectPtrArg, ObjectPtrArg&)
+	PhysicsEvents interact_objects(ObjectPtrArg, ObjectPtrArg)
 	{
 		PhysicsEvents r = { {}, {} };
 		return r;

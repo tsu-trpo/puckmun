@@ -13,7 +13,10 @@ class Map
 		
 public:
 	Map(Coordinate, Coordinate);
+
 	Map & change_block(Coordinate, Coordinate, Block);
+	Block at(Coordinate, Coordinate);
+
 	Coordinate get_height();
 	Coordinate get_width();
 };

@@ -2,9 +2,17 @@
 
 #include "error.h"
 
-EventLoop :: EventLoop(const GameField& field, const InputList& inputs)
+EventLoop :: EventLoop(
+	const GameField& field,
+	const InputList& inputs,
+	const Render& render
+	)
 	: m_field (field)
 	, m_inputs(inputs)
+	, m_render(render)
+	, m_keep_playing (true)
+	, m_current_tick(0)
+	, m_current_time(0)
 {}
 
 

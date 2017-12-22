@@ -33,7 +33,8 @@ private:
 	TimeT m_current_time;
 
 
-	EventLoop(const GameField&, const InputList&);
+
+	EventLoop(const GameField&, const InputList&, const Render&);
 
 
 	void redraw_screen(const Event&) const;

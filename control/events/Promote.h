@@ -19,7 +19,7 @@ namespace Events
 
 		void execute_physics(GameField&) const override;
 		void execute_graphics(const GameField&, Render&) const override;
-		bool graphics_first() const;
+		bool graphics_first() const override;
 	};
 }
 

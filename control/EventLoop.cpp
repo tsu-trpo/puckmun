@@ -35,7 +35,7 @@ EventLoop& EventLoop :: start_game()
 			// get desired movement
 			MoveDirection dir = object_ptr->tick();
 			// handle movement events
-			vector<Event> events = this->move_object(dir, object_ptr);
+			auto events = Physics::move_object(m_field, *object_ptr, dir);
 			// commit movement events
 			this->move_and_redraw(events);
 		}
@@ -85,9 +85,9 @@ EventLoop& EventLoop :: replan_all_objects()
 }
 
 
-EventLoop& EventLoop :: move_and_redraw(const vector<Event>& events)
+EventLoop& EventLoop :: move_and_redraw(const PhysicsEvents& events)
 {
-	for (auto& event : events)
+	for (auto& event : events.immediate)
 	{
 		if (event.graphics_first())
 		{

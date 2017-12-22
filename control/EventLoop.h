@@ -12,6 +12,7 @@
 #include "control/MoveDirection.h"
 #include "control/Event.h"
 #include "view/Render.h"
+#include "control/Physics.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -39,14 +40,12 @@ private:
 
 
 	void redraw_screen(const Event&) const;
-	vector<Event> move_object(const MoveDirection&,
-	                          const shared_ptr<AnimateObject>&) const;
 
 	PeriodT increment_tick(); //updates m_current_tick
 
 	// very unconst methods:
 	EventLoop& replan_all_objects();
-	EventLoop& move_and_redraw(const vector<Event>&);
+	EventLoop& move_and_redraw(const PhysicsEvents&);
 	EventLoop& before_game();
 	EventLoop& start_game();
 	EventLoop& after_game();

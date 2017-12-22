@@ -14,12 +14,12 @@ using std::list;
 struct ScheduledEvent
 {
 	Event event;
-	TimeT delay;
+	TimeT time;
 };
 struct PhysicsEvents
 {
 	list<Event> immediate;
-	list<ScheduledEvent> time;
+	list<ScheduledEvent> delayed;
 };
 
 namespace Physics

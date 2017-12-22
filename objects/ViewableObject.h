@@ -10,12 +10,13 @@
 class ViewableObject
 {
 public:
+	//non-const as it may be useful for animations
 	virtual char get_form() = 0;
-
-	//fuck fuck fuck old-c-style types
-	virtual Color get_bg_color()   const = 0;
-	virtual Color get_body_color() const = 0;
+	virtual Color get_bg_color()   = 0;
+	virtual Color get_body_color() = 0;
 
 	virtual Coordinate get_x(void) const = 0;
 	virtual Coordinate get_y(void) const = 0;
 };
+
+// vim: tw=78

@@ -11,7 +11,7 @@
 #include "inputs/Command.h"
 #include "control/MoveDirection.h"
 #include "control/Event.h"
-#include "view/Render.h"
+#include "view/GameRender.h"
 #include "control/Physics.h"
 
 using std::vector;
@@ -25,9 +25,9 @@ using InputList   = vector<InputObject>;
 class EventLoop
 {
 private:
-	GameField m_field;
-	InputList m_inputs;
-	Render    m_render;
+	GameField  m_field;
+	InputList  m_inputs;
+	GameRender m_render;
 
 	bool m_keep_playing;
 	PeriodT m_current_tick;
@@ -36,7 +36,7 @@ private:
 	list<ScheduledEvent> m_scheduled_events;
 
 
-	EventLoop(const GameField&, const InputList&, const Render&);
+	EventLoop(const GameField&, const InputList&, const GameRender&);
 
 
 	void redraw_screen(const Event&) const;

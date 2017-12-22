@@ -18,7 +18,7 @@ void Events::AddWall::execute_physics(GameField& field) const
 }
 
 void Events::AddWall::execute_graphics(const GameField& field,
-                                       Render& render) const
+                                       GameRender& render) const
 {
 	render.redraw_any_block(field, m_block, m_x, m_y);
 }

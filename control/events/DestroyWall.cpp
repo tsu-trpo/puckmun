@@ -17,7 +17,7 @@ void Events::DestroyWall::execute_physics(GameField& field) const
 }
 
 void Events::DestroyWall::execute_graphics(const GameField& field,
-                                       Render& render) const
+                                       GameRender& render) const
 {
 	render.redraw_any_block(field, Block::Space, m_x, m_y);
 }

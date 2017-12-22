@@ -15,7 +15,7 @@ void Events::Demote::execute_physics(GameField&) const
 	m_object->demote();
 }
 
-void Events::Demote::execute_graphics(const GameField& f, Render& r) const
+void Events::Demote::execute_graphics(const GameField& f, GameRender& r) const
 {
 	r.redraw_object_nomove(f, *m_object);
 }

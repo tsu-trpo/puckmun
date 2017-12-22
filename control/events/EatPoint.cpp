@@ -18,7 +18,7 @@ void Events::EatPoint::execute_physics(GameField& field) const
 	field.points_left -= 1;
 }
 
-void Events::EatPoint::execute_graphics(const GameField&, Render&) const
+void Events::EatPoint::execute_graphics(const GameField&, GameRender&) const
 {
 	// this event happens only when the man is in the same cell as the point,
 	// so there is no point in redrawing anything, as the point is unseen by

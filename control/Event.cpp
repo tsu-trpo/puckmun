@@ -23,7 +23,7 @@ void Event::execute_physics(GameField& field) const
 	m_event->execute_physics(field);
 }
 
-void Event::execute_graphics(const GameField& field, Render& render) const
+void Event::execute_graphics(const GameField& field, GameRender& render) const
 {
 	m_event->execute_graphics(field, render);
 }

@@ -14,7 +14,7 @@ void Events::Nothing::execute_physics(GameField&) const
 	return;
 }
 
-void Events::Nothing::execute_graphics(const GameField&, Render&) const
+void Events::Nothing::execute_graphics(const GameField&, GameRender&) const
 {
 	return;
 }

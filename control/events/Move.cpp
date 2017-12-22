@@ -35,7 +35,7 @@ void Events::Move::execute_physics(GameField&) const
 	m_object->set_y(m_new_y);
 }
 
-void Events::Move::execute_graphics(const GameField& field, Render& r) const
+void Events::Move::execute_graphics(const GameField& field, GameRender& r) const
 {
 	r.redraw_object_pre_move(field, *m_object, m_new_x, m_new_y);
 }

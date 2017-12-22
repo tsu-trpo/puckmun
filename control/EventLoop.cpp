@@ -5,7 +5,7 @@
 EventLoop :: EventLoop(
 	const GameField& field,
 	const InputList& inputs,
-	const Render& render
+	const GameRender& render
 	)
 	: m_field (field)
 	, m_inputs(inputs)

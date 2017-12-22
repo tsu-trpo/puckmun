@@ -96,7 +96,7 @@ EventLoop& EventLoop :: move_and_redraw(const PhysicsEvents& events)
 	// schedule delayed events
 	for (auto& event : events.delayed)
 	{
-		m_scheduled_events.push_back(event);
+		m_scheduled_events.push_back(std::move(event));
 		// make the time absolute
 		m_scheduled_events.back().time += m_current_time;
 	}

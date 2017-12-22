@@ -50,6 +50,8 @@ namespace Physics
 				plan_events.splice(plan_events.end(), additional.delayed);
 			}
 		}
+
+		return std::move(PhysicsEvents { std::move(imm_events), std::move(plan_events) });
 	}
 
 	//dummy function for now

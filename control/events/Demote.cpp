@@ -5,6 +5,11 @@ Events::Demote::Demote(const shared_ptr<GameObject>& object)
 {
 }
 
+std::unique_ptr<BaseEvent> Events::Demote::clone() const
+{
+	return unique_ptr<BaseEvent>( new Demote(*this) );
+}
+
 void Events::Demote::execute_physics(GameField&) const
 {
 	m_object->demote();

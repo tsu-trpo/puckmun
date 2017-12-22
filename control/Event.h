@@ -17,6 +17,7 @@ class Event
 
 public:
 	Event(unique_ptr<BaseEvent>);
+	Event(const Event&);
 
 	// non-const reference because other ways are too hard. What have I become
 	void execute_physics(GameField&) const;

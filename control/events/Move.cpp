@@ -24,6 +24,11 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	}
 }
 
+std::unique_ptr<BaseEvent> Events::Move::clone() const
+{
+	return unique_ptr<BaseEvent>( new Move(*this) );
+}
+
 void Events::Move::execute_physics(GameField&) const
 {
 	m_object->set_x(m_new_x);

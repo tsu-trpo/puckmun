@@ -7,6 +7,11 @@ Events::EatPoint::EatPoint(Coordinate x, Coordinate y)
 {
 }
 
+std::unique_ptr<BaseEvent> Events::EatPoint::clone() const
+{
+	return unique_ptr<BaseEvent>( new EatPoint(*this) );
+}
+
 void Events::EatPoint::execute_physics(GameField& field) const
 {
 	field.map.change_block(m_x, m_y, Block::Space);

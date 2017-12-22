@@ -16,6 +16,8 @@ namespace Events
 	public:
 		AddWall(Coordinate, Coordinate, Block);
 
+		std::unique_ptr<BaseEvent> clone() const override;
+
 		void execute_physics(GameField&) const override;
 		void execute_graphics(const GameField&, Render&) const override;
 		bool graphics_first() const;

@@ -13,6 +13,11 @@ Event::Event(unique_ptr<BaseEvent> event)
 {
 }
 
+Event::Event(const Event& other)
+	: m_event (other.m_event->clone())
+{
+}
+
 void Event::execute_physics(GameField& field) const
 {
 	m_event->execute_physics(field);

@@ -7,6 +7,11 @@ Events::AddWall::AddWall(Coordinate x, Coordinate y, Block block)
 {
 }
 
+std::unique_ptr<BaseEvent> Events::AddWall::clone() const
+{
+	return unique_ptr<BaseEvent>( new AddWall(*this) );
+}
+
 void Events::AddWall::execute_physics(GameField& field) const
 {
 	field.map.change_block(m_x, m_y, m_block);

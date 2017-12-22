@@ -4,6 +4,11 @@ Events::Nothing::Nothing()
 {
 }
 
+std::unique_ptr<BaseEvent> Events::Nothing::clone() const
+{
+	return unique_ptr<BaseEvent>( new Nothing(*this) );
+}
+
 void Events::Nothing::execute_physics(GameField&) const
 {
 	return;

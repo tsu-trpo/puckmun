@@ -5,6 +5,11 @@ Events::Promote::Promote(const shared_ptr<GameObject>& object)
 {
 }
 
+std::unique_ptr<BaseEvent> Events::Promote::clone() const
+{
+	return unique_ptr<BaseEvent>( new Promote(*this) );
+}
+
 void Events::Promote::execute_physics(GameField&) const
 {
 	m_object->promote();

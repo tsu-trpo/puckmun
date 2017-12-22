@@ -33,7 +33,7 @@ private:
 	PeriodT m_current_tick;
 	TimeT m_current_time;
 
-	list<Event> m_scheduled_events;
+	list<ScheduledEvent> m_scheduled_events;
 
 
 	EventLoop(const GameField&, const InputList&, const Render&);
@@ -46,6 +46,7 @@ private:
 	// very unconst methods:
 	EventLoop& replan_all_objects();
 	EventLoop& move_and_redraw(const PhysicsEvents&);
+	EventLoop& execute_one_event(const Event&);
 	EventLoop& before_game();
 	EventLoop& start_game();
 	EventLoop& after_game();

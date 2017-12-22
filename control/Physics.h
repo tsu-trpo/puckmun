@@ -19,7 +19,7 @@ struct ScheduledEvent
 struct PhysicsEvents
 {
 	list<Event> immediate;
-	list<ScheduledEvent> scheduled;
+	list<ScheduledEvent> time;
 };
 
 namespace Physics

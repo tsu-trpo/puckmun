@@ -87,18 +87,47 @@ EventLoop& EventLoop :: replan_all_objects()
 
 EventLoop& EventLoop :: move_and_redraw(const PhysicsEvents& events)
 {
+	// execute immediate events
 	for (auto& event : events.immediate)
 	{
-		if (event.graphics_first())
+		this->execute_one_event(event);
+	}
+
+	// schedule delayed events
+	for (auto& event : events.delayed)
+	{
+		m_scheduled_events.push_back(event);
+		// make the time absolute
+		m_scheduled_events.back().time += m_current_time;
+	}
+
+	// execute scheduled events
+	for (auto event_it = m_scheduled_events.begin();
+	     event_it != m_scheduled_events.end();
+	     ++event_it)
+	{
+		if (event_it->time == m_current_time)
 		{
-			event.execute_graphics(m_field, m_render);
-			event.execute_physics(m_field);
+			this->execute_one_event(event_it->event);
+			m_scheduled_events.erase(event_it);
 		}
-		else
-		{
-			event.execute_physics(m_field);
-			event.execute_graphics(m_field, m_render);
-		}
+	}
+
+	return *this;
+}
+
+
+EventLoop& EventLoop :: execute_one_event(const Event& event)
+{
+	if (event.graphics_first())
+	{
+		event.execute_graphics(m_field, m_render);
+		event.execute_physics(m_field);
+	}
+	else
+	{
+		event.execute_physics(m_field);
+		event.execute_graphics(m_field, m_render);
 	}
 	return *this;
 }

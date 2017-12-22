@@ -1,5 +1,8 @@
 #pragma once
 
+// Класс для рисования вещей во время игры. Содержит примитивные и не очень
+// методы, дёргаемые ивентами
+
 #include "objects/ViewableObject.h"
 #include "objects/GameField.h"
 

@@ -24,7 +24,7 @@ namespace Physics
 				break;
 			case MoveDirection::Down:
 				if (next_y == field.map.get_height() - 1) return NO_EVENTS;
-				next_y -= 1;
+				next_y += 1;
 				break;
 			case MoveDirection::Left:
 				if (next_x == 0) return NO_EVENTS;
@@ -32,7 +32,7 @@ namespace Physics
 				break;
 			case MoveDirection::Right:
 				if (next_x == field.map.get_width() - 1) return NO_EVENTS;
-				next_x -= 1;
+				next_x += 1;
 				break;
 		}
 

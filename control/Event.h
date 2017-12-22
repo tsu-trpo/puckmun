@@ -26,4 +26,15 @@ public:
 	bool graphics_first() const;
 };
 
+namespace Events
+{
+	Event add_wall(Coordinate x, Coordinate y, Block block);
+	Event demote(const shared_ptr<GameObject>& object);
+	Event destroy_wall(Coordinate x, Coordinate y);
+	Event eat_point(Coordinate x, Coordinate y);
+	Event move(const shared_ptr<GameObject>& obj, MoveDirection dir);
+	Event nothing();
+	Event promote(const shared_ptr<GameObject>& object);
+}
+
 // vim: tw=78

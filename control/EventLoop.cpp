@@ -35,7 +35,7 @@ EventLoop& EventLoop :: start_game()
 			// get desired movement
 			MoveDirection dir = object_ptr->tick();
 			// handle movement events
-			auto events = Physics::move_object(m_field, *object_ptr, dir);
+			auto events = Physics::move_object(m_field, object_ptr, dir);
 			// commit movement events
 			this->move_and_redraw(events);
 		}

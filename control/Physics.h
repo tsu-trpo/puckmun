@@ -10,6 +10,7 @@
 #include "control/MoveConstants.h"
 
 using std::list;
+using ObjectPtrArg = const std::shared_ptr<GameObject>&;
 
 struct ScheduledEvent
 {
@@ -24,11 +25,11 @@ struct PhysicsEvents
 
 namespace Physics
 {
-	PhysicsEvents move_object(const GameField&, const GameObject&,
+	PhysicsEvents move_object(const GameField&, ObjectPtrArg,
 	                          const MoveDirection&
 	                         );
 
-	PhysicsEvents interact_objects(const GameObject&, const GameObject&);
+	PhysicsEvents interact_objects(ObjectPtrArg, ObjectPtrArg);
 }
 
 // vim: tw=78

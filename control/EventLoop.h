@@ -30,6 +30,7 @@ private:
 
 	bool m_keep_playing;
 	PeriodT m_current_tick;
+	TimeT m_current_time;
 
 
 	EventLoop(const GameField&, const InputList&);

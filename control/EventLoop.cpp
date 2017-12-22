@@ -97,6 +97,7 @@ EventLoop& EventLoop :: move_and_redraw(const vector<Event>& events)
 
 PeriodT EventLoop :: increment_tick()
 {
+	m_current_time += 1;
 	// maximum is 120, which is divisible by 1, 2, 3, 4, 5, 6, 8, 10, 12
 	return m_current_tick = (m_current_tick + 1) % 120;
 }

@@ -51,7 +51,7 @@ namespace Physics
 			}
 		}
 
-		return std::move(PhysicsEvents { std::move(imm_events), std::move(plan_events) });
+		return PhysicsEvents { imm_events, plan_events };
 	}
 
 	//dummy function for now

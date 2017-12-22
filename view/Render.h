@@ -6,11 +6,14 @@
 class Render
 {
 public:
+	// draw object at its place
 	Render& redraw_object_nomove(const GameField&, const ViewableObject&);
 
+	// draw objects with new coordinated provided
 	Render& redraw_object_pre_move(const GameField&, const ViewableObject&,
 	                               const Coordinate&, const Coordinate&);
 
+	// draw objects with old coordinated provided
 	Render& redraw_object_post_move(const GameField&,
 	                                const Coordinate&, const Coordinate&,
 	                                const ViewableObject&);

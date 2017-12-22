@@ -15,8 +15,8 @@ namespace Events
 	public:
 		Promote(const shared_ptr<GameObject>&);
 
-		void execute_physics(GameField&) const;
-		void execute_graphics(const GameField&, Render&) const;
+		void execute_physics(GameField&) const override;
+		void execute_graphics(const GameField&, Render&) const override;
 		bool graphics_first() const;
 	};
 }

@@ -5,7 +5,7 @@ Events::Promote::Promote(const shared_ptr<GameObject>& object)
 {
 }
 
-void Events::Promote::execute_physics(GameField& f) const
+void Events::Promote::execute_physics(GameField&) const
 {
 	m_object->promote();
 }

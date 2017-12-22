@@ -1,6 +1,6 @@
 #include "control/events/DestroyWall.h"
 
-Events::DestroyWall::DestroyWall(Coordinate x, Coordinate y, Block block)
+Events::DestroyWall::DestroyWall(Coordinate x, Coordinate y)
 	: m_x     (x)
 	, m_y     (y)
 {

@@ -4,12 +4,12 @@ Events::Nothing::Nothing()
 {
 }
 
-void Events::Nothing::execute_physics(GameField& f) const
+void Events::Nothing::execute_physics(GameField&) const
 {
 	return;
 }
 
-void Events::Nothing::execute_graphics(const GameField& f, Render& r) const
+void Events::Nothing::execute_graphics(const GameField&, Render&) const
 {
 	return;
 }

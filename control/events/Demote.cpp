@@ -5,7 +5,7 @@ Events::Demote::Demote(const shared_ptr<GameObject>& object)
 {
 }
 
-void Events::Demote::execute_physics(GameField& f) const
+void Events::Demote::execute_physics(GameField&) const
 {
 	m_object->demote();
 }

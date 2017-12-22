@@ -24,7 +24,7 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	}
 }
 
-void Events::Move::execute_physics(GameField& f) const
+void Events::Move::execute_physics(GameField&) const
 {
 	m_object->set_x(m_new_x);
 	m_object->set_y(m_new_y);

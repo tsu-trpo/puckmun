@@ -6,6 +6,8 @@
 #include "errors/BasicMapLoader-errors.h"
 
 const string MapSignature = "basic_puckmun_map";
+const uint64_t VersionMajor = 0;
+const uint64_t VersionMinor = 1;
 
 Block char_to_block(char c)
 {
@@ -49,7 +51,6 @@ Map basic_load_map(const string& filename)
 	map_file >> header;
 	if (header != MapSignature)
 	{
-		std::cout << "first header: " << header << std::endl;
 		throw FiletypeError("Incorrect header of file " + filename);
 	}
 
@@ -58,8 +59,11 @@ Map basic_load_map(const string& filename)
 	map_file >> version_major >> separator >> version_minor;
 	if (separator != '.')
 	{
-		std::cout << "secont header: " << separator  << std::endl;
 		throw FiletypeError("Incorrect header of file " + filename);
+	}
+	if (version_major > VersionMajor)
+	{
+		throw FiletypeError("Incompatible version of file " + filename);
 	}
 
 	uint64_t width, height;

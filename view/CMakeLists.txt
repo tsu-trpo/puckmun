@@ -7,3 +7,9 @@ add_library(Color STATIC
 	Color.cpp
 )
 
+# Обёртка для цветов
+add_library(GameRender STATIC
+	GameRender.cpp
+)
+
+# vim: tw=78

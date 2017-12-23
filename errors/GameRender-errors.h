@@ -2,9 +2,9 @@
 
 #include <stdexcept>
 
-class ScreenOverflow : public std::logic_error
+class ScreenLimit : public std::logic_error
 {
 public:
-	ScreenOverflow(const std::string&);
-	ScreenOverflow(const char*);
+	ScreenLimit(const std::string&);
+	ScreenLimit(const char*);
 };

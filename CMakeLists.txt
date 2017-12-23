@@ -18,7 +18,7 @@ include_directories(${puckmun_SOURCE_DIR})
 # Добавляем ncurses
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Modules/")
 set(CURSES_NEED_NCURSES TRUE)
-find_package(curses REQUIRED)
+find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
 
@@ -30,4 +30,4 @@ add_subdirectory(errors)
 add_executable(main main.cpp)
 
 target_link_libraries(main Map MapLoader BasicMapLoader-errors Map GameRender
-	GameRender-errors ${CURSES_LIBRARY} "/lib64/libtinfo.so.5")
+	GameRender-errors ${CURSES_LIBRARY})

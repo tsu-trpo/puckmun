@@ -25,9 +25,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_subdirectory(control)
 add_subdirectory(objects)
 add_subdirectory(view)
-add_subdirectory(errors)
 
-add_executable(main main.cpp)
+add_executable(ncurses_test ncurses_test.cpp)
 
-target_link_libraries(main Map MapLoader BasicMapLoader-errors Map GameRender
-	GameRender-errors ${CURSES_LIBRARY})
+target_link_libraries(ncurses_test ${CURSES_LIBRARY})

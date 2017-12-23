@@ -71,26 +71,24 @@ Map basic_load_map(const string& filename)
 	Map map (static_cast<Coordinate>(height), static_cast<Coordinate>(width));
 
 	char current;
+	map_file.get(current);
 	for (uint64_t y = 0; y < height; ++y)
 	{
 		for (uint64_t x = 0; x < width; ++x)
 		{
-			map_file >> current;
+			map_file.get(current);
 			if (current == '\n')
 			{
 				throw IllFormedMapError("Unexpected newline in file " + filename);
 			}
 			map.change_block(y, x, char_to_block(current));
-			std::cout << current;
 		}
-		std::cout << std::endl;
-//		map_file >> current;
-//		if (current != '\n')
-//		{
-//			throw IllFormedMapError("Unexpected non-newline in file " + filename);
-//		}
+		map_file.get(current);
+		if (current != '\n')
+		{
+			throw IllFormedMapError("Unexpected non-newline in file " + filename);
+		}
 	}
-	std:: cout << "map loaded\n\n\n\n";
 
 	return map;
 }

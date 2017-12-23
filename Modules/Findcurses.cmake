@@ -1,2 +1,2 @@
-set(CURSES_LIBRARY "/usr/lib64/libncurses.so")
+set(CURSES_LIBRARY "/lib64/libncurses.so.6")
 set(CURSES_INCLUDE_PATH "/usr/include")

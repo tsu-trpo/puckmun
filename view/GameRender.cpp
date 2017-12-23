@@ -6,14 +6,13 @@
 size_t GameRender::m_screens_open = 0;
 
 GameRender::GameRender()
-	: m_map_window (stdscr)
 {
 	if (m_screens_open > 0)
 	{
 		throw ScreenError("Too many screens created in GameRenderer");
 	}
 	m_screens_open += 1;
-	if (!has_colors())
+	if (!has_colors() && false)
 	{
 		throw ScreenError("You terminal doesn't support colors");
 	}
@@ -30,6 +29,9 @@ GameRender::GameRender()
 	m_max_map_height = m_max_y;
 	//as the returned amount is not max, but size
 	m_max_x -= 1; m_max_y -= 1;
+
+	//seems like it should be set after everything else
+	m_map_window = stdscr;
 }
 
 GameRender::~GameRender()
@@ -54,6 +56,12 @@ chtype GameRender::get_color_pair(Color fore, Color back)
 	return COLOR_PAIR( ncurses_color(fore) * COLORS + ncurses_color(back) );
 }
 
+void log(const string& msg)
+{
+	mvprintw(0, 0, "%s", msg.c_str());
+	refresh();
+	getch();
+}
 
 GameRender& GameRender::redraw_complete(const GameField& field)
 {
@@ -71,8 +79,13 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 			Color fore, back; char body;
 			std::tie(fore, back, body) = block_view(field.map.at(x, y));
 
+			if (m_map_window != stdscr)
+			{
+				throw std::runtime_error("fuuuuuuuuuuck");
+			}
 			attron(get_color_pair(fore, back));
-			waddch(m_map_window, body);
+			wechochar(m_map_window, body);
+			attroff(get_color_pair(fore, back));
 		}
 	}
 	this->idle_cursor();
@@ -88,7 +101,7 @@ void GameRender::idle_cursor()
 void GameRender::map_line_cursor(Coordinate y)
 {
 	// go to map screen's line number y
-	::wmove(m_map_window, y, 0);
+	::wmove(m_map_window, y+1, 0);
 }
 
 // vim: tw=78

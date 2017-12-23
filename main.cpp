@@ -9,13 +9,17 @@
 int main()
 {
 	Map map = basic_load_map("../maps/test_map.bpm");
-	print_map(map);
 
 	GameField field {{}, map, 0};
 	GameRender render;
 
+	wprintw(stdscr, "woah woah woah");
+	refresh();
+	wgetch(stdscr);
 	render.redraw_complete(field);
-	getch();
+	mvwprintw(stdscr, 0, 0, "that's all");
+	refresh();
+	wgetch(stdscr);
 
 	return 0;
 }

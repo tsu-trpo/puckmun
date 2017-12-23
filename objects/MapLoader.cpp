@@ -68,7 +68,7 @@ Map basic_load_map(const string& filename)
 	{
 		throw IllFormedMapError("Too thin map in file " + filename);
 	}
-	Map map (static_cast<Coordinate>(height), static_cast<Coordinate>(width));
+	Map map (static_cast<Coordinate>(width), static_cast<Coordinate>(height));
 
 	char current;
 	map_file.get(current);
@@ -81,7 +81,7 @@ Map basic_load_map(const string& filename)
 			{
 				throw IllFormedMapError("Unexpected newline in file " + filename);
 			}
-			map.change_block(y, x, char_to_block(current));
+			map.change_block(x, y, char_to_block(current));
 		}
 		map_file.get(current);
 		if (current != '\n')

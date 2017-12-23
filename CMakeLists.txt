@@ -30,4 +30,4 @@ add_subdirectory(errors)
 add_executable(main main.cpp)
 
 target_link_libraries(main Map MapLoader BasicMapLoader-errors Map GameRender
-	GameRender-errors ${CURSES_LIBRARIY})
+	GameRender-errors ${CURSES_LIBRARY})

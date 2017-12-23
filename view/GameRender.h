@@ -3,12 +3,20 @@
 // Класс для рисования вещей во время игры. Содержит примитивные и не очень
 // методы, дёргаемые ивентами
 
+#include <ncurses.h>
+
 #include "objects/ViewableObject.h"
 #include "objects/GameField.h"
+#include "objects/Block.h"
 
 class GameRender
 {
+	static size_t m_screens_open;
+
+	size_t m_max_x, m_max_y;
 public:
+	GameRender();
+	~GameRender();
 	// draw object at its place
 	GameRender& redraw_object_nomove(const GameField&, const ViewableObject&);
 

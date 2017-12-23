@@ -10,8 +10,16 @@ if ( CMAKE_COMPILER_IS_GNUCC )
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 endif ( CMAKE_COMPILER_IS_GNUCC )
 
+
 # Добавляем включение всех файлов из поддиректорий
 include_directories(${puckmun_SOURCE_DIR})
+
+
+# Добавляем ncurses
+set(CMAKE_MODULE_PATH "/home/god/projects/puckmun/Modules/")
+set(CURSES_NEED_NCURSES TRUE)
+find_package(curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
 
 
 add_subdirectory(control)
@@ -21,4 +29,5 @@ add_subdirectory(errors)
 
 add_executable(main main.cpp)
 
-target_link_libraries(main Map MapLoader BasicMapLoader-errors Map)
+target_link_libraries(main Map MapLoader BasicMapLoader-errors Map GameRender
+	GameRender-errors ${CURSES_LIBRARIY})

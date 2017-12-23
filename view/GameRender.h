@@ -13,7 +13,16 @@ class GameRender
 {
 	static size_t m_screens_open;
 
+	WINDOW* m_map_window;
+
 	size_t m_max_x, m_max_y;
+	size_t m_max_map_width, m_max_map_height;
+
+	//inits all possible color pairs
+	static void init_color_pairs();
+	//get initialized pair
+	static chtype get_color_pair(Color, Color);
+
 public:
 	GameRender();
 	~GameRender();

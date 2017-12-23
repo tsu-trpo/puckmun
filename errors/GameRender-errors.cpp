@@ -1,9 +1,17 @@
 #include "errors/GameRender-errors.h"
 
-ScreenLimit::ScreenLimit(const std::string& s)
+ScreenError::ScreenError(const std::string& s)
 	: std::logic_error (s)
 {}
 
-ScreenLimit::ScreenLimit(const char* s)
+ScreenError::ScreenError(const char* s)
+	: std::logic_error (s)
+{}
+
+BadMap::BadMap(const std::string& s)
+	: std::logic_error (s)
+{}
+
+BadMap::BadMap(const char* s)
 	: std::logic_error (s)
 {}

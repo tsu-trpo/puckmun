@@ -23,6 +23,11 @@ class GameRender
 	//get initialized pair
 	static chtype get_color_pair(Color, Color);
 
+	//move cursor to nowhere
+	void idle_cursor();
+	//move cursor to map line
+	void map_line_cursor(Coordinate);
+
 public:
 	GameRender();
 	~GameRender();

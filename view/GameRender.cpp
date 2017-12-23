@@ -12,7 +12,7 @@ GameRender::GameRender()
 		throw ScreenError("Too many screens created in GameRenderer");
 	}
 	m_screens_open += 1;
-	if (!has_colors() && false)
+	if (!has_colors())
 	{
 		throw ScreenError("You terminal doesn't support colors");
 	}

@@ -3,6 +3,8 @@
 #include "errors/GameRender-errors.h"
 #include "view/BlockView.cpp"
 
+size_t GameRender::m_screens_open = 0;
+
 GameRender::GameRender()
 	: m_map_window (stdscr)
 {
@@ -10,6 +12,7 @@ GameRender::GameRender()
 	{
 		throw ScreenError("Too many screens created in GameRenderer");
 	}
+	m_screens_open += 1;
 	if (!has_colors())
 	{
 		throw ScreenError("You terminal doesn't support colors");
@@ -32,6 +35,7 @@ GameRender::GameRender()
 GameRender::~GameRender()
 {
 	endwin();
+	m_screens_open -= 1;
 }
 
 void GameRender::init_color_pairs()

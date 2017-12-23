@@ -16,7 +16,7 @@ include_directories(${puckmun_SOURCE_DIR})
 
 
 # Добавляем ncurses
-set(CMAKE_MODULE_PATH "/home/god/projects/puckmun/Modules/")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Modules/")
 set(CURSES_NEED_NCURSES TRUE)
 find_package(curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})

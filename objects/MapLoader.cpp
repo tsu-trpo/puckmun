@@ -63,7 +63,9 @@ Map basic_load_map(const string& filename)
 	}
 	if (version_major > VersionMajor)
 	{
-		throw FiletypeError("Incompatible version of file " + filename);
+		throw FiletypeError("Incompatible version of file " + filename +
+			" - has major version " + std::to_string(version_major) +
+			", while loader has version " + std::to_string(VersionMajor));
 	}
 
 	uint64_t width, height;
@@ -75,6 +77,7 @@ Map basic_load_map(const string& filename)
 	Map map (static_cast<Coordinate>(width), static_cast<Coordinate>(height));
 
 	char current;
+	// считываем конец строки с размерами
 	map_file.get(current);
 	for (uint64_t y = 0; y < height; ++y)
 	{
@@ -83,14 +86,18 @@ Map basic_load_map(const string& filename)
 			map_file.get(current);
 			if (current == '\n')
 			{
-				throw IllFormedMapError("Unexpected newline in file " + filename);
+				throw IllFormedMapError("Unexpected newline in file " + filename +
+					" on coordinates " + std::to_string(x) + ":" +
+					std::to_string(y));
 			}
 			map.change_block(x, y, char_to_block(current));
 		}
 		map_file.get(current);
 		if (current != '\n')
 		{
-			throw IllFormedMapError("Unexpected non-newline in file " + filename);
+			throw IllFormedMapError("Unexpected non-newline in file " + filename +
+					" on coordinates " + std::to_string(width + 1) + ":" +
+					std::to_string(y));
 		}
 	}
 

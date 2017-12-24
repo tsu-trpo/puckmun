@@ -17,10 +17,15 @@ set(ALL_PROJECT_LIBRARIES "" CACHE STRING "" FORCE)
 function(add_library_autolink lib_name lib_path)
 	message(STATUS "adding library ${lib_name}")
 	add_library(${lib_name} STATIC ${lib_path})
-	set(ALL_PROJECT_LIBRARIES
-	    "${ALL_PROJECT_LIBRARIES} ${lib_name}"
-	    CACHE STRING "" FORCE
-	)
+
+	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
+		set(ALL_PROJECT_LIBRARIES ${lib_name} CACHE STRING "" FORCE)
+	else()
+		set(ALL_PROJECT_LIBRARIES
+			"${ALL_PROJECT_LIBRARIES} ${lib_name}"
+			CACHE STRING "" FORCE
+		)
+	endif()
 endfunction(add_library_autolink)
 
 # Добавляем включение всех файлов из поддиректорий

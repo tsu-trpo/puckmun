@@ -1,14 +1,14 @@
 #include "objects/ExampleObject.h"
 
-char ExampleObject::get_form()
+char ExampleObject::get_form() const
 {
 	return ' ';
 }
-Color ExampleObject::get_bg_color()
+Color ExampleObject::get_bg_color() const
 {
 	return Color::Yellow;
 }
-Color ExampleObject::get_body_color()
+Color ExampleObject::get_body_color() const
 {
 	return Color::Black;
 }

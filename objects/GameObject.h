@@ -8,8 +8,8 @@
 class GameObject : public AnimateObject, public ViewableObject
 {
 public:
-	virtual GameObject& promote();
-	virtual GameObject& demote();
+	virtual GameObject& promote() = 0;
+	virtual GameObject& demote() = 0;
 };
 
 // vim: tw=78

@@ -7,7 +7,7 @@
 #include "control/MoveDirection.h"
 #include "control/MoveConstants.h"
 
-class AnimateObject : virtual SpaceObject
+class AnimateObject : virtual public SpaceObject
 {
 	PeriodT    m_period;
 

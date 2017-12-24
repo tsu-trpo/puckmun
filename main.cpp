@@ -17,12 +17,9 @@ int main()
 	obj->set_x(5);
 	obj->set_y(10);
 
-	GameField field {{}, map, 0};
+	GameField field {{obj}, map, 0};
 	GameRender render;
 
-	wprintw(stdscr, "woah woah woah");
-	refresh();
-	wgetch(stdscr);
 	render.redraw_complete(field);
 	mvwprintw(stdscr, 0, 0, "that's all");
 	refresh();

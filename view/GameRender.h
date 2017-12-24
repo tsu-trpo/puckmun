@@ -23,7 +23,13 @@ class GameRender
 	//move cursor to nowhere
 	void idle_cursor();
 	//move cursor to map line
-	void map_cursor(Coordinate, Coordinate);
+	void map_cursor(Coordinate x, Coordinate y);
+	//draw character under cursor
+	void basic_draw(char, Color fore, Color back);
+	//redraw block under cursor
+	void draw_current_block(const Block&);
+	//redraw object under cursor
+	void draw_current_object(const ViewableObject&);
 
 public:
 	GameRender();
@@ -32,18 +38,18 @@ public:
 
 	// draw objects with new coordinated provided
 	GameRender& redraw_object_pre_move(const GameField&, const ViewableObject&,
-	                               const Coordinate&, const Coordinate&);
+	                                   Coordinate x, Coordinate y);
 
 	// draw objects with old coordinated provided
 	GameRender& redraw_object_post_move(const GameField&,
-	                                const Coordinate&, const Coordinate&,
-	                                const ViewableObject&);
+	                                    Coordinate x, Coordinate y,
+	                                    const ViewableObject&);
 
 	GameRender& redraw_map_block(const GameField&,
-	                          const Coordinate&, const Coordinate&);
+	                          Coordinate x, Coordinate y);
 
 	GameRender& redraw_any_block(const GameField&, const Block&,
-	                         const Coordinate&, const Coordinate&);
+	                         Coordinate x, Coordinate y);
 
 	GameRender& redraw_complete(const GameField&);
 };

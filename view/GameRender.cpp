@@ -43,6 +43,36 @@ GameRender::GameRender()
 	m_map_window = stdscr;
 }
 
+void GameRender::basic_draw(char body, Color fore, Color back)
+{
+	//register or re-register block's colors
+	m_screen.register_color_pair(fore, back);
+	//turn on this color
+	CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+	//print the char
+	CALL wechochar(m_map_window, body) RAISE;
+	//turn off that color
+	CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+}
+
+void GameRender::draw_current_block(const Block& block)
+{
+	//get how block looks
+	Color fore, back; char body;
+	std::tie(fore, back, body) = block_view(block);
+
+	this->basic_draw(body, fore, back);
+}
+
+void GameRender::draw_current_object(const ViewableObject& object)
+{
+	auto fore = object.get_body_color();
+	auto back = object.get_bg_color();
+	auto body = object.get_form();
+
+	this->basic_draw(body, fore, back);
+}
+
 GameRender& GameRender::redraw_complete(const GameField& field)
 {
 	bool too_wide = field.map.get_width() > m_max_map_width;
@@ -58,38 +88,102 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 		this->map_cursor(0, y);
 		for (Coordinate x = 0; x < field.map.get_width(); ++x)
 		{
-			//get how block looks
-			Color fore, back; char body;
-			std::tie(fore, back, body) = block_view(field.map.at(x, y));
-
-			//register or re-register block's colors
-			m_screen.register_color_pair(fore, back);
-			//turn on this color
-			CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
-			//print the char
-			CALL wechochar(m_map_window, body) RAISE;
-			//turn off that color
-			CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+			auto block = field.map.at(x, y);
+			this->draw_current_block(block);
 		}
 	}
 
+	// print all objects
 	for (auto& object_ptr : field.objects)
 	{
 		this->map_cursor(object_ptr->get_x(), object_ptr->get_y());
-
-		auto fore = object_ptr->get_body_color();
-		auto back = object_ptr->get_bg_color();
-		auto body = object_ptr->get_form();
-
-		//register or re-register block's colors
-		m_screen.register_color_pair(fore, back);
-		//turn on this color
-		CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
-		//print the char
-		CALL wechochar(m_map_window, body) RAISE;
-		//turn off that color
-		CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+		this->draw_current_object(*object_ptr);
 	}
+
+	//move cursor to idle position
+	this->idle_cursor();
+
+	return *this;
+}
+
+GameRender& GameRender::redraw_object_nomove(const GameField&,
+                                             const ViewableObject& object)
+{
+	//move cursor to object position
+	this->map_cursor(object.get_x(), object.get_y());
+	//draw it
+	this->draw_current_object(object);
+
+	//move cursor to idle position
+	this->idle_cursor();
+
+	return *this;
+}
+
+GameRender& GameRender::redraw_object_pre_move(const GameField& field,
+                                               const ViewableObject& object,
+                                               Coordinate x, Coordinate y)
+{
+	//move cursor to object future position
+	this->map_cursor(x, y);
+	//draw it
+	this->draw_current_object(object);
+
+	//move to object past position
+	this->map_cursor(object.get_x(), object.get_y());
+	//redraw the block there
+	auto block = field.map.at(object.get_x(), object.get_y());
+	this->draw_current_block(block);
+
+	//move cursor to idle position
+	this->idle_cursor();
+
+	return *this;
+}
+
+GameRender& GameRender::redraw_object_post_move(const GameField& field,
+                                                Coordinate x, Coordinate y,
+                                                const ViewableObject& object)
+{
+	//move cursor to object future position
+	this->map_cursor(object.get_x(), object.get_y());
+	//draw it
+	this->draw_current_object(object);
+
+	//move to object past position
+	this->map_cursor(x, y);
+	//redraw the block there
+	auto block = field.map.at(x, y);
+	this->draw_current_block(block);
+
+	//move cursor to idle position
+	this->idle_cursor();
+
+	return *this;
+}
+
+GameRender& GameRender::redraw_map_block(const GameField& field,
+                                         Coordinate x, Coordinate y)
+{
+	//move to block position
+	this->map_cursor(x, y);
+	//redraw
+	auto block = field.map.at(x, y);
+	this->draw_current_block(block);
+
+	//move cursor to idle position
+	this->idle_cursor();
+
+	return *this;
+}
+
+GameRender& GameRender::redraw_any_block(const GameField&, const Block& block,
+                                         Coordinate x, Coordinate y)
+{
+	//move to block position
+	this->map_cursor(x, y);
+	//redraw
+	this->draw_current_block(block);
 
 	//move cursor to idle position
 	this->idle_cursor();

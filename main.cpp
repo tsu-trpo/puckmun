@@ -2,6 +2,6 @@
 
 int main()
 {
-	Map map;
+	Map map(0, 0);
 	return 0;
 }

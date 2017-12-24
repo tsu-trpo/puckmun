@@ -8,7 +8,7 @@
 
 //Interface to print items on screen. Will be extended in the future probably
 
-class ViewableObject : virtual SpaceObject
+class ViewableObject : virtual public SpaceObject
 {
 public:
 	//non-const as it may be useful for animations

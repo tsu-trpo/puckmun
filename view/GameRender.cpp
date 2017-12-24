@@ -52,9 +52,10 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 		throw BadMap("Map size too big");
 	}
 
+	// print all blocks
 	for (Coordinate y = 0; y < field.map.get_height(); ++y)
 	{
-		this->map_line_cursor(y);
+		this->map_cursor(0, y);
 		for (Coordinate x = 0; x < field.map.get_width(); ++x)
 		{
 			//get how block looks
@@ -71,6 +72,25 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 			CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
 		}
 	}
+
+	for (auto& object_ptr : field.objects)
+	{
+		this->map_cursor(object_ptr->get_x(), object_ptr->get_y());
+
+		auto fore = object_ptr->get_body_color();
+		auto back = object_ptr->get_bg_color();
+		auto body = object_ptr->get_form();
+
+		//register or re-register block's colors
+		m_screen.register_color_pair(fore, back);
+		//turn on this color
+		CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+		//print the char
+		CALL wechochar(m_map_window, body) RAISE;
+		//turn off that color
+		CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+	}
+
 	//move cursor to idle position
 	this->idle_cursor();
 
@@ -82,10 +102,9 @@ void GameRender::idle_cursor()
 	CALL ::move(0, 0) RAISE;
 }
 
-void GameRender::map_line_cursor(Coordinate y)
+void GameRender::map_cursor(Coordinate x, Coordinate y)
 {
-	// go to map screen's line number y
-	CALL ::wmove(m_map_window, y+1, 0) RAISE;
+	CALL ::wmove(m_map_window, y+1, x) RAISE;
 }
 
 // vim: tw=78

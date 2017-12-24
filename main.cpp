@@ -14,16 +14,55 @@ int main()
 	Map map = basic_load_map("../maps/test_map.bpm");
 
 	shared_ptr<ExampleObject> obj (new ExampleObject);
-	obj->set_x(5);
-	obj->set_y(10);
+
+	Coordinate x = 1, y = 1;
+	obj->set_x(x);
+	obj->set_y(y);
 
 	GameField field {{obj}, map, 0};
 	GameRender render;
 
+
 	render.redraw_complete(field);
-	mvwprintw(stdscr, 0, 0, "that's all");
-	refresh();
-	wgetch(stdscr);
+
+	bool exit = false;
+	while (!exit)
+	{
+		int c = wgetch(stdscr);
+		switch (c)
+		{
+			case 'k':
+			case 'w':
+			case KEY_UP:
+				y -= 1;
+				obj->set_y(y);
+				render.redraw_complete(field);
+				break;
+			case 'j':
+			case 's':
+			case KEY_DOWN:
+				y += 1;
+				obj->set_y(y);
+				render.redraw_complete(field);
+				break;
+			case 'h':
+			case 'a':
+			case KEY_LEFT:
+				x -= 1;
+				obj->set_x(x);
+				render.redraw_complete(field);
+				break;
+			case 'l':
+			case 'd':
+			case KEY_RIGHT:
+				x += 1;
+				obj->set_x(x);
+				render.redraw_complete(field);
+				break;
+			default:
+				exit = true;
+		}
+	}
 
 	return 0;
 }

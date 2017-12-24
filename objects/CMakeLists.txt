@@ -10,3 +10,5 @@ add_library_autolink(MapLoader MapLoader.cpp)
 
 # Библиотека с AnimateObject
 add_library_autolink(AnimateObject AnimateObject.cpp)
+
+add_library_autolink(ExampleObject ExampleObject.cpp)

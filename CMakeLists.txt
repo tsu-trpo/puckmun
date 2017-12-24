@@ -27,10 +27,10 @@ function(add_library_autolink lib_name lib_path)
 	add_library(${lib_name} STATIC ${lib_path})
 
 	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
-		set(ALL_PROJECT_LIBRARIES "lib${lib_name}.a" CACHE STRING "" FORCE)
+		set(ALL_PROJECT_LIBRARIES "${lib_name}" CACHE STRING "" FORCE)
 	else()
 		set(ALL_PROJECT_LIBRARIES
-			"${ALL_PROJECT_LIBRARIES} lib${lib_name}.a"
+			"${ALL_PROJECT_LIBRARIES}" "${lib_name}"
 			CACHE STRING "" FORCE
 		)
 	endif()
@@ -53,4 +53,4 @@ target_link_libraries(main ${ALL_PROJECT_LIBRARIES} ${ALL_PROJECT_LIBRARIES} ${C
 add_executable(ncurses_test ncurses_test.cpp)
 target_link_libraries(ncurses_test ${CURSES_LIBRARY})
 
-message(STATUS "libraries added: ${ALL_PROJECT_LIBRARIES}")
+# vim: tw=78

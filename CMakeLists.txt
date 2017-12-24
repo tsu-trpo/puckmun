@@ -19,6 +19,17 @@ set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
+set(ALL_PROJECT_LIBRARIES "" CACHE STRING "" FORCE)
+
+# Функция, добавляющая библиотеку и записывающая её имя в глобальную переменную
+function(add_library_autolink lib_name lib_path)
+	message(STATUS "adding library ${lib_name}")
+	add_library(${lib_name} STATIC ${lib_path})
+	set(ALL_PROJECT_LIBRARIES
+	    "${ALL_PROJECT_LIBRARIES} ${lib_name}"
+	    CACHE STRING "" FORCE
+	)
+endfunction(add_library_autolink)
 
 # Добавляем включение всех файлов из поддиректорий
 include_directories(${puckmun_SOURCE_DIR})
@@ -31,9 +42,10 @@ add_subdirectory(errors)
 
 
 add_executable(main main.cpp)
-target_link_libraries(main Map MapLoader BasicMapLoader-errors Map GameRender
-	GameRender-errors ${CURSES_LIBRARY})
+target_link_libraries(main #{ALL_PROJECT_LIBRARIES} ${CURSES_LIBRARY})
 
 
 add_executable(ncurses_test ncurses_test.cpp)
 target_link_libraries(ncurses_test ${CURSES_LIBRARY})
+
+message(STATUS "libraries added: ${ALL_PROJECT_LIBRARIES}")

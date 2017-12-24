@@ -3,13 +3,9 @@ project(view)
 
 
 # Обёртка для цветов
-add_library(Color STATIC
-	Color.cpp
-)
+add_library_autolink(Color Color.cpp)
 
-# Обёртка для цветов
-add_library(GameRender STATIC
-	GameRender.cpp
-)
+# Главный рендер поля
+add_library_autolink(GameRender GameRender.cpp)
 
 # vim: tw=78

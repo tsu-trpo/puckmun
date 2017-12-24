@@ -3,6 +3,15 @@
 #include "errors/GameRender-errors.h"
 #include "view/BlockView.cpp"
 
+#include "errors/NcursesError.h"
+
+void log(const string& msg)
+{
+	CALL mvprintw(0, 0, "%s", msg.c_str()) RAISE;
+	CALL refresh() RAISE;
+	CALL getch() RAISE;
+}
+
 GameRender::GameRender()
 	: m_screen()
 {
@@ -11,12 +20,12 @@ GameRender::GameRender()
 		throw ScreenError("You terminal doesn't support colors");
 	}
 
-	noecho();
+	CALL noecho() RAISE;
 
-	start_color();
+	CALL start_color() RAISE;
 	init_color_pairs();
 
-	getmaxyx(stdscr, m_max_y, m_max_x);
+	CALL getmaxyx(stdscr, m_max_y, m_max_x) RAISE;
 	//for now
 	m_max_map_width  = m_max_x;
 	m_max_map_height = m_max_y;
@@ -33,7 +42,7 @@ void GameRender::init_color_pairs()
 	{
 		for (short back = 0; back < COLORS; ++back)
 		{
-			init_pair( fore * COLORS + back, fore, back );
+			CALL init_pair( fore * COLORS + back, fore, back ) RAISE;
 		}
 	}
 }
@@ -41,13 +50,6 @@ void GameRender::init_color_pairs()
 chtype GameRender::get_color_pair(Color fore, Color back)
 {
 	return COLOR_PAIR( ncurses_color(fore) * COLORS + ncurses_color(back) );
-}
-
-void log(const string& msg)
-{
-	mvprintw(0, 0, "%s", msg.c_str());
-	refresh();
-	getch();
 }
 
 GameRender& GameRender::redraw_complete(const GameField& field)
@@ -70,9 +72,9 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 			{
 				throw std::runtime_error("fuuuuuuuuuuck");
 			}
-			attron(get_color_pair(fore, back));
-			wechochar(m_map_window, body);
-			attroff(get_color_pair(fore, back));
+			CALL attron(get_color_pair(fore, back)) RAISE;
+			CALL wechochar(m_map_window, body) RAISE;
+			CALL attroff(get_color_pair(fore, back)) RAISE;
 		}
 	}
 	this->idle_cursor();
@@ -82,13 +84,13 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 
 void GameRender::idle_cursor()
 {
-	::move(0, 0);
+	CALL ::move(0, 0) RAISE;
 }
 
 void GameRender::map_line_cursor(Coordinate y)
 {
 	// go to map screen's line number y
-	::wmove(m_map_window, y+1, 0);
+	CALL ::wmove(m_map_window, y+1, 0) RAISE;
 }
 
 // vim: tw=78

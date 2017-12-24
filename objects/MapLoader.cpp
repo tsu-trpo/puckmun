@@ -23,6 +23,7 @@ Block char_to_block(char c)
 		case ' ':
 			return Block::Space;
 	}
+	// Чтобы при смене минорной версии не падал от неожиданного блока
 	return Block::Space;
 }
 

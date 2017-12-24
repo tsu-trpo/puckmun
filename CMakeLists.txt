@@ -18,9 +18,13 @@ function(add_library_autolink lib_name lib_path)
 	message(STATUS "adding library ${lib_name}")
 	add_library(${lib_name} STATIC ${lib_path})
 
+	# Если библиотек нет, то сразу кладём, чтобы не было пустых строк при
+	# append-e
 	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
 		set(ALL_PROJECT_LIBRARIES "${lib_name}" CACHE STRING "" FORCE)
 	else()
+		# Добавляем не конкатенацией строк, потому что тогда бы link_libraries
+		# неверно воспринимал переменную
 		set(ALL_PROJECT_LIBRARIES
 			"${ALL_PROJECT_LIBRARIES}" "${lib_name}"
 			CACHE STRING "" FORCE

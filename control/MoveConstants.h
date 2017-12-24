@@ -15,7 +15,4 @@ const PeriodT MaxPeriod = 120; // делится на 1, 2, 3, 4, 5, 6, 8, 10, 1
 // Тип, хранящий время
 typedef size_t TimeT;
 
-// Значение стандартного направления
-const MoveDirection StandartDirection = MoveDirection::Down;
-
 // vim: tw=78

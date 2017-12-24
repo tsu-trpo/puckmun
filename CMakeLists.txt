@@ -19,10 +19,10 @@ function(add_library_autolink lib_name lib_path)
 	add_library(${lib_name} STATIC ${lib_path})
 
 	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
-		set(ALL_PROJECT_LIBRARIES ${lib_name} CACHE STRING "" FORCE)
+		set(ALL_PROJECT_LIBRARIES "lib${lib_name}.a" CACHE STRING "" FORCE)
 	else()
 		set(ALL_PROJECT_LIBRARIES
-			"${ALL_PROJECT_LIBRARIES} ${lib_name}"
+			"${ALL_PROJECT_LIBRARIES} lib${lib_name}.a"
 			CACHE STRING "" FORCE
 		)
 	endif()

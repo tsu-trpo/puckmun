@@ -5,13 +5,13 @@ tuple<Color, Color, char> block_view(Block block)
 	switch (block)
 	{
 		case Block::Wall:
-			return make_tuple(Color::White, Color::White, 'w');
+			return make_tuple(Color::Black, Color::White, ' ');
 		case Block::Point:
-			return make_tuple(Color::White, Color::Black, 'p');
+			return make_tuple(Color::Yellow, Color::Black, '.');
 		case Block::BigPoint:
-			return make_tuple(Color::Red, Color::Black, 'b');
+			return make_tuple(Color::Red, Color::Black, '*');
 		case Block::Space:
-			return make_tuple(Color::Black, Color::Black, 's');
+			return make_tuple(Color::Black, Color::Black, ' ');
 	}
 	throw std::logic_error("incorrect block given");
 }

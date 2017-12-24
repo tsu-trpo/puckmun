@@ -19,7 +19,7 @@ function(add_library_autolink lib_name lib_path)
 	add_library(${lib_name} STATIC ${lib_path})
 	set(ALL_PROJECT_LIBRARIES
 	    "${ALL_PROJECT_LIBRARIES} ${lib_name}"
-		CACHE STRING "" FORCE
+	    CACHE STRING "" FORCE
 	)
 endfunction(add_library_autolink)
 

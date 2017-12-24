@@ -20,11 +20,6 @@ class GameRender
 	size_t m_max_map_width, m_max_map_height;
 
 
-	//inits all possible color pairs
-	static void init_color_pairs();
-	//get initialized pair
-	static chtype get_color_pair(Color, Color);
-
 	//move cursor to nowhere
 	void idle_cursor();
 	//move cursor to map line

@@ -8,15 +8,17 @@
 #include "objects/ViewableObject.h"
 #include "objects/GameField.h"
 #include "objects/Block.h"
+#include "view/NcursesScreen.h"
 
 class GameRender
 {
-	static size_t m_screens_open;
+	NcursesScreen m_screen;
 
 	WINDOW* m_map_window;
 
 	size_t m_max_x, m_max_y;
 	size_t m_max_map_width, m_max_map_height;
+
 
 	//inits all possible color pairs
 	static void init_color_pairs();
@@ -30,7 +32,6 @@ class GameRender
 
 public:
 	GameRender();
-	~GameRender();
 	// draw object at its place
 	GameRender& redraw_object_nomove(const GameField&, const ViewableObject&);
 

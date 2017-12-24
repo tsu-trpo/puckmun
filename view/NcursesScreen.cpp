@@ -9,7 +9,7 @@ NcursesScreen::NcursesScreen()
 {
 	if (m_screens_open > 0)
 	{
-		throw ScreenError("Too many screens created in GameRenderer");
+		throw ScreenError("NcursesScreen: too many screens created");
 	}
 	m_screens_open += 1;
 

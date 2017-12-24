@@ -11,3 +11,7 @@ add_library(Map STATIC
 add_library(AnimateObject STATIC
 	AnimateObject.cpp
 )
+
+add_library(SpaceObject STATIC
+	SpaceObject.cpp
+)

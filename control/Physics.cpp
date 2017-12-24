@@ -16,10 +16,10 @@ namespace Physics
 		list<Event> imm_events;
 		list<ScheduledEvent> plan_events;
 
-		auto map_left_border  = 0;
-		auto map_right_border = field.map.get_width() - 1;
-		auto map_upper_border = 0;
-		auto map_lower_border = field.map.get_height() - 1;
+		Coordinate map_left_border  = 0;
+		Coordinate map_right_border = field.map.get_width() - 1;
+		Coordinate map_upper_border = 0;
+		Coordinate map_lower_border = field.map.get_height() - 1;
 
 		switch (direction)
 		{

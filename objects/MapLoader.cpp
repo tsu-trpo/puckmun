@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "errors/BasicMapLoader-errors.h"
+#include "error.h"
 
 const string MapSignature = "basic_puckmun_map";
 const uint64_t VersionMajor = 0;
@@ -21,9 +22,8 @@ Block char_to_block(char c)
 			return Block::BigPoint;
 		case ' ':
 			return Block::Space;
-		default:
-			return Block::Space;
 	}
+	return Block::Space;
 }
 
 char block_to_char(Block b)
@@ -38,9 +38,8 @@ char block_to_char(Block b)
 			return '*';
 		case Block::Space:
 			return ' ';
-		default:
-			throw std::runtime_error("fuck you");
 	}
+	throw std::logic_error(ERR_HEADER "unexpected wall type");
 }
 
 Map basic_load_map(const string& filename)

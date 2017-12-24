@@ -16,22 +16,27 @@ namespace Physics
 		list<Event> imm_events;
 		list<ScheduledEvent> plan_events;
 
+		auto map_left_border  = 0;
+		auto map_right_border = field.map.get_width() - 1;
+		auto map_upper_border = 0;
+		auto map_lower_border = field.map.get_height() - 1;
+
 		switch (direction)
 		{
 			case MoveDirection::Up:
-				if (next_y == 0) return NoEvents;
+				if (next_y == map_upper_border) return NoEvents;
 				next_y -= 1;
 				break;
 			case MoveDirection::Down:
-				if (next_y == field.map.get_height() - 1) return NoEvents;
+				if (next_y == map_lower_border) return NoEvents;
 				next_y += 1;
 				break;
 			case MoveDirection::Left:
-				if (next_x == 0) return NoEvents;
+				if (next_x == map_left_border)  return NoEvents;
 				next_x -= 1;
 				break;
 			case MoveDirection::Right:
-				if (next_x == field.map.get_width() - 1) return NoEvents;
+				if (next_x == map_right_border) return NoEvents;
 				next_x += 1;
 				break;
 		}

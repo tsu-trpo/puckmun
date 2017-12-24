@@ -9,5 +9,8 @@ public:
 	Color get_bg_color() override;
 	Color get_body_color() override;
 
+	GameObject& promote() override;
+	GameObject& demote() override;
+
 	MoveDirection tick() override;
 };

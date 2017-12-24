@@ -13,7 +13,16 @@ Color ExampleObject::get_body_color()
 	return Color::Black;
 }
 
-MoveDirection tick()
+MoveDirection ExampleObject::tick()
 {
 	return MoveDirection::Down;
+}
+
+GameObject& ExampleObject::demote()
+{
+	return *this;
+}
+GameObject& ExampleObject::promote()
+{
+	return *this;
 }

@@ -4,7 +4,7 @@
 #include "objects/AnimateObject.h"
 #include "control/MoveDirection.h"
 
-class TheMan: public AnimateObject
+class TheMan: public GameObject
 {	
 	MoveDirection m_current;
 	MoveDirection m_future;

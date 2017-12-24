@@ -1,5 +1,7 @@
 #pragma once
 
+// Event-интерфейс. См. control/events/README.md за описанием наследников
+
 #include <memory>
 
 #include "objects/GameField.h"

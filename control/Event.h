@@ -29,6 +29,7 @@ public:
 
 namespace Events
 {
+	// см control/events/README.md за описанием каждого ивента
 	Event make_add_wall(Coordinate x, Coordinate y, Block block);
 	Event make_demote(const shared_ptr<GameObject>& object);
 	Event make_destroy_wall(Coordinate x, Coordinate y);

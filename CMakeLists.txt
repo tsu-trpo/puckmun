@@ -10,6 +10,24 @@ if ( CMAKE_COMPILER_IS_GNUCC )
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 endif ( CMAKE_COMPILER_IS_GNUCC )
 
+
+set(ALL_PROJECT_LIBRARIES "" CACHE STRING "" FORCE)
+
+# Функция, добавляющая библиотеку и записывающая её имя в глобальную переменную
+function(add_library_autolink lib_name lib_path)
+	message(STATUS "adding library ${lib_name}")
+	add_library(${lib_name} STATIC ${lib_path})
+
+	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
+		set(ALL_PROJECT_LIBRARIES "lib${lib_name}.a" CACHE STRING "" FORCE)
+	else()
+		set(ALL_PROJECT_LIBRARIES
+			"${ALL_PROJECT_LIBRARIES} lib${lib_name}.a"
+			CACHE STRING "" FORCE
+		)
+	endif()
+endfunction(add_library_autolink)
+
 # Добавляем включение всех файлов из поддиректорий
 include_directories(${puckmun_SOURCE_DIR})
 
@@ -17,3 +35,5 @@ include_directories(${puckmun_SOURCE_DIR})
 add_subdirectory(control)
 add_subdirectory(objects)
 add_subdirectory(view)
+
+message(STATUS "libraries added: ${ALL_PROJECT_LIBRARIES}")

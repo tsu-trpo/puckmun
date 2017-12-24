@@ -29,13 +29,13 @@ public:
 
 namespace Events
 {
-	Event add_wall(Coordinate x, Coordinate y, Block block);
-	Event demote(const shared_ptr<GameObject>& object);
-	Event destroy_wall(Coordinate x, Coordinate y);
-	Event eat_point(Coordinate x, Coordinate y);
-	Event move(const shared_ptr<GameObject>& obj, MoveDirection dir);
-	Event nothing();
-	Event promote(const shared_ptr<GameObject>& object);
+	Event make_add_wall(Coordinate x, Coordinate y, Block block);
+	Event make_demote(const shared_ptr<GameObject>& object);
+	Event make_destroy_wall(Coordinate x, Coordinate y);
+	Event make_eat_point(Coordinate x, Coordinate y);
+	Event make_move(const shared_ptr<GameObject>& obj, MoveDirection dir);
+	Event make_nothing();
+	Event make_promote(const shared_ptr<GameObject>& object);
 }
 
 // vim: tw=78

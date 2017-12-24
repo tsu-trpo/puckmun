@@ -35,59 +35,54 @@ bool Event::graphics_first() const
 
 namespace Events
 {
-	Event add_wall(Coordinate x, Coordinate y, Block block)
+	Event make_add_wall(Coordinate x, Coordinate y, Block block)
 	{
 		return Event( unique_ptr<Events::AddWall>(
 		                 new Events::AddWall(x, y, block))
 		            );
 	}
 
-	Event demote(const shared_ptr<GameObject>& object)
+	Event make_demote(const shared_ptr<GameObject>& object)
 	{
 		return Event( unique_ptr<Events::Demote>(
 		                 new Events::Demote(object))
 		            );
 	}
 
-	Event destroy_wall(Coordinate x, Coordinate y)
+	Event make_destroy_wall(Coordinate x, Coordinate y)
 	{
 		return Event( unique_ptr<Events::DestroyWall>(
 		                 new Events::DestroyWall(x, y))
 		            );
 	}
 
-	Event eat_point(Coordinate x, Coordinate y)
+	Event make_eat_point(Coordinate x, Coordinate y)
 	{
 		return Event( unique_ptr<Events::EatPoint>(
 		                 new Events::EatPoint(x, y))
 		            );
 	}
 
-	Event move(const shared_ptr<GameObject>& obj, MoveDirection dir)
+	Event make_move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	{
 		return Event( unique_ptr<Events::Move>(
 		                 new Events::Move(obj, dir))
 		            );
 	}
 
-	Event nothing()
+	Event make_nothing()
 	{
 		return Event( unique_ptr<Nothing>(
 		                 new Nothing)
 					);
 	}
 
-	Event promote(const shared_ptr<GameObject>& object)
+	Event make_promote(const shared_ptr<GameObject>& object)
 	{
 		return Event( unique_ptr<Events::Promote>(
 		                 new Events::Promote(object))
 		            );
 	}
 }
-//AddWall.cpp
-//Demote.cpp
-//DestroyWall.cpp
-//EatPoint.cpp
-//Move.cpp
-//Nothing.cpp
-//Promote.cpp
+
+// vim: tw=78

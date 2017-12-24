@@ -27,6 +27,6 @@ MoveDirection TheMan::get_current() const
 
 MoveDirection TheMan::get_future() const
 {
-        return m_current;
+        return m_future;
 }
 

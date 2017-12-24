@@ -5,6 +5,9 @@ project(view)
 # Обёртка для цветов
 add_library_autolink(Color Color.cpp)
 
+# Базопасный ncurses-экран
+add_library_autolink(NcursesScreen NcursesScreen.h)
+
 # Главный рендер поля
 add_library_autolink(GameRender GameRender.cpp)
 

@@ -109,7 +109,11 @@ EventLoop& EventLoop :: move_and_redraw(const PhysicsEvents& events)
 		if (event_it->time == m_current_time)
 		{
 			this->execute_one_event(event_it->event);
-			m_scheduled_events.erase(event_it);
+
+			// safely erase element
+			auto to_erase = event_it--;
+			m_scheduled_events.erase(to_erase);
+			//now ++event_it will go to the correct element after deleted
 		}
 	}
 

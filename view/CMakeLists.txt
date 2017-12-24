@@ -6,7 +6,7 @@ project(view)
 add_library_autolink(Color Color.cpp)
 
 # Базопасный ncurses-экран
-add_library_autolink(NcursesScreen NcursesScreen.h)
+add_library_autolink(NcursesScreen NcursesScreen.cpp)
 
 # Главный рендер поля
 add_library_autolink(GameRender GameRender.cpp)

@@ -47,7 +47,7 @@ add_subdirectory(errors)
 
 
 add_executable(main main.cpp)
-target_link_libraries(main #{ALL_PROJECT_LIBRARIES} ${CURSES_LIBRARY})
+target_link_libraries(main ${ALL_PROJECT_LIBRARIES} ${ALL_PROJECT_LIBRARIES} ${CURSES_LIBRARY})
 
 
 add_executable(ncurses_test ncurses_test.cpp)

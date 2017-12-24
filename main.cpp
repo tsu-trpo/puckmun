@@ -1,14 +1,21 @@
 #include <iostream>
 #include <ncurses.h>
-#include <typeinfo>
+#include <memory>
 
 #include "objects/MapLoader.h"
 #include "objects/GameField.h"
 #include "view/GameRender.h"
+#include "objects/ExampleObject.h"
+
+using std::shared_ptr;
 
 int main()
 {
 	Map map = basic_load_map("../maps/test_map.bpm");
+
+	shared_ptr<ExampleObject> obj (new ExampleObject);
+	obj->set_x(5);
+	obj->set_y(10);
 
 	GameField field {{}, map, 0};
 	GameRender render;

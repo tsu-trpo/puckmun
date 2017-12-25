@@ -23,6 +23,7 @@ int main()
 	GameRender render (map);
 
 	render.redraw_complete(field);
+	render.print_status("Here comes dat boi!");
 
 	bool exit = false;
 	while (!exit)

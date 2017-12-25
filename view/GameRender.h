@@ -56,6 +56,9 @@ public:
 	                         Coordinate x, Coordinate y);
 
 	GameRender& redraw_complete(const GameField&);
+
+	// print a line to statusline
+	GameRender& print_status(const string&);
 };
 
 // vim: tw=78

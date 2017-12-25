@@ -7,24 +7,35 @@
 
 using std::to_string;
 
-void log_wait(const string& msg)
-{
-	CALL mvprintw(0, 0, "%s", msg.c_str()) RAISE;
-	CALL refresh() RAISE;
-	CALL getch() RAISE;
-}
 
-void log_nowait(const string& msg)
-{
-	CALL mvprintw(0, 0, "%s", msg.c_str()) RAISE;
-	CALL refresh() RAISE;
-}
-
+// border that reads puckmun
 const NcursesWindow::Border map_border {'|', '|', 'U', 'U', 'P', 'C', 'M', 'N'};
+// where cursor goes after draw command
+const int idle_pos_x = 0;
+const int idle_pos_y = 0;
+// status position
+const int status_pos_x = 1;
+const int status_pos_y = 0;
+// map screen position: offset 1 from top for the status line and 1 left for
+// the symmtry
+const int map_pos_x = 1;
+const int map_pos_y = 1;
+
+
+GameRender& GameRender::print_status(const string& msg)
+{
+	CALL mvprintw(status_pos_y, status_pos_x, "%s", msg.c_str()) RAISE;
+	CALL refresh() RAISE;
+	this->idle_cursor();
+
+	return *this;
+}
 
 GameRender::GameRender(const Map& map)
 	: m_screen ()
-	, m_map_window (0, 1, map.get_width() + 2, map.get_height() + 2, map_border)
+	, m_map_window(map_pos_x, map_pos_y,
+	               map.get_width() + 2, map.get_height() + 2,//+2 for the border
+	               map_border)
 	, m_current_map_width (map.get_width())
 	, m_current_map_height (map.get_height())
 {
@@ -33,11 +44,20 @@ GameRender::GameRender(const Map& map)
 		throw ScreenError("You terminal doesn't support colors");
 	}
 
+	// disable keyboard characters being printed at all
 	CALL noecho() RAISE;
 
 	CALL start_color() RAISE;
 
+	// get screen size
 	CALL getmaxyx(stdscr, m_max_screen_y, m_max_screen_x) RAISE;
+
+	bool too_wide = map.get_width()  + map_pos_x + 2 > m_max_screen_x;
+	bool too_high = map.get_height() + map_pos_y + 2 > m_max_screen_y;
+	if (too_wide || too_high)
+	{
+		throw BadMap("Could not create render: map size too big");
+	}
 
 	//rebox after turning on colors
 	m_map_window.rebox();
@@ -77,17 +97,19 @@ GameRender& GameRender::redraw_complete(const GameField& field)
 	bool too_high = field.map.get_height() > m_current_map_height;
 	if (too_wide || too_high)
 	{
-		throw BadMap("Map size too big");
+		throw BadMap("Could not draw map: size too big");
 	}
 
 	// print all blocks
 	for (Coordinate y = 0; y < field.map.get_height(); ++y)
 	{
+		// position at new line
 		this->map_cursor(0, y);
 		for (Coordinate x = 0; x < field.map.get_width(); ++x)
 		{
 			auto block = field.map.at(x, y);
 			this->draw_current_block(block);
+			// this will move the cursor to the next block
 		}
 	}
 
@@ -191,11 +213,12 @@ GameRender& GameRender::redraw_any_block(const GameField&, const Block& block,
 
 void GameRender::idle_cursor()
 {
-	CALL ::move(0, 0) RAISE;
+	CALL ::move(idle_pos_y, idle_pos_x) RAISE;
 }
 
 void GameRender::map_cursor(Coordinate x, Coordinate y)
 {
+	// arguments should be in range 0..size
 	if (x >= m_current_map_width || y >= m_current_map_height)
 	{
 		throw BadPosition(ERR_HEADER "moving cursor past map boundaries");
@@ -204,6 +227,8 @@ void GameRender::map_cursor(Coordinate x, Coordinate y)
 	{
 		throw std::runtime_error(ERR_HEADER "window pointer is null");
 	}
+	// it seems like i can use window-relative position here
+	// add 1 to account for border size
 	CALL ::wmove(m_map_window.get(), y+1, x+1) RAISE;
 }
 

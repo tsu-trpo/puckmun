@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "errors/BasicMapLoader-errors.h"
+#include "errors/ErrorConstants.h"
 
 const string MapSignature = "basic_puckmun_map";
 const uint64_t VersionMajor = 0;
@@ -21,9 +22,9 @@ Block char_to_block(char c)
 			return Block::BigPoint;
 		case ' ':
 			return Block::Space;
-		default:
-			return Block::Space;
 	}
+	// Чтобы при смене минорной версии не падал от неожиданного блока
+	return Block::Space;
 }
 
 char block_to_char(Block b)
@@ -38,9 +39,8 @@ char block_to_char(Block b)
 			return '*';
 		case Block::Space:
 			return ' ';
-		default:
-			throw std::runtime_error("fuck you");
 	}
+	throw std::logic_error(ERR_HEADER "unexpected wall type");
 }
 
 Map basic_load_map(const string& filename)
@@ -63,7 +63,9 @@ Map basic_load_map(const string& filename)
 	}
 	if (version_major > VersionMajor)
 	{
-		throw FiletypeError("Incompatible version of file " + filename);
+		throw FiletypeError("Incompatible version of file " + filename +
+			" - has major version " + std::to_string(version_major) +
+			", while loader has version " + std::to_string(VersionMajor));
 	}
 
 	uint64_t width, height;
@@ -75,6 +77,7 @@ Map basic_load_map(const string& filename)
 	Map map (static_cast<Coordinate>(width), static_cast<Coordinate>(height));
 
 	char current;
+	// считываем конец строки с размерами
 	map_file.get(current);
 	for (uint64_t y = 0; y < height; ++y)
 	{
@@ -83,14 +86,18 @@ Map basic_load_map(const string& filename)
 			map_file.get(current);
 			if (current == '\n')
 			{
-				throw IllFormedMapError("Unexpected newline in file " + filename);
+				throw IllFormedMapError("Unexpected newline in file " + filename +
+					" on coordinates " + std::to_string(x) + ":" +
+					std::to_string(y));
 			}
 			map.change_block(x, y, char_to_block(current));
 		}
 		map_file.get(current);
 		if (current != '\n')
 		{
-			throw IllFormedMapError("Unexpected non-newline in file " + filename);
+			throw IllFormedMapError("Unexpected non-newline in file " + filename +
+					" on coordinates " + std::to_string(width + 1) + ":" +
+					std::to_string(y));
 		}
 	}
 

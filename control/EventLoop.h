@@ -9,6 +9,10 @@
 #include "objects/GameField.h"
 #include "inputs/Input.h"
 #include "inputs/Command.h"
+#include "control/MoveDirection.h"
+#include "control/Event.h"
+#include "view/GameRender.h"
+#include "control/Physics.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -21,24 +25,35 @@ using InputList   = vector<InputObject>;
 class EventLoop
 {
 private:
-	GameField m_field;
-	InputList m_inputs;
+	GameField  m_field;
+	InputList  m_inputs;
+	GameRender m_render;
 
 	bool m_keep_playing;
+	PeriodT m_current_tick;
+	TimeT m_current_time;
+
+	list<ScheduledEvent> m_scheduled_events;
 
 
-	EventLoop(const GameField&, const InputList&);
+	EventLoop(const GameField&, const InputList&, const GameRender&);
 
 
-	bool move_objects(); //updates m_field and m_keep_playing
-	void update_object_plan(const Command&, const shared_ptr<GameObject>&); //updates m_field && m_inputs by updating second argument
-	void redraw_screen() const;
+	void redraw_screen(const Event&) const;
 
-	EventLoop& before_game(); //dunno what it updates
-	EventLoop& start_game();  //updates everything
-	EventLoop& after_game();  //dunno either
+	PeriodT increment_tick(); //updates m_current_tick
+
+	// very unconst methods:
+	EventLoop& replan_all_objects();
+	EventLoop& move_and_redraw(const PhysicsEvents&);
+	EventLoop& execute_one_event(const Event&);
+	EventLoop& before_game();
+	EventLoop& start_game();
+	EventLoop& after_game();
 
 
 public:
 	EventLoop& run(); //updates everything
 };
+
+// vim: tw=78

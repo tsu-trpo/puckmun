@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 using std::string;
 

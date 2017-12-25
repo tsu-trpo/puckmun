@@ -12,9 +12,9 @@ class ViewableObject : virtual public SpaceObject
 {
 public:
 	//non-const as it may be useful for animations
-	virtual char get_form() = 0;
-	virtual Color get_bg_color()   = 0;
-	virtual Color get_body_color() = 0;
+	virtual char get_form() const = 0;
+	virtual Color get_bg_color() const   = 0;
+	virtual Color get_body_color() const = 0;
 };
 
 // vim: tw=78

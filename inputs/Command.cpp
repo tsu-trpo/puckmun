@@ -1,6 +1,6 @@
 #include "inputs/Command.h"
 
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 Command::Command(unique_ptr<BaseCommand> command)
 	: m_command (std::move(command))

@@ -1,9 +1,14 @@
 #include "view/NcursesScreen.h"
 
 #include "errors/GameRender-errors.h"
-#include "errors/NcursesError.cpp"
+#include "errors/NcursesError.h"
 
 size_t NcursesScreen::m_screens_open = 0;
+
+size_t NcursesScreen::get_screens_open()
+{
+	return m_screens_open;
+}
 
 NcursesScreen::NcursesScreen()
 	: m_is_transferred (false)
@@ -46,8 +51,8 @@ void NcursesScreen::register_color_pair(const NcursesScreen::MapKey& key)
 	{
 		//register in ncurses
 		CALL init_pair(m_next_pair_number,
-		         ncurses_color(key.foreground),
-		         ncurses_color(key.background)) RAISE;
+		               ncurses_color(key.foreground),
+		               ncurses_color(key.background)) RAISE;
 
 		//remember its number
 		m_registered_colors[key] = m_next_pair_number;

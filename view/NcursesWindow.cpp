@@ -10,7 +10,7 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h)
 	, m_height  (h)
 	, m_width   (w)
 {
-	if (NcursesScreen::screens_open == 0)
+	if (NcursesScreen::get_screens_open() == 0)
 	{
 		throw ScreenError("Trying to create window with no screens open");
 	}

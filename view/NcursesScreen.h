@@ -47,6 +47,8 @@ public:
 
 	//get color pair number for attron()
 	chtype color_pair(Color, Color);
+
+	static size_t get_screens_open();
 };
 
 // vim: tw=78

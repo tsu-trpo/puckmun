@@ -7,7 +7,7 @@
 
 using std::to_string;
 
-void log(const string& msg)
+void log_wait(const string& msg)
 {
 	CALL mvprintw(0, 0, "%s", msg.c_str()) RAISE;
 	CALL refresh() RAISE;
@@ -21,7 +21,8 @@ void log_nowait(const string& msg)
 }
 
 GameRender::GameRender(const Map& map)
-	: m_screen()
+	: m_screen ()
+	, m_map_window (0, 1, map.get_width() + 2, map.get_height() + 2)
 	, m_current_map_width (map.get_width())
 	, m_current_map_height (map.get_height())
 {
@@ -36,18 +37,18 @@ GameRender::GameRender(const Map& map)
 
 	CALL getmaxyx(stdscr, m_max_screen_y, m_max_screen_x) RAISE;
 
-	//seems like it should be set after everything else
-	m_map_window = stdscr;
+	//rebox after turning on colors
+	m_map_window.rebox();
 }
 
 void GameRender::basic_draw(char body, Color fore, Color back)
 {
 	//turn on this color
-	CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+	CALL wattron(m_map_window.get(), m_screen.color_pair(fore, back)) RAISE;
 	//print the char
-	CALL wechochar(m_map_window, body) RAISE;
+	CALL wechochar(m_map_window.get(), body) RAISE;
 	//turn off that color
-	CALL wattroff(m_map_window, m_screen.color_pair(fore, back)) RAISE;
+	CALL wattroff(m_map_window.get(), m_screen.color_pair(fore, back)) RAISE;
 }
 
 void GameRender::draw_current_block(const Block& block)
@@ -197,7 +198,11 @@ void GameRender::map_cursor(Coordinate x, Coordinate y)
 	{
 		throw BadPosition(ERR_HEADER "moving cursor past map boundaries");
 	}
-	CALL ::wmove(m_map_window, y, x) RAISE;
+	if (!m_map_window.get())
+	{
+		throw std::runtime_error(ERR_HEADER "window pointer is null");
+	}
+	CALL ::wmove(m_map_window.get(), y+1, x+1) RAISE;
 }
 
 // vim: tw=78

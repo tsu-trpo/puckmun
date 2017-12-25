@@ -9,12 +9,12 @@
 #include "objects/GameField.h"
 #include "objects/Block.h"
 #include "view/NcursesScreen.h"
+#include "view/NcursesWindow.h"
 
 class GameRender
 {
 	NcursesScreen m_screen;
-
-	WINDOW* m_map_window;
+	NcursesWindow m_map_window;
 
 	// screen sizes
 	size_t m_max_screen_x, m_max_screen_y;

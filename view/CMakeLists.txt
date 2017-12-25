@@ -8,6 +8,9 @@ add_library_autolink(Color Color.cpp)
 # Базопасный ncurses-экран
 add_library_autolink(NcursesScreen NcursesScreen.cpp)
 
+# Безопасное ncurses-окно
+add_library_autolink(NcursesWindow NcursesWindow.cpp)
+
 # Главный рендер поля
 add_library_autolink(GameRender GameRender.cpp)
 

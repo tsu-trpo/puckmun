@@ -24,7 +24,9 @@ int main()
 	obj2->set_y(y2);
 
 	GameField field {{obj1, obj2}, map, 0};
-	GameRender render (map);
+	GameRender pre_render (map);
+	// test how move constructor behaves
+	GameRender render = std::move(pre_render);
 
 	render.redraw_complete(field);
 	render.print_status("Here comes dat boi!");

@@ -3,30 +3,16 @@ project(events)
 
 # Просто разные ивенты
 
-add_library(AddWall STATIC
-	AddWall.cpp
-)
+add_library_autolink(AddWall AddWall.cpp)
 
-add_library(Demote STATIC
-	Demote.cpp
-)
+add_library_autolink(Demote Demote.cpp)
 
-add_library(DestroyWall STATIC
-	DestroyWall.cpp
-)
+add_library_autolink(DestroyWall DestroyWall.cpp)
 
-add_library(EatPoint STATIC
-	EatPoint.cpp
-)
+add_library_autolink(EatPoint EatPoint.cpp)
 
-add_library(Move STATIC
-	Move.cpp
-)
+add_library_autolink(Move Move.cpp)
 
-add_library(Nothing STATIC
-	Nothing.cpp
-)
+add_library_autolink(Nothing Nothing.cpp)
 
-add_library(Promote STATIC
-	Promote.cpp
-)
+add_library_autolink(Promote Promote.cpp)

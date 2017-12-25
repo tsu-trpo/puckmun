@@ -37,9 +37,8 @@ NcursesScreen::~NcursesScreen()
 	m_screens_open -= 1;
 }
 
-NcursesScreen& NcursesScreen::register_color_pair(Color fore, Color back)
+void NcursesScreen::register_color_pair(const NcursesScreen::MapKey& key)
 {
-	NcursesScreen::MapKey key {fore, back};
 	auto search = m_registered_colors.find(key);
 
 	//if pair is not registered
@@ -47,19 +46,23 @@ NcursesScreen& NcursesScreen::register_color_pair(Color fore, Color back)
 	{
 		//register in ncurses
 		CALL init_pair(m_next_pair_number,
-		         ncurses_color(fore), ncurses_color(back)) RAISE;
+		         ncurses_color(key.foreground),
+		         ncurses_color(key.background)) RAISE;
 
 		//remember its number
 		m_registered_colors[key] = m_next_pair_number;
 		m_next_pair_number += 1;
 	}
 	//allows reregistering
-	return *this;
 }
 
 chtype NcursesScreen::color_pair(Color fore, Color back)
 {
 	NcursesScreen::MapKey key {fore, back};
-	// throws some map exception if pair does not exist
+
+	// register or re-register the pair
+	this->register_color_pair(key);
+
+	// return the registered pair
 	return COLOR_PAIR(m_registered_colors.at(key));
 }

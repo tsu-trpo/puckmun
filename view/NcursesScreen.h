@@ -12,6 +12,7 @@ using std::map;
 
 class NcursesScreen
 {
+	// number of ncurses screen initialized (must be 1 or zero)
 	static size_t m_screens_open;
 
 	// comparable pair of two colors
@@ -35,14 +36,15 @@ class NcursesScreen
 	map< MapKey, short > m_registered_colors;
 	short m_next_pair_number;
 
+	//register color pair for use
+	void register_color_pair(const MapKey&);
+
 public:
 	NcursesScreen();
 	NcursesScreen(NcursesScreen&&);
 	NcursesScreen(const NcursesScreen&) = delete;
 	~NcursesScreen();
 
-	//register color pair for use
-	NcursesScreen& register_color_pair(Color, Color);
 	//get color pair number for attron()
 	chtype color_pair(Color, Color);
 };

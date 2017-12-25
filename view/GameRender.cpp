@@ -20,9 +20,11 @@ void log_nowait(const string& msg)
 	CALL refresh() RAISE;
 }
 
+const NcursesWindow::Border map_border {'|', '|', 'U', 'U', 'P', 'C', 'M', 'N'};
+
 GameRender::GameRender(const Map& map)
 	: m_screen ()
-	, m_map_window (0, 1, map.get_width() + 2, map.get_height() + 2)
+	, m_map_window (0, 1, map.get_width() + 2, map.get_height() + 2, map_border)
 	, m_current_map_width (map.get_width())
 	, m_current_map_height (map.get_height())
 {

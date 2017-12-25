@@ -18,6 +18,7 @@ add_subdirectory(control)
 add_subdirectory(objects)
 add_subdirectory(view)
 add_subdirectory(errors)
+add_subdirectory(maps)
 
 add_executable(main main.cpp)
 

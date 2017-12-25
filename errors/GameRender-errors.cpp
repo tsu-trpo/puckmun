@@ -15,3 +15,11 @@ BadMap::BadMap(const std::string& s)
 BadMap::BadMap(const char* s)
 	: std::logic_error (s)
 {}
+
+BadPosition::BadPosition(const std::string& s)
+	: std::logic_error (s)
+{}
+
+BadPosition::BadPosition(const char* s)
+	: std::logic_error (s)
+{}

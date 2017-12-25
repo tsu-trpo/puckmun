@@ -16,8 +16,11 @@ class GameRender
 
 	WINDOW* m_map_window;
 
-	size_t m_max_x, m_max_y;
-	size_t m_max_map_width, m_max_map_height;
+	// screen sizes
+	size_t m_max_screen_x, m_max_screen_y;
+	// width and height of map given to constructor.
+	const Coordinate m_current_map_width;
+	const Coordinate m_current_map_height;
 
 
 	//move cursor to nowhere
@@ -32,7 +35,8 @@ class GameRender
 	void draw_current_object(const ViewableObject&);
 
 public:
-	GameRender();
+	GameRender(const Map&);
+
 	// draw object at its place
 	GameRender& redraw_object_nomove(const GameField&, const ViewableObject&);
 

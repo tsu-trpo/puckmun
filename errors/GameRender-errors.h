@@ -15,3 +15,10 @@ public:
 	BadMap(const std::string&);
 	BadMap(const char*);
 };
+
+class BadPosition : public std::logic_error
+{
+public:
+	BadPosition(const std::string&);
+	BadPosition(const char*);
+};

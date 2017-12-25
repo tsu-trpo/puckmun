@@ -20,8 +20,10 @@ void log_nowait(const string& msg)
 	CALL refresh() RAISE;
 }
 
-GameRender::GameRender()
+GameRender::GameRender(const Map& map)
 	: m_screen()
+	, m_current_map_width (map.get_width())
+	, m_current_map_height (map.get_height())
 {
 	if (!has_colors())
 	{
@@ -32,12 +34,7 @@ GameRender::GameRender()
 
 	CALL start_color() RAISE;
 
-	CALL getmaxyx(stdscr, m_max_y, m_max_x) RAISE;
-	//for now
-	m_max_map_width  = m_max_x;
-	m_max_map_height = m_max_y;
-	//as the returned amount is not max, but size
-	m_max_x -= 1; m_max_y -= 1;
+	CALL getmaxyx(stdscr, m_max_screen_y, m_max_screen_x) RAISE;
 
 	//seems like it should be set after everything else
 	m_map_window = stdscr;
@@ -45,8 +42,6 @@ GameRender::GameRender()
 
 void GameRender::basic_draw(char body, Color fore, Color back)
 {
-	//register or re-register block's colors
-	m_screen.register_color_pair(fore, back);
 	//turn on this color
 	CALL wattron(m_map_window, m_screen.color_pair(fore, back)) RAISE;
 	//print the char
@@ -75,8 +70,8 @@ void GameRender::draw_current_object(const ViewableObject& object)
 
 GameRender& GameRender::redraw_complete(const GameField& field)
 {
-	bool too_wide = field.map.get_width() > m_max_map_width;
-	bool too_high = field.map.get_height() > m_max_map_height;
+	bool too_wide = field.map.get_width() > m_current_map_width;
+	bool too_high = field.map.get_height() > m_current_map_height;
 	if (too_wide || too_high)
 	{
 		throw BadMap("Map size too big");
@@ -198,7 +193,11 @@ void GameRender::idle_cursor()
 
 void GameRender::map_cursor(Coordinate x, Coordinate y)
 {
-	CALL ::wmove(m_map_window, y+1, x) RAISE;
+	if (x >= m_current_map_width || y >= m_current_map_height)
+	{
+		throw BadPosition(ERR_HEADER "moving cursor past map boundaries");
+	}
+	CALL ::wmove(m_map_window, y, x) RAISE;
 }
 
 // vim: tw=78

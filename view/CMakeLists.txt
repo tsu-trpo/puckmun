@@ -3,7 +3,4 @@ project(view)
 
 
 # Обёртка для цветов
-add_library(Color STATIC
-	Color.cpp
-)
-
+add_library_autolink(Color Color.cpp)

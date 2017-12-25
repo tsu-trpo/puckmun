@@ -19,6 +19,26 @@ set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
+set(ALL_PROJECT_LIBRARIES "" CACHE STRING "" FORCE)
+
+# Функция, добавляющая библиотеку и записывающая её имя в глобальную переменную
+function(add_library_autolink lib_name lib_path)
+	message(STATUS "adding library ${lib_name}")
+	add_library(${lib_name} STATIC ${lib_path})
+
+	# Если библиотек нет, то сразу кладём, чтобы не было пустых строк при
+	# append-e
+	if("${ALL_PROJECT_LIBRARIES}" STREQUAL "")
+		set(ALL_PROJECT_LIBRARIES "${lib_name}" CACHE STRING "" FORCE)
+	else()
+		# Добавляем не конкатенацией строк, потому что тогда бы link_libraries
+		# неверно воспринимал переменную
+		set(ALL_PROJECT_LIBRARIES
+			"${ALL_PROJECT_LIBRARIES}" "${lib_name}"
+			CACHE STRING "" FORCE
+		)
+	endif()
+endfunction(add_library_autolink)
 
 # Добавляем включение всех файлов из поддиректорий
 include_directories(${puckmun_SOURCE_DIR})
@@ -31,3 +51,9 @@ add_subdirectory(view)
 add_executable(ncurses_test ncurses_test.cpp)
 
 target_link_libraries(ncurses_test ${CURSES_LIBRARY})
+
+add_executable(main main.cpp)
+# Линкую дважды чтобы решить проблемы с ненайденными символами
+target_link_libraries(main ${ALL_PROJECT_LIBRARIES} ${ALL_PROJECT_LIBRARIES})
+
+# vim: tw=78

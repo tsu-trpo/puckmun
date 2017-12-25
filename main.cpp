@@ -11,7 +11,7 @@ using std::shared_ptr;
 
 int main()
 {
-	Map map = basic_load_map("../maps/test_map.bpm");
+	Map map = basic_load_map("maps/test_map.bpm");
 
 	shared_ptr<ExampleObject> obj (new ExampleObject);
 

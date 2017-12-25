@@ -20,8 +20,7 @@ int main()
 	obj->set_y(y);
 
 	GameField field {{obj}, map, 0};
-	GameRender render;
-
+	GameRender render (map);
 
 	render.redraw_complete(field);
 

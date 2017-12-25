@@ -1,6 +1,6 @@
 #include "view/Color.h"
 
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 short ncurses_color(Color color)
 {

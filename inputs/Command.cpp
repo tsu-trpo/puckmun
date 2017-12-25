@@ -1,9 +1,14 @@
 #include "inputs/Command.h"
 
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 Command::Command(unique_ptr<BaseCommand> command)
-	: m_command(std::move(command))
+	: m_command (std::move(command))
+{
+}
+
+Command::Command(const Command& other)
+	: m_command (other.m_command->clone())
 {
 }
 

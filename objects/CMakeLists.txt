@@ -3,15 +3,10 @@ project(objects)
 
 
 # Библиотека с картой
-add_library(Map STATIC
-	Map.cpp
-)
+add_library_autolink(Map Map.cpp)
+
+# Библиотека с SpaceObject
+add_library_autolink(SpaceObject SpaceObject.cpp)
 
 # Библиотека с AnimateObject
-add_library(AnimateObject STATIC
-	AnimateObject.cpp
-)
-
-add_library(SpaceObject STATIC
-	SpaceObject.cpp
-)
+add_library_autolink(AnimateObject AnimateObject.cpp)

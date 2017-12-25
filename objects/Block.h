@@ -1,3 +1,5 @@
+#pragma once
+
 enum struct Block
 {
 	Wall, 
@@ -6,3 +8,4 @@ enum struct Block
 	Space
 };
 
+// vim: tw=78

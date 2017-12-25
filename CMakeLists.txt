@@ -47,9 +47,11 @@ include_directories(${puckmun_SOURCE_DIR})
 add_subdirectory(control)
 add_subdirectory(objects)
 add_subdirectory(view)
+add_subdirectory(errors)
+add_subdirectory(maps)
+
 
 add_executable(ncurses_test ncurses_test.cpp)
-
 target_link_libraries(ncurses_test ${CURSES_LIBRARY})
 
 add_executable(main main.cpp)

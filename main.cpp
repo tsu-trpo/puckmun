@@ -1,7 +1,11 @@
-#include "objects/Map.h"
+#include <iostream>
+
+#include "objects/MapLoader.h"
 
 int main()
 {
-	Map map(0, 0);
+	Map map = basic_load_map("maps/test_map.bpm");
+	print_map(map);
+
 	return 0;
 }

@@ -36,6 +36,8 @@ class GameRender
 
 public:
 	GameRender(const Map&);
+	GameRender(const GameRender&) = delete;
+	GameRender(GameRender&&) = default;
 
 	// draw object at its place
 	GameRender& redraw_object_nomove(const GameField&, const ViewableObject&);

@@ -5,15 +5,15 @@
 EventLoop :: EventLoop(
 	const GameField& field,
 	const InputList& inputs,
-	const GameRender& render
+	GameRender& render
 	)
 	: m_field (field)
 	, m_inputs(inputs)
-	, m_render(render)
+	, m_render(std::move(render))
 	, m_keep_playing (true)
 	, m_current_tick (0)
 	, m_current_time (0)
-	, m_scheduled_events ()
+	, m_scheduled_events {}
 {}
 
 

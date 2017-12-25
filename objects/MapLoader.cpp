@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "errors/BasicMapLoader-errors.h"
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 const string MapSignature = "basic_puckmun_map";
 const uint64_t VersionMajor = 0;

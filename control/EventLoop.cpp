@@ -1,6 +1,6 @@
 #include "control/EventLoop.h"
 
-#include "error.h"
+#include "errors/ErrorConstants.h"
 
 EventLoop :: EventLoop(
 	const GameField& field,

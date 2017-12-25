@@ -15,7 +15,7 @@ public:
 	Map(Coordinate, Coordinate);
 
 	Map & change_block(Coordinate, Coordinate, Block);
-	Block at(Coordinate, Coordinate);
+	Block at(Coordinate, Coordinate) const;
 
 	Coordinate get_height() const;
 	Coordinate get_width() const;

@@ -7,3 +7,5 @@ enum struct Block
 	BigPoint,
 	Space
 };
+
+// vim: tw=78

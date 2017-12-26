@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.8)
-project(objects)
 
 
 # Библиотека с картой
-add_library(Map STATIC
-	Map.cpp
-)
+add_library_autolink(Map Map.cpp)
+
+# Библиотека с SpaceObject
+add_library_autolink(SpaceObject SpaceObject.cpp)
 
 
 # Библиотека с Ghost
@@ -13,7 +13,3 @@ add_library(Ghost STATIC
 	Ghost.cpp
 )
 
-# Библиотека с AnimateObject
-add_library(AnimateObject STATIC
-	AnimateObject.cpp
-)

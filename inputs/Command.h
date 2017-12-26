@@ -1,6 +1,7 @@
+#pragma once
+
 // A thin wrapper against BaseCommand as to not carry a lot of fucking
 // pointers around
-#pragma once
 
 #include <memory>
 
@@ -15,7 +16,11 @@ class Command
 	unique_ptr<BaseCommand> m_command;
 
 public:
-	void update(const shared_ptr<AnimateObject>&) const;
-
 	Command(unique_ptr<BaseCommand>);
+	Command(const Command&);
+
+	// execute command: update the object's next actions
+	void update(const shared_ptr<AnimateObject>&) const;
 };
+
+// vim: tw=78

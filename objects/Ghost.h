@@ -1,9 +1,9 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#include "objects/AnimateObject.h"
+#include "objects/GameObject.h"
 
-class Ghost: public AnimateObject
+class Ghost: public GameObject
 {	
 	MoveDirection m_current;
 public:

@@ -35,7 +35,7 @@ class NcursesScreen
 	bool m_is_transferred;
 
 	static map< MapKey, short > m_registered_colors;
-	short m_next_pair_number;
+	static short m_next_pair_number;
 
 	//register color pair for use
 	void register_color_pair(const MapKey&);

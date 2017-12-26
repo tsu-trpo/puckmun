@@ -5,6 +5,8 @@
 
 size_t NcursesScreen::m_screens_open = 0;
 map<NcursesScreen::MapKey, short> NcursesScreen::m_registered_colors {};
+// minimum is 1 according to man
+short NcursesScreen::m_next_pair_number = 1;
 
 size_t NcursesScreen::get_screens_open()
 {
@@ -13,7 +15,6 @@ size_t NcursesScreen::get_screens_open()
 
 NcursesScreen::NcursesScreen()
 	: m_is_transferred (false)
-	, m_next_pair_number (1)
 {
 	if (m_screens_open > 0)
 	{
@@ -26,7 +27,6 @@ NcursesScreen::NcursesScreen()
 
 NcursesScreen::NcursesScreen(NcursesScreen&& other)
 	: m_is_transferred (false)
-	, m_next_pair_number (other.m_next_pair_number)
 {
 	// okay, so what if we move already transferred screen?
 	if (other.m_is_transferred) m_is_transferred = true;

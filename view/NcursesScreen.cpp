@@ -40,6 +40,10 @@ NcursesScreen::~NcursesScreen()
 {
 	if (m_is_transferred) return;
 
+	// as colors are lost when screen is removed, clear them
+	m_registered_colors = {};
+	m_next_pair_number = 1;
+
 	endwin();
 	m_screens_open -= 1;
 }

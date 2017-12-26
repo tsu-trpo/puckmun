@@ -28,6 +28,7 @@ public:
 	NcursesWindow(NcursesWindow&&);
 	~NcursesWindow();
 
+	// redraw the box in the window
 	NcursesWindow& rebox();
 
 	WINDOW* get() const;

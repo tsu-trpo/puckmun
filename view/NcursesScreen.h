@@ -1,7 +1,8 @@
 #pragma once
 
 // exception-safe инициализация экрана ncurses, не позволяющая существовать
-// более чем одной штуке
+// более чем одной штуке. Поскольку цвета ncurses также зависят от экрана, то
+// он умеет раздавать цветовые пары.
 
 #include <ncurses.h>
 #include <map>
@@ -33,7 +34,7 @@ class NcursesScreen
 	// tells whether we were once an rhs in the move constructor
 	bool m_is_transferred;
 
-	map< MapKey, short > m_registered_colors;
+	static map< MapKey, short > m_registered_colors;
 	short m_next_pair_number;
 
 	//register color pair for use

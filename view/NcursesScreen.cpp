@@ -4,6 +4,7 @@
 #include "errors/NcursesError.h"
 
 size_t NcursesScreen::m_screens_open = 0;
+map<NcursesScreen::MapKey, short> NcursesScreen::m_registered_colors {};
 
 size_t NcursesScreen::get_screens_open()
 {
@@ -12,7 +13,6 @@ size_t NcursesScreen::get_screens_open()
 
 NcursesScreen::NcursesScreen()
 	: m_is_transferred (false)
-	, m_registered_colors {}
 	, m_next_pair_number (1)
 {
 	if (m_screens_open > 0)
@@ -26,7 +26,6 @@ NcursesScreen::NcursesScreen()
 
 NcursesScreen::NcursesScreen(NcursesScreen&& other)
 	: m_is_transferred (false)
-	, m_registered_colors (std::move(other.m_registered_colors))
 	, m_next_pair_number (other.m_next_pair_number)
 {
 	// okay, so what if we move already transferred screen?

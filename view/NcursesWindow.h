@@ -22,8 +22,8 @@ private:
 	bool m_is_transferred;
 
 public:
-	// topleft corner coords, height, width, border style
-	NcursesWindow(int x, int y, int h, int w, const Border&);
+	// topleft corner coords, width, height, border style
+	NcursesWindow(int x, int y, int w, int h, const Border&);
 	NcursesWindow(const NcursesWindow&) = delete;
 	NcursesWindow(NcursesWindow&&);
 	~NcursesWindow();

@@ -48,6 +48,7 @@ public:
 
 	//get color pair number for attron() (NOT thread safe!)
 	chtype color_pair(Color, Color);
+	// not static as not having a screen means you don't have colors
 
 	static size_t get_screens_open();
 };

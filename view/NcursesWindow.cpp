@@ -7,11 +7,7 @@
 using Border = NcursesWindow::Border;
 
 NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
-	: m_start_x (x)
-	, m_start_y (y)
-	, m_height  (h)
-	, m_width   (w)
-	, m_border  (border)
+	: m_border  (border)
 	, m_is_transferred (false)
 {
 	if (NcursesScreen::get_screens_open() == 0)
@@ -20,7 +16,7 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
 	}
 
 	// create window
-	m_window = newwin(m_height, m_width, m_start_y, m_start_x);
+	m_window = newwin(h, w, y, x);
 	// draw a box around it
 	wborder(m_window, m_border.left,    m_border.right,
 	                  m_border.top,     m_border.bottom,
@@ -32,11 +28,7 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
 }
 
 NcursesWindow::NcursesWindow(NcursesWindow&& other)
-	: m_start_x        (std::move (other.m_start_x))
-	, m_start_y        (std::move (other.m_start_y))
-	, m_height         (std::move (other.m_height))
-	, m_width          (std::move (other.m_width))
-	, m_border         (std::move (other.m_border))
+	: m_border         (std::move (other.m_border))
 	, m_window         (std::move (other.m_window))
 	, m_is_transferred (false)
 	

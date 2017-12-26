@@ -13,10 +13,6 @@ public:
 	};
 
 private:
-	// topleft corner coordinates
-	int m_start_x, m_start_y;
-	// sizes
-	int m_height, m_width;
 	// border symbols
 	Border m_border;
 	// ncurses window pointer
@@ -26,6 +22,7 @@ private:
 	bool m_is_transferred;
 
 public:
+	// topleft corner coords, height, width, border style
 	NcursesWindow(int x, int y, int h, int w, const Border&);
 	NcursesWindow(const NcursesWindow&) = delete;
 	NcursesWindow(NcursesWindow&&);

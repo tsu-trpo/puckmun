@@ -2,7 +2,6 @@
 
 #include "errors/GameRender-errors.h"
 #include "errors/NcursesError.h"
-#include <iostream>
 
 size_t NcursesScreen::m_screens_open = 0;
 

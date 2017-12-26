@@ -46,7 +46,7 @@ public:
 	NcursesScreen(const NcursesScreen&) = delete;
 	~NcursesScreen();
 
-	//get color pair number for attron()
+	//get color pair number for attron() (NOT thread safe!)
 	chtype color_pair(Color, Color);
 
 	static size_t get_screens_open();

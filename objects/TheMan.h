@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#include "objects/AnimateObject.h"
+#include "objects/GameObject.h"
 #include "control/MoveDirection.h"
 
 class TheMan: public GameObject

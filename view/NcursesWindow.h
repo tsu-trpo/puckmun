@@ -16,12 +16,12 @@ private:
 	// border symbols
 	Border m_border;
 	// ncurses window pointer
-	WINDOW* m_window;
+	WINDOW* m_window = nullptr;
 
 	// tells whether we were once an rhs in the move constructor
 	// потому что если однажды окно передали, то уже нет гарантии, что с ним
 	// можно обращаться
-	bool m_is_transferred;
+	bool m_is_transferred = false;
 
 public:
 	// topleft corner coords, width, height, border style

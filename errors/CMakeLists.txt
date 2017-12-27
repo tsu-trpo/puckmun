@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 2.8.8)
 
 
-# Ошибки рендера
-add_library_autolink(GameRender-errors GameRender-errors.cpp)
-
 # Ошибки загрузчика карты
 add_library_autolink(BasicMapLoader-errors BasicMapLoader-errors.cpp)
 

@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 2.8.8)
+
+# Библиотека с призраком
+add_library_autolink(Ghost Ghost.cpp)
+
 # Библиотека с TheMan
 add_library_autolink(TheMan TheMan.cpp)
 

@@ -91,6 +91,23 @@ void GameRender::draw_current_object(const ViewableObject& object)
 	this->basic_draw(body, fore, back);
 }
 
+void GameRender::find_redraw_object(const GameField& field,
+                                    Coordinate x, Coordinate y,
+                                    const ViewableObject* const exclude)
+{
+	for (auto& object_ptr : field.objects)
+	{
+		if (   object_ptr->get_x() == x
+		    && object_ptr->get_y() == y
+		    && exclude != object_ptr.get() )
+		{
+			this->map_cursor(x, y);
+			draw_current_object(*object_ptr);
+			return;
+		}
+	}
+}
+
 GameRender& GameRender::redraw_complete(const GameField& field)
 {
 	bool too_wide = field.map.get_width() > m_current_map_width;
@@ -154,6 +171,8 @@ GameRender& GameRender::redraw_object_pre_move(const GameField& field,
 	//redraw the block there
 	auto block = field.map.at(object.get_x(), object.get_y());
 	this->draw_current_block(block);
+	//redraw object there if it exists
+	this->find_redraw_object(field, object.get_x(), object.get_y(), &object);
 
 	//move cursor to idle position
 	this->idle_cursor();
@@ -175,6 +194,8 @@ GameRender& GameRender::redraw_object_post_move(const GameField& field,
 	//redraw the block there
 	auto block = field.map.at(x, y);
 	this->draw_current_block(block);
+	//redraw object there if it exists
+	this->find_redraw_object(field, x, y, nullptr);
 
 	//move cursor to idle position
 	this->idle_cursor();

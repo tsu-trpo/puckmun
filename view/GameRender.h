@@ -33,6 +33,12 @@ class GameRender
 	void draw_current_block(const Block&);
 	//redraw object under cursor
 	void draw_current_object(const ViewableObject&);
+	//redraw first found object at coordinates, except for the one specified
+	//for exclude. Выглядит как хак, но это потому что ViewableObject-y нельзя
+	//придумать какое-то значимое сравнение == на совпадение экземпляров.
+	//которое бы тоже не опиралось на указатели
+	void find_redraw_object(const GameField&, Coordinate, Coordinate,
+	                        const ViewableObject* const exclude);
 
 public:
 	GameRender(const Map&);

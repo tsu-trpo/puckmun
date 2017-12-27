@@ -20,8 +20,6 @@ NcursesScreen::NcursesScreen()
 	// if we opened the first screen
 	if (m_screens_open == 1)
 	{
-		m_screens_open += 1;
-
 		initscr();
 	}
 }

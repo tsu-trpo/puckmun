@@ -30,3 +30,18 @@ MoveDirection TheMan::get_future() const
         return m_future;
 }
 
+char TheMan::get_form() const
+{
+	char k=' ';
+	return k;
+}
+
+Color TheMan::get_bg_color() const
+{
+	return Color::Yellow;
+}
+
+Color TheMan::get_body_color() const
+{
+	return Color::Yellow;
+}

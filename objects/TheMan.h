@@ -15,5 +15,8 @@ private:
 	void set_future(MoveDirection);
 	MoveDirection get_current() const;
 	MoveDirection get_future() const;
+	char get_form() const override;
+	Color get_bg_color() const override;
+	Color get_body_color() const override;
 };
 	

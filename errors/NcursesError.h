@@ -1,11 +1,8 @@
 #pragma once
 
 #include <stdexcept>
-#include <string>
 
 #include "errors/ErrorConstants.h"
-
-using std::string;
 
 // defines macros to use ncurses functions: it raises errors returned as exceptions
 

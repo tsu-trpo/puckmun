@@ -13,19 +13,22 @@ public:
 	};
 
 private:
-	// topleft corner coordinates
-	int m_start_x, m_start_y;
-	// sizes
-	int m_height, m_width;
 	// border symbols
 	Border m_border;
 	// ncurses window pointer
 	WINDOW* m_window;
 
+	// tells whether we were once an rhs in the move constructor
+	bool m_is_transferred;
+
 public:
-	NcursesWindow(int x, int y, int h, int w, const Border&);
+	// topleft corner coords, width, height, border style
+	NcursesWindow(int x, int y, int w, int h, const Border&);
+	NcursesWindow(const NcursesWindow&) = delete;
+	NcursesWindow(NcursesWindow&&);
 	~NcursesWindow();
 
+	// redraw the box in the window
 	NcursesWindow& rebox();
 
 	WINDOW* get() const;

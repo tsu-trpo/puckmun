@@ -7,11 +7,8 @@
 using Border = NcursesWindow::Border;
 
 NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
-	: m_start_x (x)
-	, m_start_y (y)
-	, m_height  (h)
-	, m_width   (w)
-	, m_border  (border)
+	: m_border  (border)
+	, m_is_transferred (false)
 {
 	if (NcursesScreen::get_screens_open() == 0)
 	{
@@ -19,7 +16,7 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
 	}
 
 	// create window
-	m_window = newwin(m_height, m_width, m_start_y, m_start_x);
+	m_window = newwin(h, w, y, x);
 	// draw a box around it
 	wborder(m_window, m_border.left,    m_border.right,
 	                  m_border.top,     m_border.bottom,
@@ -30,8 +27,24 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
 	refresh();
 }
 
+NcursesWindow::NcursesWindow(NcursesWindow&& other)
+	: m_border         (std::move (other.m_border))
+	, m_window         (std::move (other.m_window))
+	, m_is_transferred (false)
+	
+{
+	// okay, so what if we move already transferred window?
+	if (other.m_is_transferred) m_is_transferred = true;
+
+	other.m_is_transferred = true;
+	// window is initialized, control of window is transferred
+	// nothing to do
+}
+
 NcursesWindow::~NcursesWindow()
 {
+	if (m_is_transferred) return;
+
 	// delete the border
 	wborder(m_window, ' ',' ',  //left, right
 	                  ' ',' ',  //top, bottom

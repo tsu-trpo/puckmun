@@ -1,7 +1,8 @@
 #pragma once
 
 // exception-safe инициализация экрана ncurses, не позволяющая существовать
-// более чем одной штуке
+// более чем одной штуке. Поскольку цвета ncurses также зависят от экрана, то
+// он умеет раздавать цветовые пары.
 
 #include <ncurses.h>
 #include <map>
@@ -30,11 +31,8 @@ class NcursesScreen
 		}
 	};
 
-	// tells whether we're an rhs in the move constructor
-	bool m_is_transferred;
-
-	map< MapKey, short > m_registered_colors;
-	short m_next_pair_number;
+	static map< MapKey, short > m_registered_colors;
+	static short m_next_pair_number;
 
 	//register color pair for use
 	void register_color_pair(const MapKey&);
@@ -42,11 +40,12 @@ class NcursesScreen
 public:
 	NcursesScreen();
 	NcursesScreen(NcursesScreen&&);
-	NcursesScreen(const NcursesScreen&) = delete;
+	NcursesScreen(const NcursesScreen&);
 	~NcursesScreen();
 
-	//get color pair number for attron()
+	//get color pair number for attron() (NOT thread safe!)
 	chtype color_pair(Color, Color);
+	// not static as not having a screen means you don't have colors
 
 	static size_t get_screens_open();
 };

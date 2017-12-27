@@ -4,6 +4,9 @@
 #include "errors/NcursesError.h"
 
 size_t NcursesScreen::m_screens_open = 0;
+map<NcursesScreen::MapKey, short> NcursesScreen::m_registered_colors {};
+// minimum is 1 according to man
+short NcursesScreen::m_next_pair_number = 1;
 
 size_t NcursesScreen::get_screens_open()
 {
@@ -11,35 +14,44 @@ size_t NcursesScreen::get_screens_open()
 }
 
 NcursesScreen::NcursesScreen()
-	: m_is_transferred (false)
-	, m_registered_colors {}
-	, m_next_pair_number (1)
 {
-	if (m_screens_open > 0)
-	{
-		throw ScreenError("NcursesScreen: too many screens created");
-	}
 	m_screens_open += 1;
 
-	initscr();
+	// if we opened the first screen
+	if (m_screens_open == 1)
+	{
+		m_screens_open += 1;
+
+		initscr();
+	}
 }
 
-NcursesScreen::NcursesScreen(NcursesScreen&& other)
-	: m_is_transferred (false)
-	, m_registered_colors (std::move(other.m_registered_colors))
-	, m_next_pair_number (other.m_next_pair_number)
+NcursesScreen::NcursesScreen(NcursesScreen&&)
 {
-	other.m_is_transferred = true;
+	m_screens_open += 1;
+	// screen is initialized, control of screen is transferred
+	// nothing to do
+}
+
+NcursesScreen::NcursesScreen(const NcursesScreen&)
+{
+	m_screens_open += 1;
 	// screen is initialized, control of screen is transferred
 	// nothing to do
 }
 
 NcursesScreen::~NcursesScreen()
 {
-	if (m_is_transferred) return;
+	m_screens_open -= 1;
+
+	// exit if it wasn't the last screen closed
+	if (m_screens_open > 0) return;
+
+	// as colors are lost when screen is removed, clear them
+	m_registered_colors = {};
+	m_next_pair_number = 1;
 
 	endwin();
-	m_screens_open -= 1;
 }
 
 void NcursesScreen::register_color_pair(const NcursesScreen::MapKey& key)

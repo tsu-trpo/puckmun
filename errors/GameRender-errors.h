@@ -17,5 +17,5 @@ public:
 class BadPosition : public std::runtime_error
 {
 public:
-	ScreenError(const char*);
+	using std::runtime_error::runtime_error;
 };

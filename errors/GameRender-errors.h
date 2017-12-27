@@ -2,23 +2,20 @@
 
 #include <stdexcept>
 
-class ScreenError : public std::logic_error
+class ScreenError : public std::runtime_error
 {
 public:
-	ScreenError(const std::string&);
+	using std::runtime_error::runtime_error;
+};
+
+class BadMap : public std::runtime_error
+{
+public:
+	using std::runtime_error::runtime_error;
+};
+
+class BadPosition : public std::runtime_error
+{
+public:
 	ScreenError(const char*);
-};
-
-class BadMap : public std::logic_error
-{
-public:
-	BadMap(const std::string&);
-	BadMap(const char*);
-};
-
-class BadPosition : public std::logic_error
-{
-public:
-	BadPosition(const std::string&);
-	BadPosition(const char*);
 };

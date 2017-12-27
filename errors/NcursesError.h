@@ -14,8 +14,7 @@ extern int __ncurses_error__;
 class NcursesError : public std::runtime_error
 {
 public:
-	NcursesError(const string&);
-	NcursesError(const char*);
+	using std::runtime_error::runtime_error;
 };
 
 

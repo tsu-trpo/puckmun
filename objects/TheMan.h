@@ -10,7 +10,7 @@ class TheMan: public GameObject
 	MoveDirection m_future;
 private:
 	TheMan();
-	MoveDirection tick();
+	MoveDirection tick() override;
 	void set_current();
 	void set_future(MoveDirection);
 	MoveDirection get_current() const;

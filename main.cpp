@@ -38,41 +38,41 @@ int main()
 		switch (c)
 		{
 			case 'k':
-			case 'w':
-			case KEY_UP:
 				render.redraw_object_pre_move(field, *obj1, x1, y1-1);
 				y1 -= 1;
 				obj1->set_y(y1);
+				break;
+			case 'w':
 				render.redraw_object_pre_move(field, *obj2, x2, y2-1);
 				y2 -= 1;
 				obj2->set_y(y2);
 				break;
 			case 'j':
-			case 's':
-			case KEY_DOWN:
 				y1 += 1;
 				obj1->set_y(y1);
 				render.redraw_object_post_move(field, x1, y1-1, *obj1);
+				break;
+			case 's':
 				y2 += 1;
 				obj2->set_y(y2);
 				render.redraw_object_post_move(field, x2, y2-1, *obj2);
 				break;
 			case 'h':
-			case 'a':
-			case KEY_LEFT:
 				x1 -= 1;
 				obj1->set_x(x1);
 				render.redraw_object_post_move(field, x1+1, y1, *obj1);
+				break;
+			case 'a':
 				x2 -= 1;
 				obj2->set_x(x2);
 				render.redraw_object_post_move(field, x2+1, y2, *obj2);
 				break;
 			case 'l':
-			case 'd':
-			case KEY_RIGHT:
 				x1 += 1;
 				obj1->set_x(x1);
 				render.redraw_object_post_move(field, x1-1, y1, *obj1);
+				break;
+			case 'd':
 				x2 += 1;
 				obj2->set_x(x2);
 				render.redraw_object_post_move(field, x2-1, y2, *obj2);

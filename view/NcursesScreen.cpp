@@ -26,14 +26,14 @@ NcursesScreen::NcursesScreen()
 	}
 }
 
-NcursesScreen::NcursesScreen(NcursesScreen&& other)
+NcursesScreen::NcursesScreen(NcursesScreen&&)
 {
 	m_screens_open += 1;
 	// screen is initialized, control of screen is transferred
 	// nothing to do
 }
 
-NcursesScreen::NcursesScreen(const NcursesScreen& other)
+NcursesScreen::NcursesScreen(const NcursesScreen&)
 {
 	m_screens_open += 1;
 	// screen is initialized, control of screen is transferred

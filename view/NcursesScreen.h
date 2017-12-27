@@ -31,9 +31,6 @@ class NcursesScreen
 		}
 	};
 
-	// tells whether we were once an rhs in the move constructor
-	bool m_is_transferred;
-
 	static map< MapKey, short > m_registered_colors;
 	static short m_next_pair_number;
 
@@ -43,7 +40,7 @@ class NcursesScreen
 public:
 	NcursesScreen();
 	NcursesScreen(NcursesScreen&&);
-	NcursesScreen(const NcursesScreen&) = delete;
+	NcursesScreen(const NcursesScreen&);
 	~NcursesScreen();
 
 	//get color pair number for attron() (NOT thread safe!)

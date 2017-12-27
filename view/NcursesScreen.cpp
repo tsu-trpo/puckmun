@@ -14,38 +14,44 @@ size_t NcursesScreen::get_screens_open()
 }
 
 NcursesScreen::NcursesScreen()
-	: m_is_transferred (false)
 {
-	if (m_screens_open > 0)
-	{
-		throw ScreenError("NcursesScreen: too many screens created");
-	}
 	m_screens_open += 1;
 
-	initscr();
+	// if we opened the first screen
+	if (m_screens_open == 1)
+	{
+		m_screens_open += 1;
+
+		initscr();
+	}
 }
 
 NcursesScreen::NcursesScreen(NcursesScreen&& other)
-	: m_is_transferred (false)
 {
-	// okay, so what if we move already transferred screen?
-	if (other.m_is_transferred) m_is_transferred = true;
+	m_screens_open += 1;
+	// screen is initialized, control of screen is transferred
+	// nothing to do
+}
 
-	other.m_is_transferred = true;
+NcursesScreen::NcursesScreen(const NcursesScreen& other)
+{
+	m_screens_open += 1;
 	// screen is initialized, control of screen is transferred
 	// nothing to do
 }
 
 NcursesScreen::~NcursesScreen()
 {
-	if (m_is_transferred) return;
+	m_screens_open -= 1;
+
+	// exit if it wasn't the last screen closed
+	if (m_screens_open > 0) return;
 
 	// as colors are lost when screen is removed, clear them
 	m_registered_colors = {};
 	m_next_pair_number = 1;
 
 	endwin();
-	m_screens_open -= 1;
 }
 
 void NcursesScreen::register_color_pair(const NcursesScreen::MapKey& key)

@@ -31,7 +31,6 @@ NcursesWindow::NcursesWindow(NcursesWindow&& other)
 	: m_border         (std::move (other.m_border))
 	, m_window         (std::move (other.m_window))
 	, m_is_transferred (false)
-	
 {
 	// okay, so what if we move already transferred window?
 	if (other.m_is_transferred) m_is_transferred = true;
@@ -43,6 +42,7 @@ NcursesWindow::NcursesWindow(NcursesWindow&& other)
 
 NcursesWindow::~NcursesWindow()
 {
+	// do not clear if we're transferred
 	if (m_is_transferred) return;
 
 	// delete the border
@@ -58,11 +58,17 @@ NcursesWindow::~NcursesWindow()
 
 WINDOW* NcursesWindow::get() const
 {
+	if (m_is_transferred) return nullptr;
 	return m_window;
 }
 
 NcursesWindow& NcursesWindow::rebox()
 {
+	if (m_is_transferred)
+	{
+		throw std::logic_error("Trying to rebox a moved window");
+	}
+
 	wborder(m_window, m_border.left,    m_border.right,
 	                  m_border.top,     m_border.bottom,
 	                  m_border.topleft, m_border.topright,

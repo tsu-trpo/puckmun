@@ -19,6 +19,8 @@ private:
 	WINDOW* m_window;
 
 	// tells whether we were once an rhs in the move constructor
+	// потому что если однажды окно передали, то уже нет гарантии, что с ним
+	// можно обращаться
 	bool m_is_transferred;
 
 public:
@@ -33,3 +35,5 @@ public:
 
 	WINDOW* get() const;
 };
+
+// vim: tw=78

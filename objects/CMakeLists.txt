@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.8)
-
+# Библиотека с TheMan
+add_library_autolink(TheMan TheMan.cpp)
 
 # Библиотека с картой
 add_library_autolink(Map Map.cpp)
@@ -12,6 +13,3 @@ add_library_autolink(AnimateObject AnimateObject.cpp)
 
 # Библиотека с загрузчиком
 add_library_autolink(MapLoader MapLoader.cpp)
-
-# Библиотека с TheMan
-add_library_autolink(TheMan TheMan.cpp)

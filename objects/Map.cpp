@@ -1,10 +1,30 @@
 #include "objects/Map.h"
 
-Map::Map(Coordinate height,Coordinate width)
+Map::Map(Coordinate width, Coordinate height)
 {
-	m_height = height;
-	m_width = width;
 	m_map.resize(width);
-	for(Coordinate i = 0; i < width; i++)
-		m_map[i].resize(height);
+	for(auto &line : m_map)
+		line.resize(height);
+}
+Map & Map::change_block(Coordinate x, Coordinate y, Block block)
+{
+	m_map.at(x).at(y) = block;
+	return *this;
+}
+
+Coordinate Map::get_width() const
+{	
+	return m_map.size();
+}
+
+Coordinate Map::get_height() const
+{
+	if (get_width() == 0) 
+    		return 0;
+	return m_map[0].size();
+}
+
+Block Map::at(Coordinate x, Coordinate y) const
+{
+	return m_map.at(x).at(y);
 }

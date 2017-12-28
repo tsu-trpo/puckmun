@@ -38,11 +38,4 @@ namespace Commands
 		                  new TheManSetCurrent(dir))
 		              );
 	}
-
-	Command make_the_man_set_future(MoveDirection dir)
-	{
-		return Command( unique_ptr<TheManSetFuture>(
-		                  new TheManSetFuture(dir))
-		              );
-	}
 }

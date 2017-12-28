@@ -6,6 +6,7 @@
 
 // pre-declare here as including causes circular include problems
 class Event;
+struct PhysicsEvents;
 
 using std::shared_ptr;
 
@@ -16,11 +17,11 @@ class Ghost;
 class TactileObject
 {
 public:
-	virtual Event touch(shared_ptr<const TactileObject>) const;
+	virtual PhysicsEvents touch(shared_ptr<const TactileObject>) const;
 
 	//in case the offspring doesn't specify the touching, do nothing in those
-	virtual Event touch(shared_ptr<const TheMan>) const;
-	virtual Event touch(shared_ptr<const Ghost>) const;
+	virtual PhysicsEvents touch(shared_ptr<const TheMan>) const;
+	virtual PhysicsEvents touch(shared_ptr<const Ghost>) const;
 
 	virtual ~TactileObject() = 0;
 };

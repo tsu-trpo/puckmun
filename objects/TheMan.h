@@ -27,9 +27,9 @@ private:
 	Color get_body_color() const override;
 	bool eats_points() const override;
 public:
-	Event touch(shared_ptr<const TactileObject>) const override;
-	Event touch(shared_ptr<const TheMan>)        const override;
-	Event touch(shared_ptr<const Ghost>)         const override;
+	PhysicsEvents touch(shared_ptr<const TactileObject>) const override;
+	PhysicsEvents touch(shared_ptr<const TheMan>)        const override;
+	PhysicsEvents touch(shared_ptr<const Ghost>)         const override;
 
 	bool get_promoted() const;
 

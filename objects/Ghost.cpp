@@ -1,7 +1,11 @@
 #include "objects/Ghost.h"
 
+#include "control/Physics.h"
 #include "objects/TheMan.h"
 #include "control/Event.h"
+
+const PhysicsEvents NoEvents =
+	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
 
 Ghost::Ghost()
 {
@@ -42,26 +46,32 @@ GameObject& Ghost::demote()
 	return *this;
 }
 
-Event Ghost::touch(shared_ptr<const TactileObject> other) const
+bool Ghost::eats_points() const
+{
+	return false;
+}
+
+PhysicsEvents Ghost::touch(shared_ptr<const TactileObject> other) const
 {
 	return other->touch(shared_from_this());
 }
 
 
-Event Ghost::touch(shared_ptr<const TheMan> man_ptr) const
+PhysicsEvents Ghost::touch(shared_ptr<const TheMan> man_ptr) const
 {
 	if (man_ptr->get_promoted())
 	{
-		return Events::make_nothing();
+		return NoEvents;
 	}
+	else
 	{
 		// ghost eats dude, nom nom nom
-		return Events::make_die_hero();
+		return { {Events::make_die_hero()}, {} };
 	}
 }
 
-Event Ghost::touch(shared_ptr<const Ghost>) const
+PhysicsEvents Ghost::touch(shared_ptr<const Ghost>) const
 {
 	// ghost hails the other ghost with a breezy wave
-	return Events::make_nothing();
+	return NoEvents;
 }

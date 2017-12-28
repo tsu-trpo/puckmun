@@ -29,5 +29,6 @@ private:
 
 public:
 	TheMan();
+	bool eats_points() const override;
 };
 	

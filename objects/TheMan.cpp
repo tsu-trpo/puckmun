@@ -54,3 +54,8 @@ GameObject& TheMan::demote()
 {
 	return *this;
 }
+
+bool TheMan::eats_points() const
+{
+	return true;
+}

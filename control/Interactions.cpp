@@ -8,6 +8,11 @@ namespace Physics
 	PhysicsEvents ghost_man_interaction(const shared_ptr<Ghost>& ghost,
 	                                    const shared_ptr<TheMan>& man)
 	{
+		if (ghost->get_demoted())
+		{
+			// poor ghost just wants to run
+			return PhysicsEvents { {}, {} };
+		}
 		if (man->get_promoted())
 		{
 			// kill ghost by op player

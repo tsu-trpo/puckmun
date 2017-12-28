@@ -4,7 +4,8 @@
 
 namespace Physics
 {
-	PhysicsEvents ghost_man_interaction(shared_ptr<Ghost>, shared_ptr<TheMan>);
+	PhysicsEvents ghost_man_interaction(const shared_ptr<Ghost>&,
+	                                    const shared_ptr<TheMan>&);
 }
 
 // vim: tw=78

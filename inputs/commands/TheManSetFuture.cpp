@@ -17,11 +17,11 @@ unique_ptr<BaseCommand> TheManSetFuture::clone() const
 void TheManSetFuture::update(const shared_ptr<AnimateObject>& pre_object_ptr)
 {
 	// plan setting methods are unique for different objects because objects
-	// itself are very different, so pointer cast is the only way
+	// themselves are very different, so pointer cast is the only way
 	auto object_ptr =
 		std::dynamic_pointer_cast<TheMan, AnimateObject>(pre_object_ptr);
 
-	if (!object_ptr)
+	if (object_ptr)
 	{
 		object_ptr->set_future(m_to_set);
 	}

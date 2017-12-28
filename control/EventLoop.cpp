@@ -50,6 +50,7 @@ EventLoop& EventLoop :: start_game()
 // take actions before running the event loop
 EventLoop& EventLoop :: before_game()
 {
+	m_render.redraw_complete(m_field);
 	return *this;
 }
 

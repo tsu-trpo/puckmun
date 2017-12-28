@@ -36,8 +36,6 @@ private:
 	list<ScheduledEvent> m_scheduled_events;
 
 
-	EventLoop(const GameField&, const InputList&, GameRender&);
-
 
 	void redraw_screen(const Event&) const;
 
@@ -53,6 +51,8 @@ private:
 
 
 public:
+	EventLoop(const GameField&, const InputList&, GameRender&);
+
 	EventLoop& run(); //updates everything
 };
 

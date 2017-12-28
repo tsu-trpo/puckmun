@@ -6,6 +6,8 @@ class Ghost: public GameObject
            , public std::enable_shared_from_this<Ghost>
 {	
 	MoveDirection m_current;
+
+	bool m_demoted = false;
 public:
 	Ghost();
 	MoveDirection tick() override;
@@ -22,4 +24,6 @@ public:
 	PhysicsEvents touch(const shared_ptr<TactileObject>&) override;
 	PhysicsEvents touch(const shared_ptr<TheMan>&)        override;
 	PhysicsEvents touch(const shared_ptr<Ghost>&)         override;
+
+	bool get_demoted() const;
 };

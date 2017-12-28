@@ -3,6 +3,7 @@
 #include "objects/GameObject.h"
 #include "objects/Ghost.h"
 #include "control/Physics.h"
+#include "control/Interactions.h"
 
 const PhysicsEvents NoEvents =
 	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
@@ -90,19 +91,7 @@ PhysicsEvents TheMan::touch(const shared_ptr<TheMan>&)
 
 PhysicsEvents TheMan::touch(const shared_ptr<Ghost>& ghost_ptr)
 {
-	if (m_promoted)
-	{
-		// whoah, cool dude eats him
-		// but first, cast away constness
-		auto to_eat = const_pointer_cast<Ghost>(ghost_ptr);
-		auto event = Events::make_demote(to_eat);
-		return PhysicsEvents { std::list<Event>{event}, {} };
-	}
-	else
-	{
-		// dude dies, sad sad sad
-		return { {Events::make_die_hero()}, {} };
-	}
+	return Physics::ghost_man_interaction(ghost_ptr, shared_from_this());
 }
 
 bool TheMan::get_promoted() const

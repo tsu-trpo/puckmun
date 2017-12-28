@@ -82,8 +82,6 @@ namespace Physics
 	//dummy function for now
 	PhysicsEvents interact_objects(ObjectPtrArg fst, ObjectPtrArg snd)
 	{
-		PhysicsEvents r = { {}, {} };
-		r.immediate.push_back(fst->touch(snd));
-		return r;
+		return fst->touch(snd);
 	}
 }

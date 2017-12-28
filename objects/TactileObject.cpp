@@ -1,22 +1,26 @@
 #include "objects/TactileObject.h"
 
 #include "control/Event.h"
+#include "control/Physics.h"
 
-Event TactileObject::touch(shared_ptr<const TactileObject>) const
+const PhysicsEvents NoEvents =
+	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
+
+PhysicsEvents TactileObject::touch(shared_ptr<const TactileObject>) const
 {
-	return Events::make_nothing();
+	return NoEvents;
 }
 
 
-Event TactileObject::touch(shared_ptr<const TheMan>) const
+PhysicsEvents TactileObject::touch(shared_ptr<const TheMan>) const
 {
-	return Events::make_nothing();
+	return NoEvents;
 }
 
 
-Event TactileObject::touch(shared_ptr<const Ghost>) const
+PhysicsEvents TactileObject::touch(shared_ptr<const Ghost>) const
 {
-	return Events::make_nothing();
+	return NoEvents;
 }
 
 TactileObject::~TactileObject()

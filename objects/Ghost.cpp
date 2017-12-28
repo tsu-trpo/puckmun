@@ -28,3 +28,18 @@ Color Ghost::get_body_color() const
 {
 	return Color::Cyan;
 }
+
+GameObject& Ghost::promote()
+{
+	return *this;
+}
+
+GameObject& Ghost::demote()
+{
+	return *this;
+}
+
+MoveDirection Ghost::get_current() const
+{
+	return m_current;
+}

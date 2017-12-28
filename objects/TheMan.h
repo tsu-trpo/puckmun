@@ -22,5 +22,7 @@ private:
 	// updater commands
 	friend class TheManSetCurrent;
 	friend class TheManSetFuture;
+	//input class
+	friend class TheManPlayerInput;
 };
 	

@@ -2,6 +2,8 @@
 
 #include <ncurses.h>
 
+#include "view/NcursesScreen.h"
+
 class NcursesWindow
 {
 public:
@@ -22,6 +24,10 @@ private:
 	// потому что если однажды окно передали, то уже нет гарантии, что с ним
 	// можно обращаться
 	bool m_is_transferred = false;
+
+	// as it is neccesary for there to be a screen for a window, we keep our
+	// personal screen
+	NcursesScreen m_personal_screen;
 
 public:
 	// topleft corner coords, width, height, border style

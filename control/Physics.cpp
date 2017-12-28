@@ -80,9 +80,8 @@ namespace Physics
 	}
 
 	//dummy function for now
-	PhysicsEvents interact_objects(ObjectPtrArg, ObjectPtrArg)
+	PhysicsEvents interact_objects(ObjectPtrArg fst, ObjectPtrArg snd)
 	{
-		PhysicsEvents r = { {}, {} };
-		return r;
+		return fst->touch(snd);
 	}
 }

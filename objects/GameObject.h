@@ -4,8 +4,11 @@
 
 #include "objects/AnimateObject.h"
 #include "objects/ViewableObject.h"
+#include "objects/TactileObject.h"
 
-class GameObject : public AnimateObject, public ViewableObject
+class GameObject : public AnimateObject
+                 , public ViewableObject
+                 , public TactileObject
 {
 public:
 	virtual GameObject& promote() = 0;

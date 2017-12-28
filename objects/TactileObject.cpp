@@ -18,3 +18,7 @@ Event TactileObject::touch(shared_ptr<const Ghost>) const
 {
 	return Events::make_nothing();
 }
+
+TactileObject::~TactileObject()
+{
+}

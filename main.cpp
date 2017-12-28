@@ -18,6 +18,7 @@ int main()
 	shared_ptr<TheMan> object (new TheMan);
 	object->set_x(5);
 	object->set_y(5);
+	object->set_period(60);
 	GameField field {{object}, map, 5};
 	GameRender render (map);
 	shared_ptr<TheManPlayerInput> keyboard (new TheManPlayerInput);

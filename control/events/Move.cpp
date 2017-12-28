@@ -8,11 +8,11 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	: m_direction (dir)
 	, m_object    (obj)
 {
-	log << "trying to create move event"
-	    << obj->get_x() <<':' <<obj->get_y();
 	// doesn't check for boundaries because it doesn't have enough
 	// information for right limit anyway, and it should be called only in
 	// correct cases by design
+	m_new_x = m_object->get_x();
+	m_new_y = m_object->get_y();
 	switch (m_direction)
 	{
 		case MoveDirection::Up:

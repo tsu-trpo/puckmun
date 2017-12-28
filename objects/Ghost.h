@@ -19,7 +19,7 @@ public:
 
 	bool eats_points() const override;
 
-	PhysicsEvents touch(shared_ptr<const TactileObject>) const override;
-	PhysicsEvents touch(shared_ptr<const TheMan>)        const override;
-	PhysicsEvents touch(shared_ptr<const Ghost>)         const override;
+	PhysicsEvents touch(const shared_ptr<TactileObject>&) override;
+	PhysicsEvents touch(const shared_ptr<TheMan>&)        override;
+	PhysicsEvents touch(const shared_ptr<Ghost>&)         override;
 };

@@ -1,5 +1,7 @@
 #include "objects/TheMan.h"
 
+#include "objects/GameObject.h"
+#include "objects/Ghost.h"
 #include "control/Physics.h"
 
 const PhysicsEvents NoEvents =
@@ -74,24 +76,27 @@ bool TheMan::eats_points() const
 	return true;
 }
 
-PhysicsEvents TheMan::touch(shared_ptr<const TactileObject> other) const
+PhysicsEvents TheMan::touch(const shared_ptr<TactileObject>& other)
 {
 	return other->touch(shared_from_this());
 }
 
 
-PhysicsEvents TheMan::touch(shared_ptr<const TheMan>) const
+PhysicsEvents TheMan::touch(const shared_ptr<TheMan>&)
 {
 	// dudes interact with a high five and nothing more
 	return NoEvents;
 }
 
-PhysicsEvents TheMan::touch(shared_ptr<const Ghost>) const
+PhysicsEvents TheMan::touch(const shared_ptr<Ghost>& ghost_ptr)
 {
 	if (m_promoted)
 	{
-		// whoah, cool dude doesnt care
-		return NoEvents;
+		// whoah, cool dude eats him
+		// but first, cast away constness
+		auto to_eat = const_pointer_cast<Ghost>(ghost_ptr);
+		auto event = Events::make_demote(to_eat);
+		return PhysicsEvents { std::list<Event>{event}, {} };
 	}
 	else
 	{

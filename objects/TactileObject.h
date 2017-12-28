@@ -17,11 +17,11 @@ class Ghost;
 class TactileObject
 {
 public:
-	virtual PhysicsEvents touch(shared_ptr<const TactileObject>) const;
+	virtual PhysicsEvents touch(const shared_ptr<TactileObject>&);
 
 	//in case the offspring doesn't specify the touching, do nothing in those
-	virtual PhysicsEvents touch(shared_ptr<const TheMan>) const;
-	virtual PhysicsEvents touch(shared_ptr<const Ghost>) const;
+	virtual PhysicsEvents touch(const shared_ptr<TheMan>&);
+	virtual PhysicsEvents touch(const shared_ptr<Ghost>&);
 
 	virtual ~TactileObject() = 0;
 };

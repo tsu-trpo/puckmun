@@ -51,13 +51,13 @@ bool Ghost::eats_points() const
 	return false;
 }
 
-PhysicsEvents Ghost::touch(shared_ptr<const TactileObject> other) const
+PhysicsEvents Ghost::touch(const shared_ptr<TactileObject>& other)
 {
 	return other->touch(shared_from_this());
 }
 
 
-PhysicsEvents Ghost::touch(shared_ptr<const TheMan> man_ptr) const
+PhysicsEvents Ghost::touch(const shared_ptr<TheMan>& man_ptr)
 {
 	if (man_ptr->get_promoted())
 	{
@@ -70,7 +70,7 @@ PhysicsEvents Ghost::touch(shared_ptr<const TheMan> man_ptr) const
 	}
 }
 
-PhysicsEvents Ghost::touch(shared_ptr<const Ghost>) const
+PhysicsEvents Ghost::touch(const shared_ptr<Ghost>&)
 {
 	// ghost hails the other ghost with a breezy wave
 	return NoEvents;

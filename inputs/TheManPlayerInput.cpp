@@ -107,7 +107,7 @@ Command set_if_no_wall(const GameField& field, MoveDirection dir,
 
 	if (field.map.at(x, y) == Block::Wall)
 	{
-		return Commands::make_the_man_set_future(dir);
+		return Commands::make_no_command();
 	}
 	else
 	{
@@ -136,16 +136,6 @@ Command InpClass::plan(const GameField& field, object_arg pre_object_ptr)
 			"possibly passed an incorrect object type");
 	}
 
-
-	if (object_ptr->get_future() != object_ptr->get_current() && false)
-	{
-		// if they differ it means the player once wanted to go to a
-		// direction, but there was a wall there. We should try to go there
-		// again
-		return set_if_no_wall(field, object_ptr->get_future(),
-		                      object_ptr->get_x(), object_ptr->get_y());
-	}
-	// else we should try to read the input and go there
 
 	MoveDirection dir;
 	try

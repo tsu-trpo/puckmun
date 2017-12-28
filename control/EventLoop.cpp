@@ -83,6 +83,9 @@ EventLoop& EventLoop :: before_game()
 // take actions after the event loop peacefully terminates
 EventLoop& EventLoop :: after_game()
 {
+	// delete all inputs so noone reads from screen
+	m_inputs.resize(0);
+	wgetch(stdscr);
 	return *this;
 }
 
@@ -164,12 +167,14 @@ EventLoop& EventLoop :: execute_one_event(const Event& event)
 	if (event.graphics_first())
 	{
 		event.execute_graphics(m_field, m_render);
-		event.execute_physics(m_field);
+		GameStatus status = event.execute_physics(m_field);
+		this->check_status(status);
 	}
 	else
 	{
-		event.execute_physics(m_field);
+		GameStatus status = event.execute_physics(m_field);
 		event.execute_graphics(m_field, m_render);
+		this->check_status(status);
 	}
 	return *this;
 }
@@ -183,6 +188,24 @@ PeriodT EventLoop :: increment_tick()
 	m_current_time += 1;
 	m_current_tick = (m_current_tick + 1) % MaxPeriod;
 	return m_current_tick;
+}
+
+EventLoop& EventLoop::check_status(const GameStatus& status)
+{
+	switch (status)
+	{
+		case GameStatus::Continue:
+			return *this;
+		case GameStatus::Lost:
+			m_render.print_status("You lost!");
+			m_keep_playing = false;
+			return *this;
+		case GameStatus::Won:
+			m_render.print_status("You won!");
+			m_keep_playing = false;
+			return *this;
+	}
+	throw std::logic_error(ERR_HEADER "unexpected game status");
 }
 
 // vim: tw=78

@@ -13,6 +13,7 @@
 #include "control/Event.h"
 #include "view/GameRender.h"
 #include "control/Physics.h"
+#include "control/GameStatus.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -48,6 +49,7 @@ private:
 	EventLoop& before_game();
 	EventLoop& start_game();
 	EventLoop& after_game();
+	EventLoop& check_status(const GameStatus&);
 
 
 public:

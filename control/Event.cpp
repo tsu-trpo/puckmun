@@ -18,9 +18,9 @@ Event::Event(const Event& other)
 {
 }
 
-void Event::execute_physics(GameField& field) const
+GameStatus Event::execute_physics(GameField& field) const
 {
-	m_event->execute_physics(field);
+	return m_event->execute_physics(field);
 }
 
 void Event::execute_graphics(const GameField& field, GameRender& render) const

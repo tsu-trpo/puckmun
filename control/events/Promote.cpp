@@ -10,9 +10,11 @@ std::unique_ptr<BaseEvent> Events::Promote::clone() const
 	return unique_ptr<BaseEvent>( new Promote(*this) );
 }
 
-void Events::Promote::execute_physics(GameField&) const
+GameStatus Events::Promote::execute_physics(GameField&) const
 {
 	m_object->promote();
+
+	return GameStatus::Continue;
 }
 
 void Events::Promote::execute_graphics(const GameField& f, GameRender& r) const

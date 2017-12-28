@@ -3,11 +3,13 @@
 #include "control/Physics.h"
 #include "objects/TheMan.h"
 #include "control/Event.h"
+#include "control/Interactions.h"
 
 const PhysicsEvents NoEvents =
 	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
 
 Ghost::Ghost()
+	: m_demoted (false)
 {
 	m_current = MoveDirection::Down;
 }
@@ -38,11 +40,13 @@ Color Ghost::get_body_color() const
 
 GameObject& Ghost::promote()
 {
+	m_demoted = false;
 	return *this;
 }
 
 GameObject& Ghost::demote()
 {
+	m_demoted = true;
 	return *this;
 }
 
@@ -56,27 +60,24 @@ bool Ghost::eats_points() const
 	return false;
 }
 
-PhysicsEvents Ghost::touch(shared_ptr<const TactileObject> other) const
+PhysicsEvents Ghost::touch(const shared_ptr<TactileObject>& other)
 {
 	return other->touch(shared_from_this());
 }
 
 
-PhysicsEvents Ghost::touch(shared_ptr<const TheMan> man_ptr) const
+PhysicsEvents Ghost::touch(const shared_ptr<TheMan>& man_ptr)
 {
-	if (man_ptr->get_promoted())
-	{
-		return NoEvents;
-	}
-	else
-	{
-		// ghost eats dude, nom nom nom
-		return { {Events::make_die_hero()}, {} };
-	}
+	return Physics::ghost_man_interaction(shared_from_this(), man_ptr);
 }
 
-PhysicsEvents Ghost::touch(shared_ptr<const Ghost>) const
+PhysicsEvents Ghost::touch(const shared_ptr<Ghost>&)
 {
 	// ghost hails the other ghost with a breezy wave
 	return NoEvents;
+}
+
+bool Ghost::get_demoted() const
+{
+	return m_demoted;
 }

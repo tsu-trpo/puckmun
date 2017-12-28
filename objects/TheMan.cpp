@@ -1,6 +1,9 @@
 #include "objects/TheMan.h"
 
+#include "objects/GameObject.h"
+#include "objects/Ghost.h"
 #include "control/Physics.h"
+#include "control/Interactions.h"
 
 const PhysicsEvents NoEvents =
 	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
@@ -63,30 +66,21 @@ bool TheMan::eats_points() const
 	return true;
 }
 
-PhysicsEvents TheMan::touch(shared_ptr<const TactileObject> other) const
+PhysicsEvents TheMan::touch(const shared_ptr<TactileObject>& other)
 {
 	return other->touch(shared_from_this());
 }
 
 
-PhysicsEvents TheMan::touch(shared_ptr<const TheMan>) const
+PhysicsEvents TheMan::touch(const shared_ptr<TheMan>&)
 {
 	// dudes interact with a high five and nothing more
 	return NoEvents;
 }
 
-PhysicsEvents TheMan::touch(shared_ptr<const Ghost>) const
+PhysicsEvents TheMan::touch(const shared_ptr<Ghost>& ghost_ptr)
 {
-	if (m_promoted)
-	{
-		// whoah, cool dude doesnt care
-		return NoEvents;
-	}
-	else
-	{
-		// dude dies, sad sad sad
-		return { {Events::make_die_hero()}, {} };
-	}
+	return Physics::ghost_man_interaction(ghost_ptr, shared_from_this());
 }
 
 bool TheMan::get_promoted() const

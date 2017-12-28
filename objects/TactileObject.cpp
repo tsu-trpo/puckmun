@@ -6,19 +6,19 @@
 const PhysicsEvents NoEvents =
 	PhysicsEvents{ list<Event> {}, list<ScheduledEvent> {} };
 
-PhysicsEvents TactileObject::touch(shared_ptr<const TactileObject>) const
+PhysicsEvents TactileObject::touch(const shared_ptr<TactileObject>&)
 {
 	return NoEvents;
 }
 
 
-PhysicsEvents TactileObject::touch(shared_ptr<const TheMan>) const
+PhysicsEvents TactileObject::touch(const shared_ptr<TheMan>&)
 {
 	return NoEvents;
 }
 
 
-PhysicsEvents TactileObject::touch(shared_ptr<const Ghost>) const
+PhysicsEvents TactileObject::touch(const shared_ptr<Ghost>&)
 {
 	return NoEvents;
 }

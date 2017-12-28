@@ -12,3 +12,6 @@ add_library_autolink(Physics Physics.cpp)
 
 # Обёртка для видов событий
 add_library_autolink(Event Event.cpp)
+
+# Взаимодействия разного рода объектов
+add_library_autolink(Interactions Interactions.cpp)

@@ -1,6 +1,8 @@
 #include "control/EventLoop.h"
 
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 #include "errors/ErrorConstants.h"
 
@@ -85,7 +87,7 @@ EventLoop& EventLoop :: after_game()
 {
 	// delete all inputs so noone reads from screen
 	m_inputs.resize(0);
-	wgetch(stdscr);
+	std::this_thread::sleep_for(std::chrono::seconds(3));
 	return *this;
 }
 

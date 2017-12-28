@@ -38,6 +38,7 @@ namespace Events
 	Event make_move(const shared_ptr<GameObject>& obj, MoveDirection dir);
 	Event make_nothing();
 	Event make_promote(const shared_ptr<GameObject>& object);
+	Event make_die_hero();
 }
 
 // vim: tw=78

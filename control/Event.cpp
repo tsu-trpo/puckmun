@@ -7,6 +7,7 @@
 #include "control/events/Move.h"
 #include "control/events/Nothing.h"
 #include "control/events/Promote.h"
+#include "control/events/DieHero.h"
 
 Event::Event(unique_ptr<BaseEvent> event)
 	: m_event (std::move(event))
@@ -82,6 +83,13 @@ namespace Events
 		return Event( unique_ptr<Events::Promote>(
 		                 new Events::Promote(object))
 		            );
+	}
+
+	Event make_die_hero()
+	{
+		return Event( unique_ptr<DieHero>(
+		                 new DieHero)
+					);
 	}
 }
 

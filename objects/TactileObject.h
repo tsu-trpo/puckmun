@@ -21,4 +21,6 @@ public:
 	//in case the offspring doesn't specify the touching, do nothing in those
 	virtual Event touch(shared_ptr<const TheMan>) const;
 	virtual Event touch(shared_ptr<const Ghost>) const;
+
+	virtual ~TactileObject() = 0;
 };

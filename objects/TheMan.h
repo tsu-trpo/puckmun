@@ -10,7 +10,10 @@ class TheMan: public GameObject
 {	
 	MoveDirection m_current;
 	// whether he can eat ghosts
-	bool m_promoted;
+	bool m_promoted = false;
+	// looks of object
+	Color m_bg_color;
+	Color m_fg_color;
 private:
 	MoveDirection tick() override;
 	void set_current(MoveDirection);

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "objects/GameObject.h"
 #include "control/MoveDirection.h"
+#include "control/Event.h"
 
 class TheMan: public GameObject
 {	
@@ -26,5 +27,9 @@ private:
 public:
 	TheMan();
 	bool eats_points() const override;
+public:
+	Event touch(shared_ptr<const TactileObject>) const override;
+	Event touch(shared_ptr<const TheMan>)        const override;
+	Event touch(shared_ptr<const Ghost>)         const override;
 };
 	

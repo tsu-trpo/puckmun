@@ -45,3 +45,8 @@ Color TheMan::get_body_color() const
 {
 	return Color::Yellow;
 }
+
+bool TheMan::eats_points() const
+{
+	return true;
+}

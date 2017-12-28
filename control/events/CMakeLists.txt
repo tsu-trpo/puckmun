@@ -16,3 +16,5 @@ add_library_autolink(Move Move.cpp)
 add_library_autolink(Nothing Nothing.cpp)
 
 add_library_autolink(Promote Promote.cpp)
+
+add_library_autolink(DieHero DieHero.cpp)

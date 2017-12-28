@@ -45,3 +45,12 @@ Color TheMan::get_body_color() const
 {
 	return Color::Yellow;
 }
+
+GameObject& TheMan::promote()
+{
+	return *this;
+}
+GameObject& TheMan::demote()
+{
+	return *this;
+}

@@ -122,7 +122,7 @@ Command InpClass::plan(const GameField& field, object_arg pre_object_ptr)
 
 	// as this is called every tick, period with this sleep time should last
 	// for slightly more than 1 second
-	std::this_thread::sleep_for(std::chrono::milliseconds(9));
+	std::this_thread::sleep_for(std::chrono::milliseconds(8));
 
 
 	// input methods are unique for different objects because objects
@@ -137,7 +137,7 @@ Command InpClass::plan(const GameField& field, object_arg pre_object_ptr)
 	}
 
 
-	if (object_ptr->get_future() != object_ptr->get_current())
+	if (object_ptr->get_future() != object_ptr->get_current() && false)
 	{
 		// if they differ it means the player once wanted to go to a
 		// direction, but there was a wall there. We should try to go there

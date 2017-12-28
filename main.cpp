@@ -27,7 +27,7 @@ int main()
 	ghost->set_y(2);
 	ghost->set_period(30);
 
-	GameField field {{man, ghost}, map, 5};
+	GameField field {{man, ghost}, map, 36};
 	GameRender render (map);
 
 	shared_ptr<TheManPlayerInput> keyboard (new TheManPlayerInput);

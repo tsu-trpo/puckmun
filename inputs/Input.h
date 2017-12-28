@@ -13,5 +13,5 @@ class Input
 public:
 	virtual Command plan(const GameField&, const shared_ptr<const AnimateObject>&) = 0;
 
-	virtual ~Command() {};
+	virtual ~Input() {};
 };

@@ -20,12 +20,12 @@ int main()
 	shared_ptr<TheMan> man (new TheMan);
 	man->set_x(5);
 	man->set_y(5);
-	man->set_period(60);
+	man->set_period(40);
 
 	shared_ptr<Ghost> ghost (new Ghost);
 	ghost->set_x(10);
 	ghost->set_y(2);
-	ghost->set_period(30);
+	ghost->set_period(40);
 
 	GameField field {{man, ghost}, map, 36};
 	GameRender render (map);

@@ -2,6 +2,8 @@
 
 TheMan::TheMan()
 	: m_promoted (false)
+	, m_bg_color (Color::Yellow)
+	, m_fg_color (Color::Yellow)
 {
 	m_current = MoveDirection::Down;
 	m_future = MoveDirection::Down;
@@ -39,22 +41,26 @@ char TheMan::get_form() const
 
 Color TheMan::get_bg_color() const
 {
-	return Color::Yellow;
+	return m_bg_color;
 }
 
 Color TheMan::get_body_color() const
 {
-	return Color::Yellow;
+	return m_fg_color;
 }
 
 GameObject& TheMan::promote()
 {
 	m_promoted = true;
+	m_bg_color = Color::Red;
+	m_fg_color = Color::Red;
 	return *this;
 }
 GameObject& TheMan::demote()
 {
 	m_promoted = false;
+	m_bg_color = Color::Yellow;
+	m_fg_color = Color::Yellow;
 	return *this;
 }
 

@@ -38,3 +38,8 @@ GameObject& Ghost::demote()
 {
 	return *this;
 }
+
+MoveDirection Ghost::get_current() const
+{
+	return m_current;
+}

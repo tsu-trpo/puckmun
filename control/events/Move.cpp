@@ -1,9 +1,15 @@
 #include "control/events/Move.h"
 
+#include <fstream>
+
+static std::ofstream log ("move.log");
+
 Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	: m_direction (dir)
 	, m_object    (obj)
 {
+	log << "trying to create move event"
+	    << obj->get_x() <<':' <<obj->get_y();
 	// doesn't check for boundaries because it doesn't have enough
 	// information for right limit anyway, and it should be called only in
 	// correct cases by design
@@ -22,6 +28,7 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 			m_new_x = m_object->get_x() + 1;
 			break;
 	}
+	log << "created move event: " << m_new_x <<':' << m_new_y << std::endl;
 }
 
 std::unique_ptr<BaseEvent> Events::Move::clone() const

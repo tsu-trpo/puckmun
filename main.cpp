@@ -16,6 +16,8 @@ int main()
 	Map map = basic_load_map("maps/test_map.bpm");
 	
 	shared_ptr<TheMan> object (new TheMan);
+	object->set_x(5);
+	object->set_y(5);
 	GameField field {{object}, map, 5};
 	GameRender render (map);
 	shared_ptr<TheManPlayerInput> keyboard (new TheManPlayerInput);

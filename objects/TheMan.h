@@ -7,13 +7,10 @@
 class TheMan: public GameObject
 {	
 	MoveDirection m_current;
-	MoveDirection m_future;
 private:
 	MoveDirection tick() override;
-	void set_current();
-	void set_future(MoveDirection);
+	void set_current(MoveDirection);
 	MoveDirection get_current() const;
-	MoveDirection get_future() const;
 	char get_form() const override;
 	Color get_bg_color() const override;
 	Color get_body_color() const override;
@@ -23,7 +20,6 @@ private:
 
 	// updater commands
 	friend class TheManSetCurrent;
-	friend class TheManSetFuture;
 	//input class
 	friend class TheManPlayerInput;
 

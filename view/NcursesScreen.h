@@ -6,6 +6,7 @@
 
 #include <ncurses.h>
 #include <map>
+#include <tuple>
 
 #include "view/Color.h"
 
@@ -23,11 +24,10 @@ class NcursesScreen
 		Color background;
 		bool operator< (const MapKey& r) const
 		{
-			if (foreground == r.foreground)
-			{
-				return (unsigned)background < (unsigned)r.background;
-			}
-			return (unsigned)foreground < (unsigned)r.foreground;
+			// сравнивает лексикографически, то есть все кортежи упорядочены
+			// линейно, т.е. все сравнимы
+			return std::tie(foreground, background)
+			     < std::tie(r.foreground, r.background);
 		}
 	};
 

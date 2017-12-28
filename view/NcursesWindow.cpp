@@ -7,8 +7,9 @@
 using Border = NcursesWindow::Border;
 
 NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
-	: m_border  (border)
-	, m_is_transferred (false)
+	: m_border          (border)
+	, m_is_transferred  (false)
+	, m_personal_screen ()
 {
 	if (NcursesScreen::get_screens_open() == 0)
 	{
@@ -28,9 +29,10 @@ NcursesWindow::NcursesWindow(int x, int y, int w, int h, const Border& border)
 }
 
 NcursesWindow::NcursesWindow(NcursesWindow&& other)
-	: m_border         (std::move (other.m_border))
-	, m_window         (std::move (other.m_window))
-	, m_is_transferred (false)
+	: m_border          (std::move (other.m_border))
+	, m_window          (std::move (other.m_window))
+	, m_is_transferred  (false)
+	, m_personal_screen (std::move (other.m_personal_screen))
 {
 	// okay, so what if we move already transferred window?
 	if (other.m_is_transferred) m_is_transferred = true;

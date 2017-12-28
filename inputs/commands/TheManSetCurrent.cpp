@@ -23,10 +23,7 @@ void TheManSetCurrent::update(const shared_ptr<AnimateObject>& pre_object_ptr)
 
 	if (object_ptr)
 	{
-		// so there are some architectural perculiarities, but i have records in
-		// my note explaining them
-		object_ptr->set_future(m_to_set);
-		object_ptr->set_current();
+		object_ptr->set_current(m_to_set);
 	}
 	else
 	{

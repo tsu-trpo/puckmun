@@ -6,6 +6,8 @@ const PhysicsEvents NoEvents = PhysicsEvents{ list<Event> {}, list<ScheduledEven
 
 namespace Physics
 {
+	const TimeT buff_wear_off = 120*10; //roughly 10 seconds
+
 	PhysicsEvents move_object(const GameField& field, ObjectPtrArg object,
 	                          const MoveDirection& direction)
 	{
@@ -60,8 +62,11 @@ namespace Physics
 		if (field.map.at(next_x, next_y) == Block::BigPoint
 		    && object->eats_points())
 		{
+			//eat point && buff now
 			imm_events.push_back(Events::make_eat_point(next_x, next_y));
 			imm_events.push_back(Events::make_promote(object));
+			//demote later
+			plan_events.push_back( {Events::make_demote(object), buff_wear_off} );
 		}
 
 		// interact with objects moved to

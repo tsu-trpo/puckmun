@@ -18,5 +18,6 @@ private:
 	char get_form() const override;
 	Color get_bg_color() const override;
 	Color get_body_color() const override;
+	bool eats_points() const override;
 };
 	

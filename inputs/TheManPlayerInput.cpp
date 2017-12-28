@@ -2,6 +2,9 @@
 
 #include <chrono>
 
+#include "errors/ErrorConstants.h"
+#include "objects/TheMan.h"
+
 using InpClass = TheManPlayerInput;
 
 // why do i need double declaration?
@@ -43,7 +46,26 @@ void update_routine(shared_ptr<InpClass::ThreadData> data)
 }
 
 
-//simple direction error, because optional is only in c++17
+std::tuple<Coordinate, Coordinate>
+	next_coordinates(Coordinate x, Coordinate y, MoveDirection dir)
+{
+	switch (dir)
+	{
+		case MoveDirection::Up:
+			return std::make_tuple(x, y-1);
+		case MoveDirection::Down:
+			return std::make_tuple(x, y+1);
+		case MoveDirection::Left:
+			return std::make_tuple(x-1, y);
+		case MoveDirection::Right:
+			return std::make_tuple(x+1, y);
+	}
+	throw std::logic_error(ERR_HEADER
+		"Unexpected case when reviewing directions");
+}
+
+
+//simple direction error, because optional datatype is only in c++17
 class NoDirection
 {};
 
@@ -69,7 +91,32 @@ MoveDirection char_to_direction(int input)
 }
 
 
-Command InpClass::plan(const GameField& field, object_arg)
+// returns commandto update appropriate man field based on if there is a wall
+// in the path
+Command set_if_no_wall(const GameField& field, MoveDirection dir,
+		               Coordinate x, Coordinate y)
+{
+	std::tie(x, y) = next_coordinates(x, y, dir);
+
+	// cooridinates are unsigned, don't compare to 0
+	if (x > field.map.get_width() || y > field.map.get_height())
+	{
+		// do not intend to go where no path lies (!)
+		return Commands::make_no_command();
+	}
+
+	if (field.map.at(x, y) == Block::Wall)
+	{
+		return Commands::make_the_man_set_future(dir);
+	}
+	else
+	{
+		return Commands::make_the_man_set_current(dir);
+	}
+}
+
+
+Command InpClass::plan(const GameField& field, object_arg pre_object_ptr)
 {
 	// TODO: better sleep, write a schedule dividing second into sleep periods
 
@@ -77,16 +124,43 @@ Command InpClass::plan(const GameField& field, object_arg)
 	// for slightly more than 1 second
 	std::this_thread::sleep_for(std::chrono::milliseconds(9));
 
-	MoveDirection dir;
 
+	// input methods are unique for different objects because objects
+	// themselves are very different, so pointer cast is the only way
+	auto object_ptr =
+		std::dynamic_pointer_cast<const TheMan, const AnimateObject>
+			(pre_object_ptr);
+	if (!object_ptr)
+	{
+		throw std::logic_error(ERR_HEADER
+			"possibly passed an incorrect object type");
+	}
+
+
+	if (object_ptr->get_future() != object_ptr->get_current())
+	{
+		// if they differ it means the player once wanted to go to a
+		// direction, but there was a wall there. We should try to go there
+		// again
+		return set_if_no_wall(field, object_ptr->get_future(),
+		                      object_ptr->get_x(), object_ptr->get_y());
+	}
+	// else we should try to read the input and go there
+
+	MoveDirection dir;
 	try
 	{
+		// char_got contains the most recent character read
+		//may throw NoDirection
 		dir = char_to_direction(m_data->char_got);
 	}
 	catch (NoDirection)
 	{
 		return Commands::make_no_command();
 	}
+
+	return set_if_no_wall(field, dir,
+	                      object_ptr->get_x(), object_ptr->get_y());
 }
 
 // vim: tw=78

@@ -23,7 +23,7 @@ class TheManPlayerInput : public Input
 	struct ThreadData
 	{
 		bool should_exit;
-		int char_got;
+		int  char_got;
 	};
 
 	// routine in updater thread

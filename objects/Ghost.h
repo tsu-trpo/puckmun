@@ -10,4 +10,8 @@ public:
 	char get_form() const override;
 	Color get_bg_color() const override;
 	Color get_body_color() const override;
+
+	Event touch(shared_ptr<const TactileObject>) const override;
+	Event touch(shared_ptr<const TheMan>)        const override;
+	Event touch(shared_ptr<const Ghost>)         const override;
 };

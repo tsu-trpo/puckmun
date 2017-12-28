@@ -50,3 +50,21 @@ bool TheMan::eats_points() const
 {
 	return true;
 }
+
+Event TheMan::touch(shared_ptr<const TactileObject> other) const
+{
+	return other->touch(shared_from_this());
+}
+
+
+Event TheMan::touch(shared_ptr<const TheMan>) const
+{
+	// dudes interact with a high five and nothing more
+	return Events::make_nothing();
+}
+
+Event TheMan::touch(shared_ptr<const Ghost>) const
+{
+	// dude dies, sad sad sad
+	return Events::make_die_hero();
+}

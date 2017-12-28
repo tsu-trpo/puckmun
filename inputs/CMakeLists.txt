@@ -8,6 +8,6 @@ add_subdirectory(commands)
 add_library_autolink(Command Command.cpp)
 
 # Основной ввод для призрака
-add_library_autolink(GhostPlayerInput GhostPlayerInput.cpp)
+add_library_autolink(GhostInput GhostInput.cpp)
 
 # vim: tw=78

@@ -9,14 +9,19 @@ Command GhostInput::plan(const GameField&,
 		std::dynamic_pointer_cast<const Ghost, const AnimateObject>
 			(pre_object_ptr);
 
-	if (object_ptr->get_current() == MoveDirection::Left)
+	switch (object_ptr->get_current())
 	{
-		return Commands::make_ghost_set_current(MoveDirection::Right);
+		case MoveDirection::Up:
+			return Commands::make_ghost_set_current(MoveDirection::Right);
+		case MoveDirection::Right:
+			return Commands::make_ghost_set_current(MoveDirection::Down);
+		case MoveDirection::Down:
+			return Commands::make_ghost_set_current(MoveDirection::Left);
+		case MoveDirection::Left:
+			return Commands::make_ghost_set_current(MoveDirection::Up);
 	}
-	else
-	{
-		return Commands::make_ghost_set_current(MoveDirection::Left);
-	}
+
+	return Commands::make_no_command();
 }
 
 // vim: tw=78

@@ -27,6 +27,8 @@ InpClass::TheManPlayerInput()
 InpClass::~TheManPlayerInput()
 {
 	m_data->should_exit = true;
+	// will exit soon upon seeing the flag
+	m_update_thread.join();
 }
 
 

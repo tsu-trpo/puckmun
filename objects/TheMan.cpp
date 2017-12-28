@@ -3,7 +3,6 @@
 TheMan::TheMan()
 {
 	m_current = MoveDirection::Down;
-	m_future = MoveDirection::Down;
 }
 MoveDirection TheMan::tick()
 {

@@ -2,9 +2,9 @@
 
 #include "control/Event.h"
 
-Event TactileObject::touch(shared_ptr<const TactileObject> other) const
+Event TactileObject::touch(shared_ptr<const TactileObject>) const
 {
-	return other->touch(shared_from_this());
+	return Events::make_nothing();
 }
 
 

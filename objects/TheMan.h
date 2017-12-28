@@ -6,6 +6,7 @@
 #include "control/Event.h"
 
 class TheMan: public GameObject
+            , public std::enable_shared_from_this<TheMan>
 {	
 	MoveDirection m_current;
 	MoveDirection m_future;

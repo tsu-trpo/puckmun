@@ -13,7 +13,7 @@ using std::shared_ptr;
 class TheMan;
 class Ghost;
 
-class TactileObject : public std::enable_shared_from_this<TactileObject>
+class TactileObject
 {
 public:
 	virtual Event touch(shared_ptr<const TactileObject>) const;

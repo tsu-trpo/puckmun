@@ -1,6 +1,7 @@
 #include "objects/GameObject.h"
 
 class Ghost: public GameObject
+           , public std::enable_shared_from_this<Ghost>
 {	
 	MoveDirection m_current;
 public:

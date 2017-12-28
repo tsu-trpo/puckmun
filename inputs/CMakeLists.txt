@@ -10,4 +10,7 @@ add_library_autolink(Command Command.cpp)
 # Основной ввод с клавиатуры для чувака
 add_library_autolink(TheManPlayerInput TheManPlayerInput.cpp)
 
+# Основной ввод для призрака
+add_library_autolink(GhostPlayerInput GhostPlayerInput.cpp)
+
 # vim: tw=78

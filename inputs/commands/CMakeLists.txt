@@ -4,4 +4,6 @@ cmake_minimum_required(VERSION 2.8.8)
 
 add_library_autolink(TheManSetCurrent TheManSetCurrent.cpp)
 
+add_library_autolink(GhostSetCurrent GhostSetCurrent.cpp)
+
 add_library_autolink(NoCommand NoCommand.cpp)

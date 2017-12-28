@@ -14,4 +14,6 @@ public:
 
 	GameObject& promote() override;
 	GameObject& demote() override;
+
+	bool eats_points() const override;
 };

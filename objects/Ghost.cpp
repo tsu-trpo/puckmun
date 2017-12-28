@@ -43,3 +43,8 @@ MoveDirection Ghost::get_current() const
 {
 	return m_current;
 }
+
+bool Ghost::eats_points() const
+{
+	return false;
+}

@@ -40,12 +40,19 @@ namespace Physics
 				break;
 		}
 
-		// write the move event
+		// don't move into a wall
 		if (field.map.at(next_x, next_y) == Block::Wall)
 		{
 			return NoEvents;
 		}
+
+		// write the move event
 		imm_events.push_back(Events::make_move(object, direction));
+
+		if (field.map.at(next_x, next_y) == Block::Point)
+		{
+			imm_events.push_back(Events::make_eat_point(next_x, next_y));
+		}
 
 		// interact with objects moved to
 		for (auto& other_obj : field.objects)

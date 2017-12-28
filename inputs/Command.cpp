@@ -1,13 +1,9 @@
 #include "inputs/Command.h"
 
 #include "errors/ErrorConstants.h"
-<<<<<<< HEAD
 #include "inputs/commands/NoCommand.h"
 #include "inputs/commands/TheManSetCurrent.h"
-
-=======
 #include "inputs/commands/GhostSetCurrent.h"
->>>>>>> ghosting
 
 Command::Command(unique_ptr<BaseCommand> command)
 	: m_command (std::move(command))

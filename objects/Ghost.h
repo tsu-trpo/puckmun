@@ -1,3 +1,5 @@
+#pragma once
+
 #include "objects/GameObject.h"
 
 class Ghost: public GameObject

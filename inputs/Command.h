@@ -23,4 +23,8 @@ public:
 	void update(const shared_ptr<AnimateObject>&) const;
 };
 
+namespace Commands
+{
+	Command make_ghost_set_current(MoveDirection);
+}
 // vim: tw=78

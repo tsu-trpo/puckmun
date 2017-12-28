@@ -6,8 +6,11 @@
 #include "control/Event.h"
 
 class TheMan: public GameObject
+            , public std::enable_shared_from_this<TheMan>
 {	
 	MoveDirection m_current;
+	// whether he can eat ghosts
+	bool m_promoted;
 private:
 	MoveDirection tick() override;
 	void set_current(MoveDirection);
@@ -15,9 +18,6 @@ private:
 	char get_form() const override;
 	Color get_bg_color() const override;
 	Color get_body_color() const override;
-
-	GameObject& promote() override;
-	GameObject& demote() override;
 
 	// updater commands
 	friend class TheManSetCurrent;
@@ -31,5 +31,10 @@ public:
 	Event touch(shared_ptr<const TactileObject>) const override;
 	Event touch(shared_ptr<const TheMan>)        const override;
 	Event touch(shared_ptr<const Ghost>)         const override;
+
+	bool get_promoted() const;
+
+	GameObject& promote() override;
+	GameObject& demote() override;
 };
 	

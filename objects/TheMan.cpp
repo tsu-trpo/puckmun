@@ -1,6 +1,7 @@
 #include "objects/TheMan.h"
 
 TheMan::TheMan()
+	: m_promoted (false)
 {
 	m_current = MoveDirection::Down;
 }
@@ -37,10 +38,12 @@ Color TheMan::get_body_color() const
 
 GameObject& TheMan::promote()
 {
+	m_promoted = true;
 	return *this;
 }
 GameObject& TheMan::demote()
 {
+	m_promoted = false;
 	return *this;
 }
 
@@ -63,6 +66,19 @@ Event TheMan::touch(shared_ptr<const TheMan>) const
 
 Event TheMan::touch(shared_ptr<const Ghost>) const
 {
-	// dude dies, sad sad sad
-	return Events::make_die_hero();
+	if (m_promoted)
+	{
+		// whoah, cool dude doesnt care
+		return Events::make_nothing();
+	}
+	else
+	{
+		// dude dies, sad sad sad
+		return Events::make_die_hero();
+	}
+}
+
+bool TheMan::get_promoted() const
+{
+	return m_promoted;
 }

@@ -1,5 +1,6 @@
 #include "objects/Ghost.h"
 
+#include "objects/TheMan.h"
 #include "control/Event.h"
 
 Ghost::Ghost()
@@ -57,10 +58,16 @@ Event Ghost::touch(shared_ptr<const TactileObject> other) const
 }
 
 
-Event Ghost::touch(shared_ptr<const TheMan>) const
+Event Ghost::touch(shared_ptr<const TheMan> man_ptr) const
 {
-	// ghost eats dude, nom nom nom
-	return Events::make_die_hero();
+	if (man_ptr->get_promoted())
+	{
+		return Events::make_nothing();
+	}
+	{
+		// ghost eats dude, nom nom nom
+		return Events::make_die_hero();
+	}
 }
 
 Event Ghost::touch(shared_ptr<const Ghost>) const

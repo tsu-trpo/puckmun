@@ -16,6 +16,8 @@ unique_ptr<BaseCommand> TheManSetCurrent::clone() const
 
 void TheManSetCurrent::update(const shared_ptr<AnimateObject>& pre_object_ptr)
 {
+	// plan setting methods are unique for different objects because objects
+	// itself are very different, so pointer cast is the only way
 	auto object_ptr =
 		std::dynamic_pointer_cast<TheMan, AnimateObject>(pre_object_ptr);
 

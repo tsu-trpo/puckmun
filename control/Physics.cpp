@@ -7,8 +7,7 @@ const PhysicsEvents NoEvents = PhysicsEvents{ list<Event> {}, list<ScheduledEven
 namespace Physics
 {
 	PhysicsEvents move_object(const GameField& field, ObjectPtrArg object,
-	                          const MoveDirection& direction
-	                         )
+	                          const MoveDirection& direction)
 	{
 		Coordinate next_x = object->get_x();
 		Coordinate next_y = object->get_y();
@@ -42,6 +41,10 @@ namespace Physics
 		}
 
 		// write the move event
+		if (field.map.at(next_x, next_y) == Block::Wall)
+		{
+			return NoEvents;
+		}
 		imm_events.push_back(Events::make_move(object, direction));
 
 		// interact with objects moved to

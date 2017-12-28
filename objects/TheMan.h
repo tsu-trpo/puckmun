@@ -10,6 +10,8 @@ class TheMan: public GameObject
 {	
 	MoveDirection m_current;
 	MoveDirection m_future;
+	// whether he can eat ghosts
+	bool m_promoted = false;
 private:
 	TheMan();
 	MoveDirection tick() override;
@@ -25,5 +27,10 @@ public:
 	Event touch(shared_ptr<const TactileObject>) const override;
 	Event touch(shared_ptr<const TheMan>)        const override;
 	Event touch(shared_ptr<const Ghost>)         const override;
+
+	bool get_promoted() const;
+
+	GameObject& promote() override;
+	GameObject& demote() override;
 };
 	

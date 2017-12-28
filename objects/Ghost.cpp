@@ -1,5 +1,6 @@
 #include "objects/Ghost.h"
 
+#include "objects/TheMan.h"
 #include "control/Event.h"
 
 Ghost::Ghost()
@@ -31,16 +32,32 @@ Color Ghost::get_body_color() const
 	return Color::Cyan;
 }
 
+GameObject& Ghost::promote()
+{
+	return *this;
+}
+
+GameObject& Ghost::demote()
+{
+	return *this;
+}
+
 Event Ghost::touch(shared_ptr<const TactileObject> other) const
 {
 	return other->touch(shared_from_this());
 }
 
 
-Event Ghost::touch(shared_ptr<const TheMan>) const
+Event Ghost::touch(shared_ptr<const TheMan> man_ptr) const
 {
-	// ghost eats dude, nom nom nom
-	return Events::make_die_hero();
+	if (man_ptr->get_promoted())
+	{
+		return Events::make_nothing();
+	}
+	{
+		// ghost eats dude, nom nom nom
+		return Events::make_die_hero();
+	}
 }
 
 Event Ghost::touch(shared_ptr<const Ghost>) const

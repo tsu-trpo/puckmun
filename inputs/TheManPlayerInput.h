@@ -14,6 +14,8 @@
 #include "view/NcursesScreen.h"
 
 using std::shared_ptr;
+using object_arg = const shared_ptr<const AnimateObject>&;
+
 
 class TheManPlayerInput : public Input
 {

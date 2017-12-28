@@ -11,9 +11,11 @@ std::unique_ptr<BaseEvent> Events::DestroyWall::clone() const
 	return unique_ptr<BaseEvent>( new DestroyWall(*this) );
 }
 
-void Events::DestroyWall::execute_physics(GameField& field) const
+GameStatus Events::DestroyWall::execute_physics(GameField& field) const
 {
 	field.map.change_block(m_x, m_y, Block::Space);
+
+	return GameStatus::Continue;
 }
 
 void Events::DestroyWall::execute_graphics(const GameField& field,

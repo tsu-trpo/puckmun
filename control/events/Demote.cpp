@@ -10,9 +10,11 @@ std::unique_ptr<BaseEvent> Events::Demote::clone() const
 	return unique_ptr<BaseEvent>( new Demote(*this) );
 }
 
-void Events::Demote::execute_physics(GameField&) const
+GameStatus Events::Demote::execute_physics(GameField&) const
 {
 	m_object->demote();
+
+	return GameStatus::Continue;
 }
 
 void Events::Demote::execute_graphics(const GameField& f, GameRender& r) const

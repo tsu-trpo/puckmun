@@ -7,6 +7,7 @@
 
 #include "objects/GameField.h"
 #include "view/GameRender.h"
+#include "control/GameStatus.h"
 #include "control/events/BaseEvent.h"
 
 using std::unique_ptr;
@@ -20,7 +21,7 @@ public:
 	Event(const Event&);
 
 	// non-const reference because other ways are too hard. What have I become
-	void execute_physics(GameField&) const;
+	GameStatus execute_physics(GameField&) const;
 	void execute_graphics(const GameField&, GameRender&) const;
 
 	// tells whether the event wants graphics to be executed before physics

@@ -9,9 +9,9 @@ std::unique_ptr<BaseEvent> Events::Nothing::clone() const
 	return unique_ptr<BaseEvent>( new Nothing(*this) );
 }
 
-void Events::Nothing::execute_physics(GameField&) const
+GameStatus Events::Nothing::execute_physics(GameField&) const
 {
-	return;
+	return GameStatus::Continue;
 }
 
 void Events::Nothing::execute_graphics(const GameField&, GameRender&) const

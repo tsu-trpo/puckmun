@@ -12,9 +12,11 @@ std::unique_ptr<BaseEvent> Events::AddWall::clone() const
 	return unique_ptr<BaseEvent>( new AddWall(*this) );
 }
 
-void Events::AddWall::execute_physics(GameField& field) const
+GameStatus Events::AddWall::execute_physics(GameField& field) const
 {
 	field.map.change_block(m_x, m_y, m_block);
+
+	return GameStatus::Continue;
 }
 
 void Events::AddWall::execute_graphics(const GameField& field,

@@ -7,4 +7,7 @@ add_subdirectory(commands)
 # Обёртка для команд
 add_library_autolink(Command Command.cpp)
 
+# Основной ввод с клавиатуры для чувака
+add_library_autolink(TheManPlayerInput TheManPlayerInput.cpp)
+
 # vim: tw=78

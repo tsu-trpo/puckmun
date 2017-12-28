@@ -18,5 +18,7 @@ private:
 
 	// updater commands
 	friend class TheManSetCurrent;
+	//input class
+	friend class TheManPlayerInput;
 };
 	

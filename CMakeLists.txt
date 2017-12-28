@@ -49,6 +49,7 @@ add_subdirectory(objects)
 add_subdirectory(view)
 add_subdirectory(errors)
 add_subdirectory(maps)
+add_subdirectory(inputs)
 
 
 add_executable(ncurses_test ncurses_test.cpp)

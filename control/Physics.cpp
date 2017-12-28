@@ -49,9 +49,19 @@ namespace Physics
 		// write the move event
 		imm_events.push_back(Events::make_move(object, direction));
 
-		if (field.map.at(next_x, next_y) == Block::Point)
+		// eat the small point
+		if (field.map.at(next_x, next_y) == Block::Point
+		    && object->eats_points())
 		{
 			imm_events.push_back(Events::make_eat_point(next_x, next_y));
+		}
+
+		// eat the big point
+		if (field.map.at(next_x, next_y) == Block::BigPoint
+		    && object->eats_points())
+		{
+			imm_events.push_back(Events::make_eat_point(next_x, next_y));
+			imm_events.push_back(Events::make_promote(object));
 		}
 
 		// interact with objects moved to

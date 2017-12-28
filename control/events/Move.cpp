@@ -29,10 +29,12 @@ std::unique_ptr<BaseEvent> Events::Move::clone() const
 	return unique_ptr<BaseEvent>( new Move(*this) );
 }
 
-void Events::Move::execute_physics(GameField&) const
+GameStatus Events::Move::execute_physics(GameField&) const
 {
 	m_object->set_x(m_new_x);
 	m_object->set_y(m_new_y);
+
+	return GameStatus::Continue;
 }
 
 void Events::Move::execute_graphics(const GameField& field, GameRender& r) const

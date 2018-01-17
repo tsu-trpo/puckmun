@@ -9,11 +9,13 @@ add_library_autolink(TheMan TheMan.cpp)
 # Библиотека с картой
 add_library_autolink(Map Map.cpp)
 
+# Библиотека с загрузчиком
+add_library_autolink(MapLoader MapLoader.cpp)
+
 # Библиотека с SpaceObject
 add_library_autolink(SpaceObject SpaceObject.cpp)
 
 # Библиотека с AnimateObject
 add_library_autolink(AnimateObject AnimateObject.cpp)
 
-# Библиотека с загрузчиком
-add_library_autolink(MapLoader MapLoader.cpp)
+add_library_autolink(ExampleObject ExampleObject.cpp)

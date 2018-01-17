@@ -2,7 +2,7 @@
 
 enum struct Block
 {
-	Wall, 
+	Wall,
 	Point,
 	BigPoint,
 	Space

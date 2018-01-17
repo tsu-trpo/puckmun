@@ -12,7 +12,7 @@ class ViewableObject : virtual public SpaceObject
 {
 public:
 	virtual char get_form() const = 0;
-	virtual Color get_bg_color() const   = 0;
+	virtual Color get_bg_color()   const = 0;
 	virtual Color get_body_color() const = 0;
 };
 

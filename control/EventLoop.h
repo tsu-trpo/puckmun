@@ -36,7 +36,7 @@ private:
 	list<ScheduledEvent> m_scheduled_events;
 
 
-	EventLoop(const GameField&, const InputList&, const GameRender&);
+	EventLoop(const GameField&, const InputList&, GameRender&);
 
 
 	void redraw_screen(const Event&) const;

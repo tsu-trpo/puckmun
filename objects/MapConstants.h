@@ -12,4 +12,6 @@ typedef size_t PointsNumber;
 // Тип, хранящий координаты
 typedef size_t Coordinate;
 
+typedef size_t PointsNumber;
+
 // vim: tw=78

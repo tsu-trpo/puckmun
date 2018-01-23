@@ -1,6 +1,7 @@
 #include <memory>
 #include <map>
 
+
 #include "objects/MapLoader.h"
 #include "objects/GameField.h"
 #include "view/GameRender.h"
@@ -13,10 +14,10 @@
 using std::shared_ptr;
 using std::make_pair;
 
+
 int main()
 {
 	Map map = basic_load_map("maps/test_map.bpm");
-	
 	shared_ptr<TheMan> man (new TheMan);
 	man->set_x(5);
 	man->set_y(5);
@@ -34,6 +35,7 @@ int main()
 	shared_ptr<GhostInput> ai (new GhostInput);
 
 	InputList input_pairs {{keyboard, man}, {ai, ghost}};
+
 
 	EventLoop loop (field, input_pairs, render);
 	loop.run();

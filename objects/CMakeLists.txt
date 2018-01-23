@@ -22,3 +22,4 @@ add_library_autolink(ExampleObject ExampleObject.cpp)
 
 # Библиотека с интерфейсом взаимодействия
 add_library_autolink(TactileObject TactileObject.cpp)
+

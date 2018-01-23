@@ -62,6 +62,7 @@ target_link_libraries(ncurses_test ${CURSES_LIBRARY})
 add_executable(main main.cpp)
 # Линкую дважды чтобы решить проблемы с ненайденными символами
 target_link_libraries(main ${ALL_PROJECT_LIBRARIES} ${ALL_PROJECT_LIBRARIES}
-	${CURSES_LIBRARY} ${CMAKE_THREAD_LIBS_INIT})
+${CURSES_LIBRARY} ${CMAKE_THREAD_LIBS_INIT})
+
 
 # vim: tw=78

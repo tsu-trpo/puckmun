@@ -1,5 +1,9 @@
 #include "control/events/Move.h"
 
+#include <fstream>
+
+static std::ofstream log ("move.log");
+
 Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	: m_direction (dir)
 	, m_object    (obj)
@@ -7,6 +11,8 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 	// doesn't check for boundaries because it doesn't have enough
 	// information for right limit anyway, and it should be called only in
 	// correct cases by design
+	m_new_x = m_object->get_x();
+	m_new_y = m_object->get_y();
 	switch (m_direction)
 	{
 		case MoveDirection::Up:
@@ -22,6 +28,7 @@ Events::Move::Move(const shared_ptr<GameObject>& obj, MoveDirection dir)
 			m_new_x = m_object->get_x() + 1;
 			break;
 	}
+	log << "created move event: " << m_new_x <<':' << m_new_y << std::endl;
 }
 
 std::unique_ptr<BaseEvent> Events::Move::clone() const
@@ -29,10 +36,12 @@ std::unique_ptr<BaseEvent> Events::Move::clone() const
 	return unique_ptr<BaseEvent>( new Move(*this) );
 }
 
-void Events::Move::execute_physics(GameField&) const
+GameStatus Events::Move::execute_physics(GameField&) const
 {
 	m_object->set_x(m_new_x);
 	m_object->set_y(m_new_y);
+
+	return GameStatus::Continue;
 }
 
 void Events::Move::execute_graphics(const GameField& field, GameRender& r) const

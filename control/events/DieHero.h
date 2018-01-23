@@ -1,13 +1,18 @@
 #pragma once
 
+#include <memory>
+
 #include "control/events/BaseEvent.h"
+#include "objects/GameObject.h"
+
+using std::shared_ptr;
 
 namespace Events
 {
-	class Nothing : public BaseEvent
+	class DieHero : public BaseEvent
 	{
 	public:
-		Nothing();
+		DieHero();
 
 		std::unique_ptr<BaseEvent> clone() const override;
 

@@ -12,10 +12,17 @@ std::unique_ptr<BaseEvent> Events::EatPoint::clone() const
 	return unique_ptr<BaseEvent>( new EatPoint(*this) );
 }
 
-void Events::EatPoint::execute_physics(GameField& field) const
+GameStatus Events::EatPoint::execute_physics(GameField& field) const
 {
 	field.map.change_block(m_x, m_y, Block::Space);
 	field.points_left -= 1;
+
+	if (field.points_left == 0)
+	{
+		return GameStatus::Won;
+	}
+
+	return GameStatus::Continue;
 }
 
 void Events::EatPoint::execute_graphics(const GameField&, GameRender&) const

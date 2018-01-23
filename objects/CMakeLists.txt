@@ -19,3 +19,7 @@ add_library_autolink(SpaceObject SpaceObject.cpp)
 add_library_autolink(AnimateObject AnimateObject.cpp)
 
 add_library_autolink(ExampleObject ExampleObject.cpp)
+
+# Библиотека с интерфейсом взаимодействия
+add_library_autolink(TactileObject TactileObject.cpp)
+

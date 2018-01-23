@@ -13,6 +13,7 @@
 #include "control/Event.h"
 #include "view/GameRender.h"
 #include "control/Physics.h"
+#include "control/GameStatus.h"
 
 using std::vector;
 using std::shared_ptr;
@@ -36,8 +37,6 @@ private:
 	list<ScheduledEvent> m_scheduled_events;
 
 
-	EventLoop(const GameField&, const InputList&, GameRender&);
-
 
 	void redraw_screen(const Event&) const;
 
@@ -50,9 +49,12 @@ private:
 	EventLoop& before_game();
 	EventLoop& start_game();
 	EventLoop& after_game();
+	EventLoop& check_status(const GameStatus&);
 
 
 public:
+	EventLoop(const GameField&, const InputList&, GameRender&);
+
 	EventLoop& run(); //updates everything
 };
 

@@ -23,4 +23,10 @@ public:
 	void update(const shared_ptr<AnimateObject>&) const;
 };
 
+namespace Commands
+{
+	Command make_no_command();
+	Command make_the_man_set_current(MoveDirection);
+	Command make_ghost_set_current(MoveDirection);
+}
 // vim: tw=78
